@@ -4,4 +4,4 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .idea
-*.json
+[a]ppsettings.*.json
