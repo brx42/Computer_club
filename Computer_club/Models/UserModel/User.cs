@@ -1,6 +1,6 @@
-﻿namespace Computer_club.Endpoints.Entities.UserCRUD.Create;
+﻿namespace Computer_club.Models.UserModel;
 
-public class CreateUserCommand
+public class User : BaseUser
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }

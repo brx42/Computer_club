@@ -1,6 +1,6 @@
-﻿namespace Computer_club.Endpoints.Entities.UserCRUD.Create;
+﻿namespace Computer_club.Endpoints.Entities.UserCRUD.Update;
 
-public class CreateUserCommand
+public class UpdateUserResult
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }
@@ -10,5 +10,5 @@ public class CreateUserCommand
     public string ContactDetails { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public string DateOfBirth { get; set; } = new DateTime().Date.ToString("d");
+    public string DateOfBirth { get; set; } = new DateTime().ToString("d");
 }
