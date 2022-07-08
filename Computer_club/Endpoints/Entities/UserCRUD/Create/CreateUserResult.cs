@@ -1,6 +1,9 @@
-﻿namespace Computer_club.Endpoints.Entities.UserCRUD.Create;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class CreateUserResult
+namespace Computer_club.Endpoints.Entities.UserCRUD.Create;
+
+public class CreateUserResult : CreateUserCommand
 {
-    
+    [Key]
+    public Guid Id { get; set; }
 }
