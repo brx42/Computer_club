@@ -1,7 +1,7 @@
-﻿using Computer_club.Endpoints.Entities.UserCRUD.Create;
-using Computer_club.Endpoints.Entities.UserCRUD.Get;
-using Computer_club.Endpoints.Entities.UserCRUD.Update;
-using Computer_club.Models.UserModel;
+﻿/*using Computer_club.Domain.Entities.User;
+using Computer_club.Endpoints.UserCRUD.Create;
+using Computer_club.Endpoints.UserCRUD.Get;
+using Computer_club.Endpoints.UserCRUD.Update;
 
 namespace Computer_club;
 
@@ -9,11 +9,12 @@ public class AutoMapping : Profile
 {
     public AutoMapping()
     {
-        CreateMap<CreateUserCommand, User>();
-        CreateMap<UpdateUserCommand, User>();
+        CreateMap<CreateUserCommand, UserModel>();
+        CreateMap<UpdateUserCommand, UserModel>();
 
-        CreateMap<User, CreateUserResult>();
-        CreateMap<User, UpdateUserResult>();
-        CreateMap<User, GetUserResult>();
+        CreateMap<UserModel, CreateUserResult>();
+        CreateMap<UserModel, UpdateUserResult>();
+        CreateMap<UserModel, GetUserResult>();
     }
 }
+*/

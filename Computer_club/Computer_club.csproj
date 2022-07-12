@@ -12,28 +12,30 @@
         <PackageReference Include="Ardalis.EFCore.Extensions" Version="1.1.0" />
         <PackageReference Include="AutoMapper" Version="11.0.1" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.6">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
           <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.21.0" />
         <PackageReference Include="Npgsql" Version="6.0.5" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.3.1" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Endpoints\Entities\UserCRUD\Get\GetByIdUserResult.cs">
-        <DependentUpon>Get.cs</DependentUpon>
-      </Compile>
       <Compile Update="Endpoints\Entities\UserCRUD\Delete\DeleteUserRequest.cs">
         <DependentUpon>Delete.cs</DependentUpon>
       </Compile>
@@ -49,6 +51,13 @@
       <Compile Update="Endpoints\Entities\UserCRUD\Update\UpdateUserResult.cs">
         <DependentUpon>Update.cs</DependentUpon>
       </Compile>
+      <Compile Update="Endpoints\Entities\UserCRUD\Get\GetByIdUserResult.cs">
+        <DependentUpon>GetById.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Computer_club.Domain\Computer_club.Domain.csproj" />
     </ItemGroup>
 
 </Project>
