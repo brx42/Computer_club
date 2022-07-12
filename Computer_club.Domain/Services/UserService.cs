@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Computer_club.Domain.Entities.User;
+using TokenOptions = Computer_club.Domain.Settings.TokenOptions;
 
 namespace Computer_club.Domain.Services;
 
@@ -17,9 +18,9 @@ public class UserService : IUserService
 {
     private readonly AppDbContext _context;
     private readonly UserManager<UserModel> _userManager;
-    private readonly JwtSettings _jwt;
+    private readonly TokenOptions _jwt;
     
-    public UserService(AppDbContext context, UserManager<UserModel> userManager, RoleManager<IdentityRole> roleManager, JwtSettings jwt)
+    public UserService(AppDbContext context, UserManager<UserModel> userManager, RoleManager<IdentityRole> roleManager, TokenOptions jwt)
     {
         _context = context;
         _userManager = userManager;

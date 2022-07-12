@@ -1,6 +1,6 @@
 ﻿namespace Computer_club.Domain.Settings;
 
-public class JwtSettings
+public class TokenOptions
 {
     public string Key { get; set; }
     public string Issuer { get; set; }

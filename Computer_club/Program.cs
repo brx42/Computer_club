@@ -12,11 +12,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
+using TokenOptions = Computer_club.Domain.Settings.TokenOptions;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("TokenOptions"));
+builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection("TokenOptions"));
 
 builder.Services.AddIdentity<UserModel, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
