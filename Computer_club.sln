@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Computer_club", "Computer_club\Computer_club.csproj", "{12E37F24-DDEA-4D58-856A-EE35AD0B630F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Computer_club.API", "Computer_club.API\Computer_club.API.csproj", "{12E37F24-DDEA-4D58-856A-EE35AD0B630F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Computer_club.Domain", "Computer_club.Domain\Computer_club.Domain.csproj", "{6C7D838D-4891-40A9-B113-DEC5541C6F36}"
 EndProject
