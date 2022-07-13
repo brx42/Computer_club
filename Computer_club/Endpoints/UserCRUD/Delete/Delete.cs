@@ -1,5 +1,7 @@
-﻿using Computer_club.Domain.Entities.User;
+﻿using Computer_club.Domain.Data.Entities;
+using Computer_club.Domain.Data.Entities.User;
 using Computer_club.Domain.Services;
+using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

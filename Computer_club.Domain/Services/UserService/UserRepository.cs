@@ -1,8 +1,9 @@
-﻿using Computer_club.Domain.DataContext;
-using Computer_club.Domain.Entities.User;
+﻿using Computer_club.Domain.Data;
+using Computer_club.Domain.Data.Entities;
+using Computer_club.Domain.Data.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
-namespace Computer_club.Domain.Services;
+namespace Computer_club.Domain.Services.UserService;
 
 public class UserRepository : IUserRepository<UserModel>
 {

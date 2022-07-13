@@ -1,6 +1,6 @@
-﻿namespace Computer_club.Domain.Default;
+﻿namespace Computer_club.Domain.Security;
 
-public enum Roles
+public enum Role
 {
     SuperAdministrator,
     Manager,

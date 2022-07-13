@@ -1,4 +1,4 @@
-﻿namespace Computer_club.Domain.Services;
+﻿namespace Computer_club.Domain.Services.UserService;
 
 public interface IUserRepository<T>
 {
