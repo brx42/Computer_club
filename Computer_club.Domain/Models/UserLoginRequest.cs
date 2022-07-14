@@ -2,7 +2,7 @@
 
 namespace Computer_club.Domain.Models;
 
-public class AccountLoginRequest
+public class UserLoginRequest
 {
     [Required] 
     public string Login { get; set; }

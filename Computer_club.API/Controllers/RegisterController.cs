@@ -1,4 +1,5 @@
-﻿using Computer_club.Domain.Exceptions;
+﻿using Computer_club.Domain.Data.Entities;
+using Computer_club.Domain.Exceptions;
 using Computer_club.Domain.Models;
 using Computer_club.Domain.Services.AccountService;
 using Microsoft.AspNetCore.Mvc;
@@ -16,13 +17,13 @@ public class RegisterController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Register([FromBody] AccountRegisterRequest request)
+    public IActionResult Register([FromBody] UserRegisterRequest request)
     {
         if (!TryValidateModel(request))
             return BadRequest();
         try
         {
-            _service.Register(request.NickName, request.Email, request.Password);
+            _service.Register(request.Login, request.Email, request.Password);
             return Ok();
         }
         catch (ServiceException ex)

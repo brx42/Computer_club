@@ -1,5 +1,5 @@
 ﻿using Computer_club.Domain.Data.Entities;
-using Computer_club.Domain.Data.Entities.User;
+using Computer_club.Domain.Security;
 using Computer_club.Domain.Services;
 using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
@@ -12,14 +12,15 @@ public class Delete : EndpointBaseAsync
         .WithRequest<DeleteUserRequest>
         .WithActionResult
 {
-    private readonly IUserRepository<UserModel> _repository;
+    private readonly IUserRepository<User> _repository;
 
-    public Delete(IUserRepository<UserModel> repository)
+    public Delete(IUserRepository<User> repository)
     {
         _repository = repository;
     }
 
     [Authorize]
+    //[AuthRoles(RoleEnum.SuperAdministrator)]
     [HttpDelete("user/delete")]
     [SwaggerOperation(
         Summary = "Deletes a User",

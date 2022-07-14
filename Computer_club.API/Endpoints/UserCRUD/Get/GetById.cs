@@ -1,5 +1,5 @@
 ﻿using Computer_club.Domain.Data.Entities;
-using Computer_club.Domain.Data.Entities.User;
+using Computer_club.Domain.Security;
 using Computer_club.Domain.Services;
 using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
@@ -12,16 +12,17 @@ public class GetById : EndpointBaseAsync
         .WithRequest<Guid>
         .WithActionResult<GetUserResult>
 {
-    private readonly IUserRepository<UserModel> _repository;
+    private readonly IUserRepository<User> _repository;
     private readonly IMapper _mapper;
 
-    public GetById(IUserRepository<UserModel> repository, IMapper mapper)
+    public GetById(IUserRepository<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
     }
 
     [Authorize]
+    //[AuthRoles(RoleEnum.SuperAdministrator)]
     [HttpGet("user/get/{id}")]
     [SwaggerOperation(
         Summary = "Gets a single User",

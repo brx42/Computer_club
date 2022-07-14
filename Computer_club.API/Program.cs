@@ -2,7 +2,7 @@ global using Ardalis.ApiEndpoints;
 global using AutoMapper;
 using System.Text;
 using Computer_club.Domain.Data;
-using Computer_club.Domain.Data.Entities.User;
+using Computer_club.Domain.Data.Entities;
 using Computer_club.Domain.Services.AccountService;
 using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +35,9 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddControllers();
 builder.Services.AddControllers(options => options.UseNamespaceRouteToken());
+
 
 var connection = builder.Configuration.GetConnectionString("ClubConnection");
 
@@ -46,7 +47,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connection));
 
 builder.Services.AddTransient<IAccountService, AccountService>();
-builder.Services.AddScoped(typeof(IUserRepository<UserModel>), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
 
 builder.Services.AddSwaggerGen(c =>
 {

@@ -1,5 +1,7 @@
-﻿using Computer_club.Domain.Exceptions;
+﻿using Computer_club.Domain.Data.Entities;
+using Computer_club.Domain.Exceptions;
 using Computer_club.Domain.Models;
+using Computer_club.Domain.Security;
 using Computer_club.Domain.Services.AccountService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +18,7 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Login([FromBody] AccountLoginRequest request)
+    public IActionResult Login([FromBody] UserLoginRequest request)
     {
         if (!TryValidateModel(request))
             return BadRequest();

@@ -5,9 +5,9 @@ namespace Computer_club.Domain.Services.AccountService;
 
 public interface IAccountService
 {
-    Account Register(string nickname, string email, string password);
+    User Register(string nickname, string email, string password);
 
     string Login(string login, string password);
 
-    void AddRole(Account account, Role role);
+    void AddRole(User user, RoleEnum role);
 }

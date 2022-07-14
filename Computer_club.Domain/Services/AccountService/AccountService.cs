@@ -22,51 +22,50 @@ public class AccountService : IAccountService
         _configuration = configuration;
         _context = context;
     }
+    
 
-    public Account Register(string nickname, string email, string password)
+    public User Register(string login, string email, string password)
     {
-        if (_context.Accounts.Any(p => p.Email == email))
+        if (_context.Users.Any(p => p.Email == email))
             throw new ServiceException("Электронная почта уже зарегистрирована.");
-        if (_context.Accounts.Any(p => p.NickName == nickname))
-            throw new ServiceException("Никнейм уже зарегистрирован.");
+        if (_context.Users.Any(p => p.Login == login))
+            throw new ServiceException("Логин уже зарегистрирован.");
 
-        var account = new Account()
+        var user = new User
         {
-            CreationDate = DateTime.UtcNow,
-            Active = true,
-            NickName = nickname,
+            Login = login,
             Email = email,
             Password = Encryptor.Md5Hash(password),
-            Roles = new List<AccountRole>()
+            Roles = new List<UserRole>()
         };
         
-        AddRole(account, Role.ClubClient);
-        _context.Accounts.Add(account);
+        AddRole(user, RoleEnum.ClubClient);
+        _context.Users.Add(user);
         _context.SaveChanges();
-        return account;
+        return user;
     }
 
     public string Login(string login, string password)
     {
-        var account = _context.Accounts
+        var user = _context.Users
             .Include(a => a.Roles)
             .Include("Roles.Role")
-            .FirstOrDefault(a => (a.NickName == login || a.Email == login) &&
+            .FirstOrDefault(a => (a.Login == login || a.Email == login) &&
                                  a.Password == Encryptor.Md5Hash(password));
 
-        if (account == null)
+        if (user == null)
             throw new ServiceException("Пользователь не существует.");
-        if (!account.Active)
+        if (!user.IsActive)
             throw new ServiceException("Неверный аккаунт.");
 
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, account.NickName),
-            new Claim(JwtRegisteredClaimNames.Jti, account.Id.ToString()),
-            new Claim(JwtRegisteredClaimNames.Email, account.Email)
+            new Claim(JwtRegisteredClaimNames.Sub, user.Login),
+            new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email)
         };
 
-        foreach (var role in account.Roles)
+        foreach (var role in user.Roles)
             claims.Add(new Claim("role", Enum.GetName(typeof(Role), role.Role.Name)));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtToken:Key"]));
@@ -83,16 +82,16 @@ public class AccountService : IAccountService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public void AddRole(Account account, Role role)
+    public void AddRole(User user, RoleEnum role)
     {
         var roleToAdd = _context.Roles.FirstOrDefault(r => r.Name == role);
 
         if (roleToAdd == null)
             throw new ServiceException("Роли не существует.");
-        if (account.Roles.Any(r => r.Role.Name == role))
+        if (user.Roles.Any(r => r.Role.Name == role))
             throw new ServiceException("Учётная запись уже зарегистрирована для этой роли.");
         
-        account.Roles.Add(new AccountRole {Account = account, Role = roleToAdd});
+        user.Roles.Add(new UserRole {User = user, Role = roleToAdd});
         _context.SaveChanges();
     }
 }
