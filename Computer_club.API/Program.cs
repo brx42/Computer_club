@@ -16,6 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+
 builder.Services.AddControllers(options => options.UseNamespaceRouteToken());
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();

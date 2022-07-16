@@ -3,7 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Computer_club.Domain.Options;
 
-public static class JWT
+public class JWT
 {
     public static string Issuer { get; set; }
     public static string Audience { get; set; }
