@@ -1,6 +1,4 @@
-﻿using Computer_club.Domain.Data.Entities;
-using Computer_club.Domain.Security;
-using Computer_club.Domain.Services;
+﻿using Computer_club.Domain.Entities;
 using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +17,7 @@ public class GetAll : EndpointBaseAsync
         _repository = repository;
     }
     
-    [Authorize]
-    //[AuthRoles(RoleEnum.SuperAdministrator)]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpGet("user/get_all")]
     [SwaggerOperation(
         Summary = "Get a list of all Users",

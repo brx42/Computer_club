@@ -1,5 +1,5 @@
 ﻿using Computer_club.Domain.Data;
-using Computer_club.Domain.Data.Entities;
+using Computer_club.Domain.Entities;
 using Computer_club.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,18 +16,18 @@ public class UserRepository : IUserRepository<User>
 
     public async Task<List<User>> GetAllAsync(CancellationToken token)
     {
-        return await _context.Users.ToListAsync(token);
+        return await _context.UserModels.ToListAsync(token);
     }
 
     public async Task<User?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.Users.SingleOrDefaultAsync(x =>
+        return await _context.UserModels.SingleOrDefaultAsync(x =>
             x.Id == id, token);
     }
 
     public async Task<User> AddAsync(User user, CancellationToken token)
     {
-        await _context.Users.AddAsync(user, token);
+        await _context.UserModels.AddAsync(user, token);
         await _context.SaveChangesAsync(token);
         return user;
     }
@@ -40,7 +40,7 @@ public class UserRepository : IUserRepository<User>
 
     public async Task DeleteAsync(User user, CancellationToken token)
     {
-        _context.Users.Remove(user);
+        _context.UserModels.Remove(user);
         await _context.SaveChangesAsync(token);
     }
 }

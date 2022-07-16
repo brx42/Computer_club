@@ -2,10 +2,13 @@ global using Ardalis.ApiEndpoints;
 global using AutoMapper;
 using System.Text;
 using Computer_club.Domain.Data;
-using Computer_club.Domain.Data.Entities;
-using Computer_club.Domain.Services.AccountService;
+using Computer_club.Domain.Entities;
+using Computer_club.Domain.Options;
+using Computer_club.Domain.Services.AuthService;
+using Computer_club.Domain.Services.TokenService;
 using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -13,48 +16,49 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(options =>
+builder.Services.AddControllers(options => options.UseNamespaceRouteToken());
+
+builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
+
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(opt =>
     {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer(x =>
+    .AddJwtBearer(options =>
     {
-        x.RequireHttpsMetadata = false;
-        x.SaveToken = true;
-        x.TokenValidationParameters = new TokenValidationParameters
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            ClockSkew = TimeSpan.Zero,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
             ValidateAudience = true,
-            ValidIssuer = builder.Configuration["JwtToken:Issuer"],
-            ValidAudience = builder.Configuration["JwtToken:Audience"],
-            IssuerSigningKey =
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtToken:Key"]))
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            ValidateLifetime = true,
+            IssuerSigningKey = JWT.GetSymmetricSecurityKey(),
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.Zero
         };
     });
 
-builder.Services.AddControllers();
-builder.Services.AddControllers(options => options.UseNamespaceRouteToken());
-
-
-var connection = builder.Configuration.GetConnectionString("ClubConnection");
-
-builder.Services.AddEndpointsApiExplorer(); 
-
 builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseNpgsql(connection));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
 
-builder.Services.AddTransient<IAccountService, AccountService>();
-builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+}).AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo {Title = "Computer_club_api", Version = "v1"});
     c.UseApiEndpoints();
     c.EnableAnnotations();
-    c.AddSecurityDefinition("OAuth2", new OpenApiSecurityScheme
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "Authorization using bearer scheme",
         In = ParameterLocation.Header,
@@ -62,6 +66,20 @@ builder.Services.AddSwaggerGen(c =>
         Type = SecuritySchemeType.ApiKey
     });
     c.OperationFilter<SecurityRequirementsOperationFilter>();
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+        new OpenApiSecurityScheme
+        {
+            Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            }
+        },
+        new string[] {}
+        }
+    });
 });
 
 var app = builder.Build();
