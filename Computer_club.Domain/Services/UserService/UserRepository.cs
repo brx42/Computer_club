@@ -1,6 +1,5 @@
 ﻿using Computer_club.Domain.Data;
 using Computer_club.Domain.Entities;
-using Computer_club.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Computer_club.Domain.Services.UserService;

@@ -1,5 +1,4 @@
 ﻿using Computer_club.Domain.Entities;
-using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RefreshToken = Computer_club.Domain.Models.RefreshToken;

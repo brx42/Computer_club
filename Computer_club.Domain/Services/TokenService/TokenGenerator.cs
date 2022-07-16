@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using Computer_club.Domain.Entities;
 using Computer_club.Domain.Options;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Computer_club.Domain.Services.TokenService;
