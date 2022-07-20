@@ -1,8 +1,10 @@
 ﻿using Computer_club.Domain.Data;
 using Computer_club.Domain.DTO;
 using Computer_club.Domain.Entities;
+using Computer_club.Domain.Exceptions;
 using Computer_club.Domain.Models;
 using Computer_club.Domain.Services.TokenService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Domain.Services.AuthService;
@@ -11,42 +13,46 @@ public class AuthService : IAuthService
 {
     private readonly ITokenGenerator _tokenGenerator;
     private readonly AppDbContext _context;
-    private readonly UserManager<AppUser> _userManager;
+    private readonly UserManager<User> _userManager;
 
-    public AuthService(ITokenGenerator tokenGenerator, AppDbContext context, UserManager<AppUser> userManager)
+    public AuthService(ITokenGenerator tokenGenerator, AppDbContext context, UserManager<User> userManager)
     {
         _tokenGenerator = tokenGenerator;
         _context = context;
         _userManager = userManager;
     }
 
-    public async Task<ResponseLogin> Login(LoginDTO loginDto)
+    public async Task<Response<Token>> Login(LoginDTO loginDto)
     {
-        var response = new ResponseLogin { Success = false };
+        var response = new Response<Token>
+        {
+            Success = false
+        };
+
         try
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Login);
             if (user == null)
             {
-                response.Message = "Неверный логин или пароль";
+                response.Message = "Неверный логин";
                 return response;
             }
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
             if (!result)
             {
-                response.Message = "Неверный логин или пароль";
+                response.Message = "Неверный пароль";
                 return response;
             }
 
             var token = _tokenGenerator.CreateJwtToken(user);
-            var list = _context.RefreshTokens.Where(r => r.AppUserId == user.Id).ToList();
-            if (list.Count() > 0)
+            var list = _context.RefreshTokens.Where(r => r.UserId == user.Id).ToList();
+            if (list.Any())
                 _context.RefreshTokens.RemoveRange(list);
             var refreshToken = new RefreshToken
             {
-                AppUser = user,
-                AppUserId = user.Id,
+                User = user,
+                UserId = user.Id,
                 ExpiresAt = DateTime.UtcNow + TimeSpan.FromDays(30),
                 Token = _tokenGenerator.CreateRefreshToken()
             };
@@ -54,8 +60,8 @@ public class AuthService : IAuthService
             await _context.SaveChangesAsync();
 
             response.Success = true;
-            response.Message = ResponseMessage.Success.ToString();
-            response.Token = new Token
+            response.Message = "Success";
+            response.Data = new Token
             {
                 RefreshToken = refreshToken.Token,
                 JwtToken = token,
@@ -66,57 +72,50 @@ public class AuthService : IAuthService
         }
         catch (Exception ex)
         {
-            response.Message = ResponseMessage.Error.ToString();
+            response.Message = "Error";
             response.Success = false;
             return response;
         }
     }
 
-    public async Task<ResponseRegistration> Registration(RegistrationDTO registrationDto)
+    public async Task<Response<IEnumerable<IdentityError>>> Registration(RegistrationDTO registrationDto)
     {
-        var response = new ResponseRegistration
-        {
-            Success = false,
-            Message = ResponseMessage.Error.ToString()
-        };
+        var response = new Response<IEnumerable<IdentityError>>();
+        response.Success = false;
         try
         {
-            var user = new AppUser
+            var user = new User
             {
-                FullName = registrationDto.FullName,
                 Email = registrationDto.Email,
-                UserName = registrationDto.Email,
-                RegistrationDate = DateTime.UtcNow.ToString(),
-                BirthdayDate = registrationDto.BirthdayDate,
+                UserName = registrationDto.Login, 
+                DateOfBirth = registrationDto.DateOfBirth,
                 PhoneNumber = registrationDto.PhoneNumber
             };
 
             var result = await _userManager.CreateAsync(user, registrationDto.Password);
             if (!result.Succeeded)
             {
-                response.Errors = result.Errors;
+                response.Data = result.Errors;
                 return response;
             }
 
-            response.Message = ResponseMessage.Success.ToString();
+            response.Message = "Success";
             response.Success = true;
             return response;
         }
         catch (Exception ex)
         {
-            response.Message = ResponseMessage.Error.ToString();
+            
+            response.Message = "Error";
             response.Success = false;
             return response;
         }
     }
 
-    public async Task<ResponseLogin> RefreshToken(string token)
+    public async Task<Response<Token>> RefreshToken(string token)
     {
-        ResponseLogin response = new ResponseLogin
-        {
-            Message = ResponseMessage.Error.ToString(),
-            Success = false
-        };
+        var response = new Response<Token>();
+        response.Success = false;
 
         try
         {
@@ -124,7 +123,7 @@ public class AuthService : IAuthService
             if (refreshToken == null)
                 return response;
 
-            var user = _context.Users.FirstOrDefault(x => x.Id == refreshToken.AppUserId);
+            var user = _context.Users.FirstOrDefault(x => x.Id == refreshToken.UserId);
             if (refreshToken != null && refreshToken.ExpiresAt < DateTime.UtcNow)
             {
                 _context.RefreshTokens.Remove(refreshToken);
@@ -135,8 +134,8 @@ public class AuthService : IAuthService
             var newToken = new RefreshToken
             {
                 Token = _tokenGenerator.CreateRefreshToken(),
-                AppUserId = user.Id,
-                AppUser = user as AppUser,
+                UserId = user.Id,
+                User = user as User,
                 ExpiresAt = DateTime.UtcNow.AddDays(30)
             };
 
@@ -145,11 +144,11 @@ public class AuthService : IAuthService
             await _context.SaveChangesAsync();
 
             response.Success = true;
-            response.Message = ResponseMessage.Success.ToString();
+            response.Message = "Success";
             response.Token = new Token
             {
                 RefreshToken = newToken.Token,
-                JwtToken = _tokenGenerator.CreateJwtToken((AppUser)user),
+                JwtToken = _tokenGenerator.CreateJwtToken(user),
                 UserId = user.Id,
                 Username = user.UserName
             };
@@ -157,8 +156,8 @@ public class AuthService : IAuthService
         }
         catch (Exception ex)
         {
-            response.Message = ResponseMessage.Error.ToString();
-            response.Success = false;
+            response.Message = "Error";
+            response.Success = true;
             return response;
         }
     }

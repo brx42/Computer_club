@@ -2,52 +2,57 @@ global using Ardalis.ApiEndpoints;
 global using AutoMapper;
 using Computer_club.Domain.Data;
 using Computer_club.Domain.Entities;
-using Computer_club.Domain.Options;
 using Computer_club.Domain.Services.AuthService;
 using Computer_club.Domain.Services.TokenService;
 using Computer_club.Domain.Services.UserService;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using System.Text.Json.Serialization;
+using Computer_club.Domain.Options;
+using Computer_club.Domain.Options.Signing;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
-builder.Services.AddControllers(options => options.UseNamespaceRouteToken());
+builder.Services.AddControllers(options =>
+    options.UseNamespaceRouteToken())
+                .AddJsonOptions(options => 
+    options.JsonSerializerOptions.ReferenceHandler = 
+        ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
 
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(opt =>
+builder.Services.AddAuthentication(options =>
     {
-        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
     .AddJwtBearer(options =>
     {
+        options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            ValidateAudience = true,
-            ValidAudience = builder.Configuration["JWT:Audience"],
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateLifetime = true,
-            IssuerSigningKey = JWT.GetSymmetricSecurityKey(),
+            IssuerSigningKey = Issuer.GetIssuerKey(),
             ValidateIssuerSigningKey = true,
             ClockSkew = TimeSpan.Zero
         };
     });
+builder.Services.AddAuthorization();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
 
-builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 }).AddEntityFrameworkStores<AppDbContext>();
@@ -96,7 +101,6 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", 
                     "Computer_club_api v1"));
-
 
 app.UseEndpoints(endpoint =>
 {

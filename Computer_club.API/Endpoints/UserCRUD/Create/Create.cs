@@ -33,7 +33,7 @@ public class Create : EndpointBaseAsync
                     CancellationToken token = default)
     {
         var user = new User();
-        _mapper.Map(request, user);
+        _mapper.Map<User>(request);
         await _repository.AddAsync(user, token);
 
         var result = _mapper.Map<CreateUserResult>(user);

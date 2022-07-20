@@ -11,14 +11,15 @@ namespace Computer_club.Controllers;
 
 [Route("[controller]")]
 [ApiController]
+[AllowAnonymous]
 public class AccountController : ControllerBase
 {
     private readonly IAuthService _auth;
     private readonly RoleManager<IdentityRole> _role;
     private readonly AppDbContext _context;
-    private readonly UserManager<AppUser> _manager;
+    private readonly UserManager<User> _manager;
 
-    public AccountController(IAuthService auth, RoleManager<IdentityRole> role, AppDbContext context, UserManager<AppUser> manager)
+    public AccountController(IAuthService auth, RoleManager<IdentityRole> role, AppDbContext context, UserManager<User> manager)
     {
         _auth = auth;
         _role = role;

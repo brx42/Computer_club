@@ -1,12 +1,13 @@
 ﻿using Computer_club.Domain.DTO;
 using Computer_club.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Domain.Services.AuthService;
 
 public interface IAuthService
 {
-    public Task<ResponseLogin> Login(LoginDTO loginDto);
-    public Task<ResponseRegistration> Registration(RegistrationDTO registrationDto);
-    public Task<ResponseLogin> RefreshToken(string token);
+    public Task<Response<Token>> Login(LoginDTO loginDto);
+    public Task<Response<IEnumerable<IdentityError>>> Registration(RegistrationDTO registrationDto);
+    public Task<Response<Token>> RefreshToken(string token);
     public Task Logout(string refreshToken);
 }
