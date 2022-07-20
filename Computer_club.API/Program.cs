@@ -1,5 +1,6 @@
 global using Ardalis.ApiEndpoints;
 global using AutoMapper;
+using System.Security.Cryptography;
 using Computer_club.Domain.Data;
 using Computer_club.Domain.Entities;
 using Computer_club.Domain.Services.AuthService;
@@ -11,13 +12,15 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text.Json.Serialization;
 using Computer_club.Domain.Options;
-using Computer_club.Domain.Options.Signing;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+var optSection = builder.Configuration.GetSection("JwtOptions");
+builder.Services.Configure<JwtOptions>(optSection);
+var optSectionJwt = optSection.Get<JwtOptions>();
+var key = builder.Configuration.Get<RsaKeys>();
 
 builder.Services.AddControllers(options =>
     options.UseNamespaceRouteToken())
@@ -39,10 +42,12 @@ builder.Services.AddAuthentication(options =>
         options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,
-            ValidateAudience = false,
+            ValidIssuer = optSectionJwt.Issuer,
+            ValidateIssuer = true,
+            ValidAudience = optSectionJwt.Audience,
+            ValidateAudience = true,
             ValidateLifetime = true,
-            IssuerSigningKey = Issuer.GetIssuerKey(),
+            IssuerSigningKey = key.GetPublicKey(),
             ValidateIssuerSigningKey = true,
             ClockSkew = TimeSpan.Zero
         };

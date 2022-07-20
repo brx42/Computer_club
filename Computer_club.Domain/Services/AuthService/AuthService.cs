@@ -145,7 +145,7 @@ public class AuthService : IAuthService
 
             response.Success = true;
             response.Message = "Success";
-            response.Token = new Token
+            response.Data = new Token
             {
                 RefreshToken = newToken.Token,
                 JwtToken = _tokenGenerator.CreateJwtToken(user),

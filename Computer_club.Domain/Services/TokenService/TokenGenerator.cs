@@ -2,21 +2,28 @@
 using System.Security.Claims;
 using Computer_club.Domain.Entities;
 using Computer_club.Domain.Options;
-using Computer_club.Domain.Options.Signing;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Computer_club.Domain.Services.TokenService;
 
 public class TokenGenerator : ITokenGenerator
 {
+    private readonly JwtOptions _jwtOptions;
+    private readonly RsaKeys _keys;
+    public TokenGenerator(IOptions<JwtOptions> jwtOptions, RsaKeys keys)
+    {
+        _keys = keys;
+        _jwtOptions = jwtOptions.Value;
+    }
     public string CreateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenDescription = new SecurityTokenDescriptor
         {
-            Expires = DateTime.Now.AddMinutes(JwtOptions.LifeTime),
+            Expires = DateTime.Now.AddMinutes(_jwtOptions.LifeTime),
             Subject = GetIdentity(user),
-            SigningCredentials = Audience.GetAudienceKey()
+            SigningCredentials = _keys.GetPrivateKey(),
         };
         var token = tokenHandler.CreateToken(tokenDescription);
         return tokenHandler.WriteToken(token);
