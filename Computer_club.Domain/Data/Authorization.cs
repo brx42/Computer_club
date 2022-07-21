@@ -2,10 +2,10 @@
 
 public class Authorization
 {
-    public const string DefaultUsername = "User";
-    public const string DefaultEmail = "User@localhost.ru";
-    public const string DefaultPassword = "UserPassword";
-    public const Roles DefaultRoles = Roles.Client;
+    public const string SuperAdminUsername = "SuperAdmin";
+    public const string SuperAdminEmail = "SuperAdmin@localhost.ru";
+    public const string SuperAdminPassword = "SuperAdmin123.";
+    public const Roles SuperAdminRoles = Roles.SuperAdmin;
     
     
     public enum Roles
