@@ -17,7 +17,7 @@ public class Delete : EndpointBaseAsync
         _repository = repository;
     }
 
-    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpDelete("user/delete")]
     [SwaggerOperation(
         Summary = "Deletes a User",

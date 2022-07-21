@@ -19,7 +19,7 @@ public class Update : EndpointBaseAsync
                 _mapper = mapper;
         }
         
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
         [HttpPut("user/update")]
         [SwaggerOperation(
                 Summary = "Updates a User",

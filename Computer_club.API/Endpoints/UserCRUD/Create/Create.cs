@@ -20,7 +20,7 @@ public class Create : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [Authorize(AuthenticationSchemes = "Bearer", Roles = "SuperAdmin")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [HttpPost("user/create")]
     [SwaggerOperation(
         Summary = "Creates a new User",

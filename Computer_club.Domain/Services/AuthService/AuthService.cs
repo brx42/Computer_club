@@ -1,10 +1,8 @@
 ﻿using Computer_club.Domain.Data;
 using Computer_club.Domain.DTO;
 using Computer_club.Domain.Entities;
-using Computer_club.Domain.Exceptions;
 using Computer_club.Domain.Models;
 using Computer_club.Domain.Services.TokenService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Domain.Services.AuthService;
@@ -24,14 +22,10 @@ public class AuthService : IAuthService
 
     public async Task<Response<Token>> Login(LoginDTO loginDto)
     {
-        var response = new Response<Token>
-        {
-            Success = false
-        };
-
+        var response = new Response<Token>();
         try
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Login);
+            var user = await _userManager.FindByNameAsync(loginDto.Login);
             if (user == null)
             {
                 response.Message = "Неверный логин";
@@ -45,7 +39,7 @@ public class AuthService : IAuthService
                 return response;
             }
 
-            var token = _tokenGenerator.CreateJwtToken(user);
+            var token = await _tokenGenerator.CreateJwtToken(user);
             var list = _context.RefreshTokens.Where(r => r.UserId == user.Id).ToList();
             if (list.Any())
                 _context.RefreshTokens.RemoveRange(list);
@@ -80,8 +74,10 @@ public class AuthService : IAuthService
 
     public async Task<Response<IEnumerable<IdentityError>>> Registration(RegistrationDTO registrationDto)
     {
-        var response = new Response<IEnumerable<IdentityError>>();
-        response.Success = false;
+        var response = new Response<IEnumerable<IdentityError>>
+        {
+            Success = false
+        };
         try
         {
             var user = new User
@@ -114,19 +110,21 @@ public class AuthService : IAuthService
 
     public async Task<Response<Token>> RefreshToken(string token)
     {
-        var response = new Response<Token>();
-        response.Success = false;
+        var response = new Response<Token>
+        {
+            Success = false
+        };
 
         try
         {
-            var refreshToken = _context.RefreshTokens.FirstOrDefault(x => x.Token == token);
-            if (refreshToken == null)
+            var oldToken = _context.RefreshTokens.FirstOrDefault(x => x.Token == token);
+            if (oldToken == null)
                 return response;
 
-            var user = _context.Users.FirstOrDefault(x => x.Id == refreshToken.UserId);
-            if (refreshToken != null && refreshToken.ExpiresAt < DateTime.UtcNow)
+            var user = _context.Users.FirstOrDefault(x => x.Id == oldToken.UserId);
+            if (oldToken != null && oldToken.ExpiresAt < DateTime.UtcNow)
             {
-                _context.RefreshTokens.Remove(refreshToken);
+                _context.RefreshTokens.Remove(oldToken);
                 await _context.SaveChangesAsync();
                 return response;
             }
@@ -135,12 +133,12 @@ public class AuthService : IAuthService
             {
                 Token = _tokenGenerator.CreateRefreshToken(),
                 UserId = user.Id,
-                User = user as User,
+                User = user,
                 ExpiresAt = DateTime.UtcNow.AddDays(30)
             };
 
             await _context.RefreshTokens.AddAsync(newToken);
-            _context.RefreshTokens.Remove(refreshToken);
+            if (oldToken != null) _context.RefreshTokens.Remove(oldToken);
             await _context.SaveChangesAsync();
 
             response.Success = true;
@@ -148,7 +146,7 @@ public class AuthService : IAuthService
             response.Data = new Token
             {
                 RefreshToken = newToken.Token,
-                JwtToken = _tokenGenerator.CreateJwtToken(user),
+                JwtToken = await _tokenGenerator.CreateJwtToken(user),
                 UserId = user.Id,
                 Username = user.UserName
             };

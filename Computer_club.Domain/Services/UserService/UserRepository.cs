@@ -15,31 +15,30 @@ public class UserRepository : IUserRepository<User>
 
     public async Task<List<User>> GetAllAsync(CancellationToken token)
     {
-        return await _context.UserModels.ToListAsync(token);
+        return await _context.Users.ToListAsync(token);
     }
 
     public async Task<User?> GetByIdAsync(Guid id, CancellationToken token)
     {
-        return await _context.UserModels.SingleOrDefaultAsync(x =>
-            x.Id == id, token);
+        return await _context.Users.FindAsync(id, token);
     }
 
     public async Task<User> AddAsync(User user, CancellationToken token)
     {
-        await _context.UserModels.AddAsync(user, token);
+        await _context.Users.AddAsync(user, token);
         await _context.SaveChangesAsync(token);
         return user;
     }
 
     public async Task UpdateAsync(User user, CancellationToken token)
     {
-        _context.Entry(user).State = EntityState.Modified;
+        _context.Users.Update(user);
         await _context.SaveChangesAsync(token);
     }
 
     public async Task DeleteAsync(User user, CancellationToken token)
     {
-        _context.UserModels.Remove(user);
+        _context.Users.Remove(user);
         await _context.SaveChangesAsync(token);
     }
 }

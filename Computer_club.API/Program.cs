@@ -18,9 +18,11 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 
 var optSection = builder.Configuration.GetSection("JwtOptions");
+var keySection = builder.Configuration.GetSection("JwtOptions:Keys");
 builder.Services.Configure<JwtOptions>(optSection);
+builder.Services.Configure<RsaKeys>(keySection);
 var optSectionJwt = optSection.Get<JwtOptions>();
-var key = builder.Configuration.Get<RsaKeys>();
+var key = keySection.Get<RsaKeys>();
 
 builder.Services.AddControllers(options =>
     options.UseNamespaceRouteToken())
@@ -37,8 +39,9 @@ builder.Services.AddAuthentication(options =>
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer(options =>
-    {
+    .AddJwtBearer("Bearer", async options=>
+    { 
+        options.IncludeErrorDetails = true;
         options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -47,7 +50,7 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = optSectionJwt.Audience,
             ValidateAudience = true,
             ValidateLifetime = true,
-            IssuerSigningKey = key.GetPublicKey(),
+            IssuerSigningKey = await key.GetPublicKey(),
             ValidateIssuerSigningKey = true,
             ClockSkew = TimeSpan.Zero
         };
@@ -57,7 +60,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
 
-builder.Services.AddIdentity<User, IdentityRole>(options =>
+builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 }).AddEntityFrameworkStores<AppDbContext>();

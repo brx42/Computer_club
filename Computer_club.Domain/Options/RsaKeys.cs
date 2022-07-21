@@ -1,35 +1,33 @@
 ﻿using System.Security.Cryptography;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Computer_club.Domain.Options;
 
 public class RsaKeys
 {
-    private readonly RSA _rsa;
-    private readonly IConfiguration _configuration;
+    public string PublicPath { get; set; }
+    public string PrivatePath { get; set; }
+    
 
-    public RsaKeys(IConfiguration configuration)
+    public async Task<RsaSecurityKey> GetPublicKey()
     {
-        _configuration = configuration;
-        _rsa = RSA.Create();
-    }
-
-    public RsaSecurityKey GetPublicKey()
-    {
-        _rsa.ImportRSAPublicKey(
-            source: Convert.FromBase64String(_configuration["JwtOptions:Key:Public"]),
+        var rsa = RSA.Create();
+        var file = await File.ReadAllTextAsync(PublicPath);
+        rsa.ImportRSAPublicKey(
+            source: Convert.FromBase64String(file),
             bytesRead: out int _);
-        return new RsaSecurityKey(_rsa);
+        return new RsaSecurityKey(rsa);
     }
 
-    public SigningCredentials GetPrivateKey()
+    public async Task<SigningCredentials> GetPrivateKey()
     {
-        _rsa.ImportRSAPrivateKey(
-            source: Convert.FromBase64String(_configuration["JwtOptions:Key:Private"]),
+        var rsa = RSA.Create();
+        var file = await File.ReadAllTextAsync(PrivatePath);
+        rsa.ImportPkcs8PrivateKey(
+            source: Convert.FromBase64String(file),
             bytesRead: out int _);
         var signingCredentials = new SigningCredentials(
-            key: new RsaSecurityKey(_rsa),
+            key: new RsaSecurityKey(rsa),
             algorithm: SecurityAlgorithms.RsaSha256);
         return signingCredentials;
     }

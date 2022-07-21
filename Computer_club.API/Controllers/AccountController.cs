@@ -15,11 +15,11 @@ namespace Computer_club.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly IAuthService _auth;
-    private readonly RoleManager<IdentityRole> _role;
+    private readonly RoleManager<IdentityRole<Guid>> _role;
     private readonly AppDbContext _context;
     private readonly UserManager<User> _manager;
 
-    public AccountController(IAuthService auth, RoleManager<IdentityRole> role, AppDbContext context, UserManager<User> manager)
+    public AccountController(IAuthService auth, RoleManager<IdentityRole<Guid>> role, AppDbContext context, UserManager<User> manager)
     {
         _auth = auth;
         _role = role;
