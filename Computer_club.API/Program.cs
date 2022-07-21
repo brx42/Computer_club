@@ -79,7 +79,7 @@ builder.Services.AddSwaggerGen(c =>
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
-    c.OperationFilter<SecurityRequirementsOperationFilter>();
+    //c.OperationFilter<SecurityRequirementsOperationFilter>();
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {

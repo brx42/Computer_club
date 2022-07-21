@@ -56,9 +56,9 @@ public class AccountController : ControllerBase
 
     [HttpGet("logout")]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public async Task<IActionResult> Logout([Required] string refreshToken)
+    public async Task<IActionResult> Logout()
     {
-        await _auth.Logout(refreshToken);
+        await _auth.Logout();
         return Ok();
     }
 }

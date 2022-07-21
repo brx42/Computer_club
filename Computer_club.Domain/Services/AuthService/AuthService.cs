@@ -4,6 +4,7 @@ using Computer_club.Domain.Entities;
 using Computer_club.Domain.Models;
 using Computer_club.Domain.Services.TokenService;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Computer_club.Domain.Services.AuthService;
 
@@ -160,9 +161,9 @@ public class AuthService : IAuthService
         }
     }
 
-    public async Task Logout(string refreshToken)
+    public async Task Logout()
     {
-        var token = _context.RefreshTokens.FirstOrDefault(x => x.Token == refreshToken);
+        var token = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token != null);
         _context.RefreshTokens.Remove(token);
         await _context.SaveChangesAsync();
     }

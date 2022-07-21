@@ -9,5 +9,5 @@ public interface IAuthService
     public Task<Response<Token>> Login(LoginDTO loginDto);
     public Task<Response<IEnumerable<IdentityError>>> Registration(RegistrationDTO registrationDto);
     public Task<Response<Token>> RefreshToken(string token);
-    public Task Logout(string refreshToken);
+    public Task Logout();
 }
