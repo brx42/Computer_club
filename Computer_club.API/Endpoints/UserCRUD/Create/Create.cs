@@ -8,7 +8,7 @@ namespace Computer_club.Endpoints.UserCRUD.Create;
 
 public class Create : EndpointBaseAsync
         .WithRequest<CreateUserCommand>
-        .WithActionResult<CreateUserResult>
+        .WithActionResult
 {
     private readonly IUserRepository<User> _repository;
     private readonly IMapper _mapper;
@@ -21,19 +21,19 @@ public class Create : EndpointBaseAsync
     }
 
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpPost("user/create")]
+    [HttpPost("api/post")]
     [SwaggerOperation(
         Summary = "Creates a new User",
         Description = "Creates a new User",
         OperationId = "User.Create",
         Tags = new[] { "UserEndpoints" })
     ]
-    public override async Task<ActionResult<CreateUserResult>>
+    public override async Task<ActionResult>
         HandleAsync([FromBody]CreateUserCommand request,
                     CancellationToken token = default)
     {
         var user = new User();
-        _mapper.Map<User>(request);
+        _mapper.Map(request, user);
         await _repository.AddAsync(user, token);
 
         var result = _mapper.Map<CreateUserResult>(user);

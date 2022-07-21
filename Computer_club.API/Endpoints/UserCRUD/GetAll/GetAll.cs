@@ -18,7 +18,7 @@ public class GetAll : EndpointBaseAsync
     }
     
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpGet("user/get_all")]
+    [HttpGet("api/get")]
     [SwaggerOperation(
         Summary = "Get a list of all Users",
         Description = "Get a list of all Users",

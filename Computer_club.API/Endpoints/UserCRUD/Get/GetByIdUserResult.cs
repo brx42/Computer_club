@@ -1,8 +1,7 @@
 ﻿namespace Computer_club.Endpoints.UserCRUD.Get;
 
-public class GetUserResult
+public class GetByIdUserResult
 {
-    public Guid? Id { get; set; }
     public string FirstName { get; set; } 
     public string SecondName { get; set; }
     public string LastName { get; set; } 

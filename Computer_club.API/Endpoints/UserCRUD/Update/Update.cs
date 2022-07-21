@@ -19,8 +19,8 @@ public class Update : EndpointBaseAsync
                 _mapper = mapper;
         }
         
+        [HttpPut("api/put")]
         [Authorize(AuthenticationSchemes = "Bearer")]
-        [HttpPut("user/update")]
         [SwaggerOperation(
                 Summary = "Updates a User",
                 Description = "Updates a User",
@@ -31,7 +31,7 @@ public class Update : EndpointBaseAsync
         ([FromBody]UpdateUserCommand request,
         CancellationToken token = default)
         {
-                var user = await _repository.GetByIdAsync(request.Id, token);
+                var user = await _repository.GetByIdAsync(request.Id);
                 if (user == null) return NotFound();
                 _mapper.Map(request, user);
                 await _repository.UpdateAsync(user, token);

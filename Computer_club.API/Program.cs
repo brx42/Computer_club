@@ -1,6 +1,5 @@
 global using Ardalis.ApiEndpoints;
 global using AutoMapper;
-using System.Security.Cryptography;
 using Computer_club.Domain.Data;
 using Computer_club.Domain.Entities;
 using Computer_club.Domain.Services.AuthService;
@@ -9,7 +8,6 @@ using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 using System.Text.Json.Serialization;
 using Computer_club.Domain.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,25 +32,24 @@ builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
 
+var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     })
-    .AddJwtBearer("Bearer", async options=>
-    { 
-        options.IncludeErrorDetails = true;
-        options.SaveToken = true;
+    .AddJwtBearer("Bearer", options=>
+    {
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidIssuer = optSectionJwt.Issuer,
-            ValidateIssuer = true,
+            ValidateIssuer = false,
             ValidAudience = optSectionJwt.Audience,
-            ValidateAudience = true,
+            ValidateAudience = false,
             ValidateLifetime = true,
-            IssuerSigningKey = await key.GetPublicKey(),
+            IssuerSigningKey = pubKey,
             ValidateIssuerSigningKey = true,
-            ClockSkew = TimeSpan.Zero
+            ClockSkew = TimeSpan.Zero,
         };
     });
 builder.Services.AddAuthorization();
@@ -77,9 +74,9 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Authorization using bearer scheme",
         In = ParameterLocation.Header,
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer"
     });
-    //c.OperationFilter<SecurityRequirementsOperationFilter>();
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -96,14 +93,16 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseAuthentication();
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>

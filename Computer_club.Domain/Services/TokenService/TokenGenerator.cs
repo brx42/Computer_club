@@ -21,6 +21,8 @@ public class TokenGenerator : ITokenGenerator
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenDescription = new SecurityTokenDescriptor
         {
+            Issuer = _jwtOptions.Issuer,
+            Audience = _jwtOptions.Audience,
             Expires = DateTime.Now.AddMinutes(_jwtOptions.LifeTime),
             Subject = GetIdentity(user),
             SigningCredentials = await _keys.GetPrivateKey(),

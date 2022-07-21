@@ -18,9 +18,9 @@ public class UserRepository : IUserRepository<User>
         return await _context.Users.ToListAsync(token);
     }
 
-    public async Task<User?> GetByIdAsync(Guid id, CancellationToken token)
+    public async Task<User?> GetByIdAsync(Guid id)
     {
-        return await _context.Users.FindAsync(id, token);
+        return await _context.Users.FindAsync(id);
     }
 
     public async Task<User> AddAsync(User user, CancellationToken token)
@@ -36,9 +36,9 @@ public class UserRepository : IUserRepository<User>
         await _context.SaveChangesAsync(token);
     }
 
-    public async Task DeleteAsync(User user, CancellationToken token)
+    public async Task DeleteAsync(User user)
     {
         _context.Users.Remove(user);
-        await _context.SaveChangesAsync(token);
+        await _context.SaveChangesAsync();
     }
 }
