@@ -1,6 +1,6 @@
-﻿namespace Computer_club.Endpoints.UserCRUD.Create;
+﻿namespace Computer_club.Endpoints.UserAction.Update;
 
-public class CreateUserCommand
+public class UpdateUserResult
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }

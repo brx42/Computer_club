@@ -1,4 +1,4 @@
-﻿namespace Computer_club.Endpoints.UserCRUD.Get;
+﻿namespace Computer_club.Endpoints.UserAction.Get;
 
 public class GetByIdUserResult
 {

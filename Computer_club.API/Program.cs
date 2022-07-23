@@ -9,7 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Computer_club;
+using Computer_club.Domain.Extensions;
+using Computer_club.Domain.Models;
 using Computer_club.Domain.Options;
+using Computer_club.Domain.Services.RoleService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -31,6 +35,7 @@ builder.Services.AddControllers(options =>
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IRoleService<Role>), typeof(RoleService));
 
 var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>
@@ -52,7 +57,7 @@ builder.Services.AddAuthentication(options =>
             ClockSkew = TimeSpan.Zero,
         };
     });
-builder.Services.AddAuthorization();
+builder.Services.AddRoleAndPolicy();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
@@ -60,6 +65,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.User.RequireUniqueEmail = true;
+
 }).AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddEndpointsApiExplorer();
@@ -93,7 +104,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(MainMapper));
 
 var app = builder.Build();
 

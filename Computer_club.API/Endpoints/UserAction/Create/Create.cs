@@ -1,10 +1,10 @@
-﻿using Computer_club.Domain.Entities;
-using Computer_club.Domain.Services.UserService;
+﻿using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Computer_club.Domain.Entities;
 
-namespace Computer_club.Endpoints.UserCRUD.Create;
+namespace Computer_club.Endpoints.UserAction.Create;
 
 public class Create : EndpointBaseAsync
         .WithRequest<CreateUserCommand>
@@ -21,7 +21,7 @@ public class Create : EndpointBaseAsync
     }
 
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpPost("api/post")]
+    [HttpPost("api/user")]
     [SwaggerOperation(
         Summary = "Creates a new User",
         Description = "Creates a new User",
@@ -32,7 +32,7 @@ public class Create : EndpointBaseAsync
         HandleAsync([FromBody]CreateUserCommand request,
                     CancellationToken token = default)
     {
-        var user = new User();
+        var user = new Domain.Entities.User();
         _mapper.Map(request, user);
         await _repository.AddAsync(user, token);
 

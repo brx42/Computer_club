@@ -1,13 +1,14 @@
-﻿using Computer_club.Domain.Entities;
-using Computer_club.Endpoints.UserCRUD.Create;
-using Computer_club.Endpoints.UserCRUD.Get;
-using Computer_club.Endpoints.UserCRUD.Update;
+﻿using Computer_club.Domain.DTO;
+using Computer_club.Domain.Entities;
+using Computer_club.Endpoints.UserAction.Create;
+using Computer_club.Endpoints.UserAction.Get;
+using Computer_club.Endpoints.UserAction.Update;
 
 namespace Computer_club;
 
-public class Mapper : Profile
+public class MainMapper : Profile
 {
-    public Mapper()
+    public MainMapper()
     {
         CreateMap<CreateUserCommand, User>().
             ForMember(dest => dest.UserName,opt => opt.MapFrom(src => src.Login)).
@@ -26,5 +27,12 @@ public class Mapper : Profile
         CreateMap<User, UpdateUserResult>().
             ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.UserName)).
             ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.PasswordHash));
+
+
+
+        CreateMap<RegistrationDTO, User>().
+            ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Login)).
+            ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
+        
     }
 }

@@ -10,6 +10,8 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     public AppDbContext(DbContextOptions options) : base(options)
 
     {
+        // Database.EnsureDeleted();
+        // Database.EnsureCreated();
     }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     

@@ -1,4 +1,4 @@
-﻿namespace Computer_club.Endpoints.UserCRUD.Update;
+﻿namespace Computer_club.Endpoints.UserAction.Update;
 
 public class UpdateUserCommand
 {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Computer_club.Endpoints.UserCRUD.GetAll;
+namespace Computer_club.Endpoints.UserAction.GetAll;
 
 public class GetAll : EndpointBaseAsync
         .WithoutRequest
@@ -18,7 +18,7 @@ public class GetAll : EndpointBaseAsync
     }
     
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpGet("api/get")]
+    [HttpGet("api/user")]
     [SwaggerOperation(
         Summary = "Get a list of all Users",
         Description = "Get a list of all Users",

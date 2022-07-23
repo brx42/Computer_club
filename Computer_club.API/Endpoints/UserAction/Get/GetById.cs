@@ -1,10 +1,10 @@
-﻿using Computer_club.Domain.Entities;
-using Computer_club.Domain.Services.UserService;
+﻿using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Computer_club.Domain.Entities;
 
-namespace Computer_club.Endpoints.UserCRUD.Get;
+namespace Computer_club.Endpoints.UserAction.Get;
 
     public class GetById : EndpointBaseAsync
         .WithRequest<Guid>
@@ -20,16 +20,16 @@ namespace Computer_club.Endpoints.UserCRUD.Get;
     }
 
 
-    [HttpGet("api/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [HttpGet("api/user/{id:guid}")]
+    [Authorize]
     [SwaggerOperation(
         Summary = "Gets a single User",
         Description = "Gets a single User by Id",
         OperationId = "User.GetById",
         Tags = new[] { "UserEndpoints" })
     ]
-    public override async Task<ActionResult<GetByIdUserResult>>
-        HandleAsync(Guid id, CancellationToken token = default)
+    public override async Task<ActionResult<GetByIdUserResult>> HandleAsync
+        (Guid id, CancellationToken token = default)
     {
         var user = await _repository.GetByIdAsync(id);
         if (user == null) return NotFound();

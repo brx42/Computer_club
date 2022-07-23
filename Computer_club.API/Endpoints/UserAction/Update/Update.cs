@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Computer_club.Endpoints.UserCRUD.Update;
+namespace Computer_club.Endpoints.UserAction.Update;
 
 public class Update : EndpointBaseAsync
         .WithRequest<UpdateUserCommand>
@@ -19,7 +19,7 @@ public class Update : EndpointBaseAsync
                 _mapper = mapper;
         }
         
-        [HttpPut("api/put")]
+        [HttpPut("api/user")]
         [Authorize(AuthenticationSchemes = "Bearer")]
         [SwaggerOperation(
                 Summary = "Updates a User",

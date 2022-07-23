@@ -1,4 +1,6 @@
-﻿namespace Computer_club.Domain.Models;
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Computer_club.Domain.Models;
 
 public class Token
 {
@@ -6,4 +8,5 @@ public class Token
     public Guid UserId { get; set; }
     public string JwtToken { get; set; }
     public string RefreshToken { get; set; }
+    public string? Role { get; set; }
 }

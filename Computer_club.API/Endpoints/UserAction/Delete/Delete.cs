@@ -1,10 +1,10 @@
-﻿using Computer_club.Domain.Entities;
-using Computer_club.Domain.Services.UserService;
+﻿using Computer_club.Domain.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using Computer_club.Domain.Entities;
 
-namespace Computer_club.Endpoints.UserCRUD.Delete;
+namespace Computer_club.Endpoints.UserAction.Delete;
 
 public class Delete : EndpointBaseAsync
         .WithRequest<Guid>
@@ -17,7 +17,7 @@ public class Delete : EndpointBaseAsync
         _repository = repository;
     }
     
-    [HttpDelete("api/{id}")]
+    [HttpDelete("api/user/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Deletes a User",
