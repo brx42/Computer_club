@@ -1,8 +1,8 @@
-﻿using Computer_club.Domain.Entities;
-using Computer_club.Domain.Models;
+﻿using Computer_club.Data.Entities.User;
+using Computer_club.Data.Models.User;
 using Microsoft.AspNetCore.Identity;
 
-namespace Computer_club.Domain.Data;
+namespace Computer_club.Data.Data;
 
 public class AppDbSeed 
 {

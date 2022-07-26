@@ -1,4 +1,4 @@
-﻿namespace Computer_club.Domain.Models;
+﻿namespace Computer_club.Data.Models.User;
 
 public class Token
 {

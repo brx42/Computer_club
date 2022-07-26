@@ -1,7 +1,6 @@
-﻿using Computer_club.Domain.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace Computer_club.Domain.Entities;
+namespace Computer_club.Data.Entities.User;
 
 public sealed class User : IdentityUser<Guid>
 {

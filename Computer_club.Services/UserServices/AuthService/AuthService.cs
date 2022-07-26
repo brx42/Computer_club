@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using Computer_club.Domain.Data;
-using Computer_club.Domain.DTO;
-using Computer_club.Domain.Entities;
-using Computer_club.Domain.Models;
-using Computer_club.Domain.Services.TokenService;
+using Computer_club.Data.Data;
+using Computer_club.Data.DTO.Auth;
+using Computer_club.Data.Entities.User;
+using Computer_club.Data.Models.User;
+using Computer_club.Services.UserServices.TokenService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Computer_club.Domain.Services.AuthService;
+namespace Computer_club.Services.UserServices.AuthService;
 
 public class AuthService : IAuthService
 {
