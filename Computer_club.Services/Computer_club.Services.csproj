@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Computer_club.Data\Computer_club.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ClubServices\ProviderService" />
+    </ItemGroup>
+
 </Project>
