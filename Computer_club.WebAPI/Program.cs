@@ -6,13 +6,15 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Data;
 using Computer_club.Data.Entities.User;
+using Computer_club.Data.Models.Club;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
-using Computer_club.Services.UserServices.AuthService;
-using Computer_club.Services.UserServices.RoleService;
-using Computer_club.Services.UserServices.TokenService;
-using Computer_club.Services.UserServices.UserRepository;
-using Computer_club.WebAPI;
+using Computer_club.Services.Services.ClubServices.AddressService;
+using Computer_club.Services.Services.UserServices.AuthService;
+using Computer_club.Services.Services.UserServices.RoleService;
+using Computer_club.Services.Services.UserServices.TokenService;
+using Computer_club.Services.Services.UserServices.UserService;
+using Computer_club.WebAPI.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -27,14 +29,14 @@ var key = keySection.Get<RsaKeys>();
 
 builder.Services.AddControllers(options =>
     options.UseNamespaceRouteToken())
-                .AddJsonOptions(options => 
-    options.JsonSerializerOptions.ReferenceHandler = 
-        ReferenceHandler.IgnoreCycles);
+    .AddJsonOptions(options => 
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped(typeof(IUserRepository<User>), typeof(UserRepository));
+builder.Services.AddScoped<IUserService<User>, UserService>();
 builder.Services.AddScoped<IRoleService<IdentityRole<Guid>>, RoleService>();
+builder.Services.AddScoped<IAddressService<AddressClub>, AddressService>();
 
 var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>
@@ -103,7 +105,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddAutoMapper(typeof(MainMapper));
+builder.Services.AddAutoMapper(typeof(UserMapper), typeof(ClubMapping));
+
 
 var app = builder.Build();
 

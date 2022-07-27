@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Entities.User;
-using Computer_club.Services.UserServices.UserRepository;
+using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -10,10 +10,10 @@ public class Update : EndpointBaseAsync
     .WithRequest<UpdateUserCommand>
     .WithActionResult<UpdateUserResult>
 {
-    private readonly IUserRepository<User> _repository;
+    private readonly IUserService<User> _repository;
     private readonly IMapper _mapper;
 
-    public Update(IUserRepository<User> repository, IMapper mapper)
+    public Update(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

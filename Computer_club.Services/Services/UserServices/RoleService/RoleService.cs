@@ -3,7 +3,7 @@ using Computer_club.Data.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Computer_club.Services.UserServices.RoleService;
+namespace Computer_club.Services.Services.UserServices.RoleService;
 
 public class RoleService : IRoleService<IdentityRole<Guid>>
 {

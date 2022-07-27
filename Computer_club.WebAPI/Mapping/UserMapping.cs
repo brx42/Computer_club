@@ -6,11 +6,11 @@ using Computer_club.WebAPI.Endpoints.UserAction.Get;
 using Computer_club.WebAPI.Endpoints.UserAction.Update;
 using Microsoft.AspNetCore.Identity;
 
-namespace Computer_club.WebAPI;
+namespace Computer_club.WebAPI.Mapping;
 
-public class MainMapper : Profile
+public class UserMapper : Profile
 {
-    public MainMapper()
+    public UserMapper()
     {
         // User endpoints
         CreateMap<CreateUserCommand, User>().

@@ -13,6 +13,7 @@
       <PackageReference Include="Ardalis.EFCore.Extensions" Version="1.1.0" />
       <PackageReference Include="AutoMapper" Version="11.0.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="Dadata" Version="22.6.0" />
       <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.7" />
       <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.7" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.7" />

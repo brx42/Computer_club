@@ -1,6 +1,6 @@
 ﻿using Computer_club.Data.Entities.User;
 
-namespace Computer_club.Services.UserServices.TokenService;
+namespace Computer_club.Services.Services.UserServices.TokenService;
 
 public interface ITokenGenerator
 {

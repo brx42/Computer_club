@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Entities.User;
-using Computer_club.Services.UserServices.UserRepository;
+using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -10,11 +10,11 @@ public class Create : EndpointBaseAsync
     .WithRequest<CreateUserCommand>
     .WithActionResult
 {
-    private readonly IUserRepository<User> _repository;
+    private readonly IUserService<User> _repository;
     private readonly IMapper _mapper;
 
 
-    public Create(IUserRepository<User> repository, IMapper mapper)
+    public Create(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

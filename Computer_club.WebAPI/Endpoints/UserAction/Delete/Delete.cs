@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Entities.User;
-using Computer_club.Services.UserServices.UserRepository;
+using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -10,9 +10,9 @@ public class Delete : EndpointBaseAsync
     .WithRequest<Guid>
     .WithActionResult
 {
-    private readonly IUserRepository<User> _repository;
+    private readonly IUserService<User> _repository;
 
-    public Delete(IUserRepository<User> repository)
+    public Delete(IUserService<User> repository)
     {
         _repository = repository;
     }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Computer_club.Services.UserServices.RoleService;
+namespace Computer_club.Services.Services.UserServices.RoleService;
 
 public interface IRoleService<T>
 {

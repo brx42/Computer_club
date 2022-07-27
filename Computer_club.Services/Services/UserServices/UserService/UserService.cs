@@ -2,13 +2,13 @@
 using Computer_club.Data.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
-namespace Computer_club.Services.UserServices.UserRepository;
+namespace Computer_club.Services.Services.UserServices.UserService;
 
-public class UserRepository : IUserRepository<User>
+public class UserService : IUserService<User>
 {
     private readonly AppDbContext _context;
 
-    public UserRepository(AppDbContext context)
+    public UserService(AppDbContext context)
     {
         _context = context;
     }

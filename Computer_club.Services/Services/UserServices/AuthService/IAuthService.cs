@@ -1,7 +1,7 @@
 ﻿using Computer_club.Data.DTO.Auth;
 using Computer_club.Data.Models.User;
 
-namespace Computer_club.Services.UserServices.AuthService;
+namespace Computer_club.Services.Services.UserServices.AuthService;
 
 public interface IAuthService
 {

@@ -5,7 +5,7 @@ using Computer_club.Services.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Computer_club.Services.UserServices.TokenService;
+namespace Computer_club.Services.Services.UserServices.TokenService;
 
 public class TokenGenerator : ITokenGenerator
 {

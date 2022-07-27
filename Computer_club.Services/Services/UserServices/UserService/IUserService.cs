@@ -1,14 +1,10 @@
-﻿namespace Computer_club.Services.UserServices.UserRepository;
+﻿namespace Computer_club.Services.Services.UserServices.UserService;
 
-public interface IUserRepository<T>
+public interface IUserService<T>
 {
     Task<List<T>> GetAllAsync(CancellationToken token);
-
     Task<T?> GetByIdAsync(Guid id);
-
     Task<T> AddAsync(T entity, CancellationToken token);
-
     Task UpdateAsync(T entity, CancellationToken token);
-
     Task DeleteAsync(T entity);
 }

@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ClubServices\ProviderService" />
+      <PackageReference Include="Dadata" Version="22.6.0" />
     </ItemGroup>
 
 </Project>
