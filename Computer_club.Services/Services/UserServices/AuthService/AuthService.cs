@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using Computer_club.Data.Data;
-using Computer_club.Data.DTO.Auth;
+using Computer_club.Data.Database;
 using Computer_club.Data.Entities.User;
 using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.UserServices.TokenService;

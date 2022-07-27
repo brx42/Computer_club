@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Data;
+﻿using Computer_club.Data.Database;
 using Computer_club.Data.Entities.User;
 using Microsoft.EntityFrameworkCore;
 

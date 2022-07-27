@@ -1,5 +1,4 @@
-﻿using Computer_club.Data.DTO.Auth;
-using Computer_club.Data.Models.User;
+﻿using Computer_club.Data.Models.User;
 
 namespace Computer_club.Services.Services.UserServices.AuthService;
 

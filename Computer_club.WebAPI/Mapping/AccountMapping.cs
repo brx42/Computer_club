@@ -1,0 +1,14 @@
+﻿using Computer_club.Data.Entities.User;
+using Computer_club.Data.Models.User;
+
+namespace Computer_club.WebAPI.Mapping;
+
+public class AccountMapping : Profile
+{
+    public AccountMapping()
+    {
+        CreateMap<RegistrationDTO, User>().
+            ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Login)).
+            ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
+    }
+}

@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
-using Computer_club.Data.Data;
+using Computer_club.Data.Database;
+using Computer_club.Data.Entities.Club;
 using Computer_club.Data.Entities.User;
-using Computer_club.Data.Models.Club;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
-using Computer_club.Services.Services.ClubServices.AddressService;
-using Computer_club.Services.Services.ClubServices.DescriptionService;
+using Computer_club.Services.Services.ClubServices.ClubService;
 using Computer_club.Services.Services.UserServices.AuthService;
 using Computer_club.Services.Services.UserServices.RoleService;
 using Computer_club.Services.Services.UserServices.TokenService;
@@ -37,8 +36,7 @@ builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService<User>, UserService>();
 builder.Services.AddScoped<IRoleService<IdentityRole<Guid>>, RoleService>();
-builder.Services.AddScoped<IAddressService<AddressClub>, AddressService>();
-builder.Services.AddScoped<IDescriptionService<DescriptionClub>, DescriptionService>();
+builder.Services.AddScoped<IClubService<Club>, ClubService>();
 
 var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>
@@ -107,7 +105,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddAutoMapper(typeof(UserMapper), typeof(ClubMapping));
+builder.Services.AddAutoMapper
+    (typeof(UserMapping), typeof(ClubMapping), typeof(RoleMapping), typeof(AccountMapping));
 
 
 var app = builder.Build();
