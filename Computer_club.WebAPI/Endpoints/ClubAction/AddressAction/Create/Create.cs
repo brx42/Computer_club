@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.AddressAction.Create;
 
-public class Create : EndpointBaseAsync.WithRequest<AddressClub>.WithActionResult<AddressClub>
+public class Create : EndpointBaseAsync.
+        WithRequest<AddressClub>.
+        WithActionResult<AddressClub>
 {
     private readonly IAddressService<AddressClub> _service;
 
@@ -23,7 +25,8 @@ public class Create : EndpointBaseAsync.WithRequest<AddressClub>.WithActionResul
         OperationId = "Address.Create",
         Tags = new[] { "AddressEndpoints" })
     ]
-    public override async Task<ActionResult<AddressClub>> HandleAsync(AddressClub club, CancellationToken cancellationToken = new CancellationToken())
+    public override async Task<ActionResult<AddressClub>> HandleAsync
+        (AddressClub club, CancellationToken token = default)
     {
         var result = await _service.AddAsync(club);
         return Created("", result);

@@ -6,7 +6,7 @@ public class Club
 {
     public Guid ClubId { get; set; }
     public AddressClub? AddressClub { get; set; }
-    public string? Description { get; set; }
+    public DescriptionClub? Description { get; set; }
     public Provider? Provider { get; set; }
     public EquipmentSeat? EquipmentSeat { get; set; }
     public HistoryRepairEquipment? HistoryRepairEquipment { get; set; }

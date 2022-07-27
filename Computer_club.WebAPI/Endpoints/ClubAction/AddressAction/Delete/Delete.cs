@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.AddressAction.Delete;
 
-public class Delete : EndpointBaseAsync.WithRequest<AddressClub>.WithActionResult
+public class Delete : EndpointBaseAsync.
+        WithRequest<AddressClub>.
+        WithActionResult
 {
     private readonly IAddressService<AddressClub> _service;
 

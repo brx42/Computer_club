@@ -10,6 +10,7 @@ using Computer_club.Data.Models.Club;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
 using Computer_club.Services.Services.ClubServices.AddressService;
+using Computer_club.Services.Services.ClubServices.DescriptionServices;
 using Computer_club.Services.Services.UserServices.AuthService;
 using Computer_club.Services.Services.UserServices.RoleService;
 using Computer_club.Services.Services.UserServices.TokenService;
@@ -37,6 +38,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService<User>, UserService>();
 builder.Services.AddScoped<IRoleService<IdentityRole<Guid>>, RoleService>();
 builder.Services.AddScoped<IAddressService<AddressClub>, AddressService>();
+builder.Services.AddScoped<IDescriptionService<DescriptionClub>, DescriptionService>();
 
 var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>

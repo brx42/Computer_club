@@ -34,6 +34,5 @@ public class Update : EndpointBaseAsync.WithRequest<UpdateAddressCommand>.WithAc
         await _service.UpdateAsync(address, token);
         var result = _mapper.Map<UpdateAddressResult>(address);
         return Ok(result);
-
     }
 }

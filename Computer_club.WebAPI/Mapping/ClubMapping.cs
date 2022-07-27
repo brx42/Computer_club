@@ -2,6 +2,7 @@
 using Computer_club.Data.Models.Club;
 using Computer_club.WebAPI.Endpoints.ClubAction.AddressAction.FindAddress;
 using Computer_club.WebAPI.Endpoints.ClubAction.AddressAction.Update;
+using Computer_club.WebAPI.Endpoints.ClubAction.DescriptionAction.Update;
 using Dadata.Model;
 
 namespace Computer_club.WebAPI.Mapping;
@@ -18,5 +19,13 @@ public class ClubMapping : Profile
         CreateMap<AddressClub, UpdateAddressResult>()
             .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
 
+
+        // Description
+        CreateMap<UpdateDescriptionCommand, DescriptionClub>()
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+
+        CreateMap<DescriptionClub, UpdateDescriptionResult>()
+            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
     }
 }

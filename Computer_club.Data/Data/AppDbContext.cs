@@ -18,6 +18,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Club> Clubs { get; set; }
     public DbSet<AddressClub> AddressClubs { get; set; }
+    public DbSet<DescriptionClub> DescriptionClubs { get; set; }
     public DbSet<EquipmentSeat> EquipmentSeats { get; set; }
     public DbSet<HistoryRepairEquipment> HistoryRepairEquipments { get; set; }
     public DbSet<PhotoGallery> PhotoGalleries { get; set; }

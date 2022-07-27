@@ -23,7 +23,7 @@ public class GetById : EndpointBaseAsync.WithRequest<Guid>.WithActionResult<Addr
         OperationId = "Address.GetById",
         Tags = new[] { "AddressEndpoints" })
     ]
-    public override async Task<ActionResult<AddressClub>> HandleAsync(Guid id, CancellationToken cancellationToken = new CancellationToken())
+    public override async Task<ActionResult<AddressClub>> HandleAsync(Guid id, CancellationToken token = default)
     {
         var result = await _service.GetByIdAsync(id);
         return Ok(result);
