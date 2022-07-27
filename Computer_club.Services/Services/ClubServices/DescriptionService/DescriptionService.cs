@@ -2,7 +2,7 @@
 using Computer_club.Data.Models.Club;
 using Microsoft.EntityFrameworkCore;
 
-namespace Computer_club.Services.Services.ClubServices.DescriptionServices;
+namespace Computer_club.Services.Services.ClubServices.DescriptionService;
 
 public class DescriptionService : IDescriptionService<DescriptionClub>
 {
@@ -25,14 +25,14 @@ public class DescriptionService : IDescriptionService<DescriptionClub>
 
     public async Task<DescriptionClub?> AddAsync(DescriptionClub description)
     {
-        await _context.AddAsync(description);
+        await _context.DescriptionClubs.AddAsync(description);
         await _context.SaveChangesAsync();
         return description;
     }
 
     public async Task UpdateAsync(DescriptionClub description, CancellationToken token)
     {
-        _context.Update(description);
+        _context.DescriptionClubs.Update(description);
         await _context.SaveChangesAsync(token);
     }
 

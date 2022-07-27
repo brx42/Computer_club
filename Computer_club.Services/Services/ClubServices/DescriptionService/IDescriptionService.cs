@@ -1,6 +1,4 @@
-﻿using Computer_club.Data.Models.Club;
-
-namespace Computer_club.Services.Services.ClubServices.DescriptionServices;
+﻿namespace Computer_club.Services.Services.ClubServices.DescriptionService;
 
 public interface IDescriptionService<T>
 {

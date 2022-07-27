@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Models.Club;
-using Computer_club.Services.Services.ClubServices.DescriptionServices;
+using Computer_club.Services.Services.ClubServices.DescriptionService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
