@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.User;
+﻿using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

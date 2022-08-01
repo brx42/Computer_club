@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Database;
-using Computer_club.Data.Entities.User;
+using Computer_club.Data.Entities.UserEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

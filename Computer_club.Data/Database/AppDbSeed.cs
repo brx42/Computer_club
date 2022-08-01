@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.User;
+﻿using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.User;
 using Microsoft.AspNetCore.Identity;
 

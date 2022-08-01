@@ -53,6 +53,7 @@ public static class Authorization
                 opt.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
                 opt.RequireRole(Role.Auditor);
             });
+            
         });
         return service;
     }

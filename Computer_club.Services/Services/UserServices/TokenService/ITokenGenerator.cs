@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.User;
+﻿using Computer_club.Data.Entities.UserEntities;
 
 namespace Computer_club.Services.Services.UserServices.TokenService;
 

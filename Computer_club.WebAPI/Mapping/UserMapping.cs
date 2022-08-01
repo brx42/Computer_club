@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.User;
+﻿using Computer_club.Data.Entities.UserEntities;
 using Computer_club.WebAPI.Endpoints.RoleAction.Get;
 using Computer_club.WebAPI.Endpoints.UserAction.Create;
 using Computer_club.WebAPI.Endpoints.UserAction.Get;

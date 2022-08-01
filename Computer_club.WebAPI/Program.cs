@@ -5,11 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
-using Computer_club.Data.Entities.Club;
-using Computer_club.Data.Entities.User;
+using Computer_club.Data.Entities.ClubEntities;
+using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
 using Computer_club.Services.Services.ClubServices.ClubService;
+using Computer_club.Services.Services.ClubServices.HistoryEquipmentService;
 using Computer_club.Services.Services.UserServices.AuthService;
 using Computer_club.Services.Services.UserServices.RoleService;
 using Computer_club.Services.Services.UserServices.TokenService;
@@ -32,11 +34,7 @@ builder.Services.AddControllers(options =>
     .AddJsonOptions(options => 
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserService<User>, UserService>();
-builder.Services.AddScoped<IRoleService<IdentityRole<Guid>>, RoleService>();
-builder.Services.AddScoped<IClubService<Club>, ClubService>();
+builder.Services.AddServices();
 
 var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>

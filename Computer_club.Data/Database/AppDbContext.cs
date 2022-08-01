@@ -1,6 +1,6 @@
-﻿using Computer_club.Data.Entities.Club;
-using Computer_club.Data.Entities.User;
-using Computer_club.Data.Models.Club;
+﻿using Computer_club.Data.Entities.ClubEntities;
+using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.ClubModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +16,20 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         // Database.EnsureCreated();
     }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
-    public DbSet<Club> Clubs { get; set; }
-    public DbSet<HistoryRepairEquipment> HistoryRepairEquipments { get; set; }
+    
+    public DbSet<GameClub> GameClubs { get; set; }
+
+    public DbSet<Equipment> Equipments { get; set; }
+
+    public DbSet<HistoryEquip> HistoryEquips { get; set; }
+
+    public DbSet<Photo> Photos { get; set; }
+
+    public DbSet<Place> Places { get; set; }
+
+    public DbSet<PlaceType> PlaceTypes { get; set; }
+    
     public DbSet<Provider> Providers { get; set; }
+
     public DbSet<Schedule> Schedules { get; set; }
 }
