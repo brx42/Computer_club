@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.User;
+using Computer_club.Data.Models.UserModels;
 
 namespace Computer_club.Services.Services.UserServices.AuthService;
 

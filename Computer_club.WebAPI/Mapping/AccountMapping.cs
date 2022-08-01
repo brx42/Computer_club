@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.User;
+using Computer_club.Data.Models.UserModels;
 
 namespace Computer_club.WebAPI.Mapping;
 

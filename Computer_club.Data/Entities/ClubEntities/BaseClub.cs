@@ -2,7 +2,7 @@
 
 namespace Computer_club.Data.Entities.ClubEntities;
 
-public abstract class BaseClub
+public class BaseClub
 {
-    [Key] public int Id { get; }
+    [Key] public int Id { get; set; }
 }

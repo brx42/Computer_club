@@ -2,7 +2,7 @@
 
 namespace Computer_club.Data.Models.ClubModels;
 
-public class PlaceType : BaseClub
+public class DeviceSet : BaseClub 
 {
     public string Name { get; set; }
 

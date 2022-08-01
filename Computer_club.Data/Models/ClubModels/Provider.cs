@@ -10,6 +10,6 @@ public class Provider : BaseClub
     public bool IsStatic { get; set; }
     public string? ContractNumber { get; set; }
 
-    public int? ClubId { get; set; }
+    public int? GameClubId { get; set; }
     public GameClub GameClub { get; set; }
 }

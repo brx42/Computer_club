@@ -1,4 +1,5 @@
-﻿using Computer_club.Data.Models.ClubModels;
+﻿using System.ComponentModel.DataAnnotations;
+using Computer_club.Data.Models.ClubModels;
 
 namespace Computer_club.Data.Entities.ClubEntities;
 
