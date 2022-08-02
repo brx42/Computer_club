@@ -40,7 +40,7 @@ public class RoleEndpointsTests
     [Fact]
     public void GetAll()
     {
-        var getAll = new GetAllRole(_service);
+        var getAll = new GetAllRoles(_service);
         var result = getAll.HandleAsync();
         Assert.NotNull(result);
     }

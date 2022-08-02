@@ -6,13 +6,13 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.RoleAction.GetAll;
 
-public class GetAllRole : EndpointBaseAsync.
+public class GetAllRoles : EndpointBaseAsync.
     WithoutRequest.
     WithActionResult
 {
     private readonly IRoleService<IdentityRole<Guid>> _service;
 
-    public GetAllRole(IRoleService<IdentityRole<Guid>> service)
+    public GetAllRoles(IRoleService<IdentityRole<Guid>> service)
     {
         _service = service;
     }

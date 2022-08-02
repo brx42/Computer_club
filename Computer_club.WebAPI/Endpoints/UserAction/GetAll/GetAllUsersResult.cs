@@ -1,6 +1,6 @@
 ﻿namespace Computer_club.WebAPI.Endpoints.UserAction.GetAll;
 
-public class GetAllUserResult
+public class GetAllUsersResult
 {
     public string FirstName { get; set; }
     public string SecondName { get; set; }

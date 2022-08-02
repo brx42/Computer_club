@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Update;
 
-public class UpdateClub : EndpointBaseAsync.WithRequest<UpdateClubCommand>.WithActionResult<UpdateClubResult>
+public class UpdateClub : EndpointBaseAsync.
+        WithRequest<UpdateClubCommand>.
+        WithActionResult<UpdateClubResult>
 {
     private readonly IClubService<GameClub> _service;
     private readonly IMapper _mapper;
@@ -28,11 +30,11 @@ public class UpdateClub : EndpointBaseAsync.WithRequest<UpdateClubCommand>.WithA
     public override async Task<ActionResult<UpdateClubResult>> HandleAsync
         ([FromBody]UpdateClubCommand club, CancellationToken token = default)
     {
-        var address = await _service.GetByIdAsync(club.Id);
-        if (address == null) return NotFound();
-        _mapper.Map(club, address);
-        await _service.UpdateAsync(address, token);
-        var result = _mapper.Map<UpdateClubResult>(address);
+        var find = await _service.GetByIdAsync(club.Id);
+        if (find == null) return NotFound();
+        _mapper.Map(club, find);
+        await _service.UpdateAsync(find, token);
+        var result = _mapper.Map<UpdateClubResult>(find);
         return Ok(result);
     }
 }

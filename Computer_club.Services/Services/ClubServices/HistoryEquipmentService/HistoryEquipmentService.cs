@@ -18,9 +18,9 @@ public class HistoryEquipService : IHistoryEquipService<HistoryEquip>
         return await _context.HistoryEquips.ToListAsync(token);
     }
 
-    public async Task<HistoryEquip?> GetByIdAsync(int id, CancellationToken token)
+    public async Task<HistoryEquip?> GetByIdAsync(int id)
     {
-        return await _context.HistoryEquips.FindAsync(id, token);
+        return await _context.HistoryEquips.FindAsync(id);
     }
 
     public async Task<HistoryEquip> AddAsync(HistoryEquip equip, CancellationToken token)

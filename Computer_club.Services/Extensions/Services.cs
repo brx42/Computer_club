@@ -3,6 +3,7 @@ using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Services.ClubServices.ClubService;
 using Computer_club.Services.Services.ClubServices.HistoryEquipmentService;
+using Computer_club.Services.Services.ClubServices.ProviderService;
 using Computer_club.Services.Services.UserServices.AuthService;
 using Computer_club.Services.Services.UserServices.RoleService;
 using Computer_club.Services.Services.UserServices.TokenService;
@@ -21,6 +22,7 @@ public static class ServiceExtensions
         service.AddScoped<IUserService<User>, UserService>();
         service.AddScoped<IRoleService<IdentityRole<Guid>>, RoleService>();
         service.AddScoped<IClubService<GameClub>, ClubService>();
+        service.AddScoped<IProviderService<Provider>, ProviderService>();
         service.AddScoped<IHistoryEquipService<HistoryEquip>, HistoryEquipService>();
 
         return service;

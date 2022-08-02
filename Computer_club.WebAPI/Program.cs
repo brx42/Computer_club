@@ -5,17 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
-using Computer_club.Data.Entities.ClubEntities;
 using Computer_club.Data.Entities.UserEntities;
-using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
-using Computer_club.Services.Services.ClubServices.ClubService;
-using Computer_club.Services.Services.ClubServices.HistoryEquipmentService;
-using Computer_club.Services.Services.UserServices.AuthService;
-using Computer_club.Services.Services.UserServices.RoleService;
-using Computer_club.Services.Services.UserServices.TokenService;
-using Computer_club.Services.Services.UserServices.UserService;
 using Computer_club.WebAPI.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -104,7 +96,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddAutoMapper
-    (typeof(UserMapping), typeof(ClubMapping), typeof(RoleMapping), typeof(AccountMapping));
+    (typeof(UserMapping), typeof(ClubMapping), typeof(RoleMapping), typeof(AccountMapping),
+    typeof(ProviderMapping));
 
 
 var app = builder.Build();

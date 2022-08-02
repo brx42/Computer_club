@@ -6,14 +6,14 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.UserAction.GetAll;
 
-public class GetAllUser : EndpointBaseAsync
-    .WithRequest<GetAllUserCommand>
-    .WithActionResult<GetAllUserResult>
+public class GetAllUsers : EndpointBaseAsync
+    .WithRequest<GetAllUsersCommand>
+    .WithActionResult<GetAllUsersResult>
 {
     private readonly IUserService<User> _repository;
     private readonly IMapper _mapper;
 
-    public GetAllUser(IUserService<User> repository, IMapper mapper)
+    public GetAllUsers(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
@@ -27,8 +27,8 @@ public class GetAllUser : EndpointBaseAsync
         OperationId = "User.GetAll",
         Tags = new[] { "UserEndpoints" })
     ]
-    public override async Task<ActionResult<GetAllUserResult>> HandleAsync
-        ([FromQuery] GetAllUserCommand request,CancellationToken token = default)
+    public override async Task<ActionResult<GetAllUsersResult>> HandleAsync
+        ([FromQuery] GetAllUsersCommand request,CancellationToken token = default)
     {
         if (request.PerPage == 0)
             request.PerPage = 10;
@@ -37,7 +37,7 @@ public class GetAllUser : EndpointBaseAsync
 
         var result =
             (await _repository.GetAllAsync(request.PerPage, request.Page, token)).Select
-            (x => _mapper.Map<GetAllUserResult>(x));
+            (x => _mapper.Map<GetAllUsersResult>(x));
         return Ok(result);
     }
 }
