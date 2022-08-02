@@ -3,6 +3,7 @@ using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Services.ClubServices.ClubService;
 using Computer_club.Services.Services.ClubServices.DeviceSetService;
+using Computer_club.Services.Services.ClubServices.EquipmentService;
 using Computer_club.Services.Services.ClubServices.HistoryEquipmentService;
 using Computer_club.Services.Services.ClubServices.PhotoService;
 using Computer_club.Services.Services.ClubServices.ProviderService;
@@ -12,7 +13,6 @@ using Computer_club.Services.Services.UserServices.TokenService;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Computer_club.Services.Extensions;
 
@@ -29,6 +29,7 @@ public static class ServiceExtensions
         service.AddScoped<IHistoryEquipService<HistoryEquip>, HistoryEquipService>();
         service.AddScoped<IPhotoService<Photo>, PhotoService>();
         service.AddScoped<IDeviceSetService<DeviceSet>, DeviceSetService>();
+        service.AddScoped<IEquipmentService<Equipment>, EquipmentService>();
 
         return service;
     }
