@@ -6,14 +6,14 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.UserAction.Update;
 
-public class Update : EndpointBaseAsync
+public class UpdateUser : EndpointBaseAsync
     .WithRequest<UpdateUserCommand>
     .WithActionResult<UpdateUserResult>
 {
     private readonly IUserService<User> _repository;
     private readonly IMapper _mapper;
 
-    public Update(IUserService<User> repository, IMapper mapper)
+    public UpdateUser(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

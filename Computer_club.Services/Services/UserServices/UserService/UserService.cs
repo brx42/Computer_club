@@ -13,9 +13,9 @@ public class UserService : IUserService<User>
         _context = context;
     }
 
-    public async Task<List<User>> GetAllAsync(CancellationToken token)
+    public async Task<List<User>> GetAllAsync(int perPage, int page, CancellationToken token)
     {
-        return await _context.Users.ToListAsync(token);
+        return await _context.Users.Skip(perPage * (page - 1)).Take(perPage).ToListAsync(token);
     }
 
     public async Task<User?> GetByIdAsync(Guid id)

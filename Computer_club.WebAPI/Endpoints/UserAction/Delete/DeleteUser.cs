@@ -6,13 +6,13 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.UserAction.Delete;
 
-public class Delete : EndpointBaseAsync
+public class DeleteUser : EndpointBaseAsync
     .WithRequest<Guid>
     .WithActionResult
 {
     private readonly IUserService<User> _repository;
 
-    public Delete(IUserService<User> repository)
+    public DeleteUser(IUserService<User> repository)
     {
         _repository = repository;
     }

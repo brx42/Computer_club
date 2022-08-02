@@ -6,15 +6,17 @@ using Computer_club.Data.Entities.ClubEntities;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Create;
 
-public class Create : EndpointBaseAsync.
-        WithRequest<GameClub>.
-        WithActionResult<GameClub>
+public class CreateClub : EndpointBaseAsync.
+        WithRequest<CreateClubCommand>.
+        WithActionResult<CreateClubResult>
 {
     private readonly IClubService<GameClub> _service;
+    private readonly IMapper _mapper;
 
-    public Create(IClubService<GameClub> service)
+    public CreateClub(IClubService<GameClub> service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpPost("api/club")]
@@ -25,10 +27,12 @@ public class Create : EndpointBaseAsync.
         OperationId = "Club.Create",
         Tags = new[] { "ClubEndpoints" })
     ]
-    public override async Task<ActionResult<GameClub>> HandleAsync
-        (GameClub club, CancellationToken token = default)
+    public override async Task<ActionResult<CreateClubResult>> HandleAsync
+        (CreateClubCommand club, CancellationToken token = default)
     {
-        var result = await _service.AddAsync(club);
+        var gameClub = _mapper.Map<GameClub>(club);
+        var request = await _service.AddAsync(gameClub);
+        var result = _mapper.Map<CreateClubResult>(request);
         return Created("", result);
     }
 }

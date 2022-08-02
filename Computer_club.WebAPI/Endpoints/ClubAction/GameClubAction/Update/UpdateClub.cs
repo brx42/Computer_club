@@ -1,18 +1,17 @@
 ﻿using Computer_club.Data.Entities.ClubEntities;
 using Computer_club.Services.Services.ClubServices.ClubService;
-using Computer_club.WebAPI.Endpoints.ClubAction.ClubAction.Update;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Update;
 
-public class Update : EndpointBaseAsync.WithRequest<UpdateClubCommand>.WithActionResult<UpdateClubResult>
+public class UpdateClub : EndpointBaseAsync.WithRequest<UpdateClubCommand>.WithActionResult<UpdateClubResult>
 {
     private readonly IClubService<GameClub> _service;
     private readonly IMapper _mapper;
 
-    public Update(IClubService<GameClub> service, IMapper mapper)
+    public UpdateClub(IClubService<GameClub> service, IMapper mapper)
     {
         _service = service;
         _mapper = mapper;

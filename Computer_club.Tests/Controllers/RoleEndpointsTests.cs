@@ -16,7 +16,7 @@ public class RoleEndpointsTests
     [Fact]
     public void Create()
     {
-        var create = new Create(_service);
+        var create = new CreateRole(_service);
         var result = create.HandleAsync(string.Empty);
         Assert.NotNull(result);
     }
@@ -24,7 +24,7 @@ public class RoleEndpointsTests
     [Fact]
     public void Delete()
     {
-        var delete = new Delete(_service);
+        var delete = new DeleteRole(_service);
         var result = delete.HandleAsync(new IdentityRole<Guid>());
         Assert.NotNull(result);
     }
@@ -32,7 +32,7 @@ public class RoleEndpointsTests
     [Fact]
     public void Get()
     {
-        var get = new GetById(_service, _mapper);
+        var get = new GetByIdRole(_service, _mapper);
         var result = get.HandleAsync(new Guid());
         Assert.NotNull(result);
     }
@@ -40,7 +40,7 @@ public class RoleEndpointsTests
     [Fact]
     public void GetAll()
     {
-        var getAll = new GetAll(_service);
+        var getAll = new GetAllRole(_service);
         var result = getAll.HandleAsync();
         Assert.NotNull(result);
     }

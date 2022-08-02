@@ -6,18 +6,20 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Delete;
 
-public class Delete : EndpointBaseAsync.
-        WithRequest<GameClub>.
+public class DeleteClub : EndpointBaseAsync.
+        WithRequest<int>.
         WithActionResult
 {
     private readonly IClubService<GameClub> _service;
+    private readonly IMapper _mapper;
 
-    public Delete(IClubService<GameClub> service)
+    public DeleteClub(IClubService<GameClub> service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
-    [HttpDelete("api/club")]
+    [HttpDelete("api/club/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Club delete ",
@@ -25,11 +27,11 @@ public class Delete : EndpointBaseAsync.
         OperationId = "Club.delete",
         Tags = new[] { "ClubEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync(GameClub club, CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {
-        var address = await _service.GetByIdAsync(club.Id);
-        if (address == null) return NotFound();
-        var result = _service.DeleteAsync(address);
+        var club = await _service.GetByIdAsync(id);
+        if (club == null) return NotFound();
+        var result = _service.DeleteAsync(club);
         return Ok(result);
     }
 }

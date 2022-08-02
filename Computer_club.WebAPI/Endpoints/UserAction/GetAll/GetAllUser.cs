@@ -6,15 +6,17 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.UserAction.GetAll;
 
-public class GetAll : EndpointBaseAsync
-    .WithoutRequest
-    .WithActionResult
+public class GetAllUser : EndpointBaseAsync
+    .WithRequest<GetAllUserCommand>
+    .WithActionResult<GetAllUserResult>
 {
     private readonly IUserService<User> _repository;
+    private readonly IMapper _mapper;
 
-    public GetAll(IUserService<User> repository)
+    public GetAllUser(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
     
     [Authorize(AuthenticationSchemes = "Bearer")]
@@ -25,9 +27,17 @@ public class GetAll : EndpointBaseAsync
         OperationId = "User.GetAll",
         Tags = new[] { "UserEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
+    public override async Task<ActionResult<GetAllUserResult>> HandleAsync
+        ([FromQuery] GetAllUserCommand request,CancellationToken token = default)
     {
-        var result = await _repository.GetAllAsync(token);
+        if (request.PerPage == 0)
+            request.PerPage = 10;
+        if (request.Page == 0)
+            request.Page = 1;
+
+        var result =
+            (await _repository.GetAllAsync(request.PerPage, request.Page, token)).Select
+            (x => _mapper.Map<GetAllUserResult>(x));
         return Ok(result);
     }
 }

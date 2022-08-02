@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Computer_club.Data.Models.ClubModels;
+﻿using Computer_club.Data.Models.ClubModels;
 
 namespace Computer_club.Data.Entities.ClubEntities;
 
@@ -10,6 +9,7 @@ public class GameClub : BaseClub
     public bool IsOwned { get; set; }
     public string? ContractNumber { get; set; }
     public string? DigitizedDocument { get; set; }
+
 
     public Provider Provider { get; set; }
     public List<HistoryEquip> HistoryEquips { get; set; }

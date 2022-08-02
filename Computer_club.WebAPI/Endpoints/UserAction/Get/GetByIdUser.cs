@@ -6,14 +6,14 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.UserAction.Get;
 
-public class GetById : EndpointBaseAsync
+public class GetByIdUser : EndpointBaseAsync
     .WithRequest<Guid>
     .WithActionResult<GetByIdUserResult>
 {
     private readonly IUserService<User> _repository;
     private readonly IMapper _mapper;
 
-    public GetById(IUserService<User> repository, IMapper mapper)
+    public GetByIdUser(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

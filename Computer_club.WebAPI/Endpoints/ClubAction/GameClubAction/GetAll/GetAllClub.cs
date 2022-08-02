@@ -6,13 +6,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetAll;
 
-public class GetAll : EndpointBaseAsync.WithoutRequest.WithActionResult
+public class GetAllClub : EndpointBaseAsync.WithoutRequest.WithActionResult
 {
     private readonly IClubService<GameClub> _service;
+    private readonly IMapper _mapper;
 
-    public GetAll(IClubService<GameClub> service)
+    public GetAllClub(IClubService<GameClub> service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet("api/club")]
@@ -26,6 +28,7 @@ public class GetAll : EndpointBaseAsync.WithoutRequest.WithActionResult
     public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
     {
         var result = await _service.GetAllAsync(token);
-        return Ok(result);
+        var map = _mapper.Map<List<GetAllClubResult>>(result);
+        return Ok(map);
     }
 }

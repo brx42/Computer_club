@@ -6,13 +6,15 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetById;
 
-public class GetById : EndpointBaseAsync.WithRequest<int>.WithActionResult<GameClub>
+public class GetByIdClub : EndpointBaseAsync.WithRequest<int>.WithActionResult
 {
     private readonly IClubService<GameClub> _service;
+    private readonly IMapper _mapper;
 
-    public GetById(IClubService<GameClub> service)
+    public GetByIdClub(IClubService<GameClub> service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet("api/club/{id}")]
@@ -23,9 +25,10 @@ public class GetById : EndpointBaseAsync.WithRequest<int>.WithActionResult<GameC
         OperationId = "Club.GetById",
         Tags = new[] { "ClubEndpoints" })
     ]
-    public override async Task<ActionResult<GameClub>> HandleAsync(int id, CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {
         var result = await _service.GetByIdAsync(id);
-        return Ok(result);
+        var map = _mapper.Map<GetByIdClubResult>(result);
+        return Ok(map);
     }
 }

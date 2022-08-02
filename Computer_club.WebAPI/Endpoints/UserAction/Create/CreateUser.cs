@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.UserAction.Create;
 
-public class Create : EndpointBaseAsync
+public class CreateUser : EndpointBaseAsync
     .WithRequest<CreateUserCommand>
     .WithActionResult
 {
@@ -14,7 +14,7 @@ public class Create : EndpointBaseAsync
     private readonly IMapper _mapper;
 
 
-    public Create(IUserService<User> repository, IMapper mapper)
+    public CreateUser(IUserService<User> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

@@ -1,4 +1,4 @@
-﻿namespace Computer_club.WebAPI.Endpoints.ClubAction.ClubAction.Update;
+﻿namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Update;
 
 public class UpdateClubCommand
 {
