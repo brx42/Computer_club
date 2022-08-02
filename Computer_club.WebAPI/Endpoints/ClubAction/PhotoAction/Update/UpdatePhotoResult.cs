@@ -1,6 +1,6 @@
-﻿namespace Computer_club.WebAPI.Endpoints.ClubAction.PhotoAction.Create;
+﻿namespace Computer_club.WebAPI.Endpoints.ClubAction.PhotoAction.Update;
 
-public class CreatePhotoCommand
+public class UpdatePhotoResult
 {
     public string FilePath { get; set; }
     public string Name { get; set; }
