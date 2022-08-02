@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.RoleAction.Delete;
 
-public class DeleteRole : EndpointBaseAsync.WithRequest<IdentityRole<Guid>>.WithActionResult
+public class DeleteRole : EndpointBaseAsync
+    .WithRequest<IdentityRole<Guid>>
+    .WithActionResult
 {
     private readonly IRoleService<IdentityRole<Guid>> _service;
 

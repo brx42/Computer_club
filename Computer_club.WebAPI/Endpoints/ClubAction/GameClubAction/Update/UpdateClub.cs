@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Update;
 
-public class UpdateClub : EndpointBaseAsync.
-        WithRequest<UpdateClubCommand>.
-        WithActionResult<UpdateClubResult>
+public class UpdateClub : EndpointBaseAsync
+    .WithRequest<UpdateClubCommand>
+    .WithActionResult<UpdateClubResult>
 {
     private readonly IClubService<GameClub> _service;
     private readonly IMapper _mapper;

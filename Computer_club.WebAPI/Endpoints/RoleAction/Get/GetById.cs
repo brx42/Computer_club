@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.RoleAction.Get;
 
-public class GetByIdRole : EndpointBaseAsync.
-        WithRequest<Guid>.
-        WithActionResult<GetByIdRoleResult>
+public class GetByIdRole : EndpointBaseAsync
+    .WithRequest<Guid>
+    .WithActionResult<GetByIdRoleResult>
 {
     private readonly IRoleService<IdentityRole<Guid>> _service;
     private readonly IMapper _mapper;

@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.GetAll;
 
-public class GetAllProviders : EndpointBaseAsync.WithoutRequest.WithActionResult
+public class GetAllProviders : EndpointBaseAsync
+    .WithoutRequest
+    .WithActionResult
 {
     private readonly IProviderService<Provider> _service;
     private readonly IMapper _mapper;

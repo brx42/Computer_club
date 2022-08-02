@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.Delete;
 
-public class DeleteProvider : EndpointBaseAsync.WithRequest<int>.WithActionResult
+public class DeleteProvider : EndpointBaseAsync
+    .WithRequest<int>
+    .WithActionResult
 {
     private readonly IProviderService<Provider> _service;
 

@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.Update;
 
-public class UpdateProvider : EndpointBaseAsync.
-        WithRequest<UpdateProviderCommand>.
-        WithActionResult<UpdateProviderResult>
+public class UpdateProvider : EndpointBaseAsync
+    .WithRequest<UpdateProviderCommand>
+    .WithActionResult<UpdateProviderResult>
 {
     private readonly IProviderService<Provider> _service;
     private readonly IMapper _mapper;

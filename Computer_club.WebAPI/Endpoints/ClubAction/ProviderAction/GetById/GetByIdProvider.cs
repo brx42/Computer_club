@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.GetById;
 
-public class GetByIdProvider : EndpointBaseAsync.
-        WithRequest<int>.
-        WithActionResult<GetByIdProviderResult>
+public class GetByIdProvider : EndpointBaseAsync
+    .WithRequest<int>
+    .WithActionResult<GetByIdProviderResult>
 {
     private readonly IProviderService<Provider> _service;
     private readonly IMapper _mapper;
@@ -29,8 +29,8 @@ public class GetByIdProvider : EndpointBaseAsync.
     ]
     public override async Task<ActionResult<GetByIdProviderResult>> HandleAsync(int id, CancellationToken token = default)
     {
-        var result = await _service.GetByIdAsync(id);
-        var map = _mapper.Map<GetByIdProviderResult>(result);
-        return Ok(map);
+        var provider = await _service.GetByIdAsync(id);
+        var result = _mapper.Map<GetByIdProviderResult>(provider);
+        return Ok(result);
     }
 }

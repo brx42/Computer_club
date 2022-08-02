@@ -64,12 +64,4 @@
       <ProjectReference Include="..\Computer_club.Services\Computer_club.Services.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Endpoints\ClubAction\HistoryEquipAction\Create" />
-      <Folder Include="Endpoints\ClubAction\HistoryEquipAction\Delete" />
-      <Folder Include="Endpoints\ClubAction\HistoryEquipAction\GetAll" />
-      <Folder Include="Endpoints\ClubAction\HistoryEquipAction\GetById" />
-      <Folder Include="Endpoints\ClubAction\HistoryEquipAction\Update" />
-    </ItemGroup>
-
 </Project>

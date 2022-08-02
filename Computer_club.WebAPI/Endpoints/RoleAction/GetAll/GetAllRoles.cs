@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.RoleAction.GetAll;
 
-public class GetAllRoles : EndpointBaseAsync.
-    WithoutRequest.
-    WithActionResult
+public class GetAllRoles : EndpointBaseAsync
+    .WithoutRequest
+    .WithActionResult
 {
     private readonly IRoleService<IdentityRole<Guid>> _service;
 

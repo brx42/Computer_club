@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.FindAddress;
 
-public class FindAddress : EndpointBaseAsync.
-        WithRequest<FindAddressCommand>.
-        WithActionResult<IEnumerable<string>>
+public class FindAddress : EndpointBaseAsync
+    .WithRequest<FindAddressCommand>
+    .WithActionResult<IEnumerable<string>>
 {
     private readonly IClubService<GameClub> _address;
 

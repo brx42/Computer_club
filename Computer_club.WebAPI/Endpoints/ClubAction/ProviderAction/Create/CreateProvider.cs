@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.Create;
 
-public class CreateProvider : EndpointBaseAsync.
-        WithRequest<CreateProviderCommand>.
-        WithActionResult<CreateProviderResult>
+public class CreateProvider : EndpointBaseAsync
+    .WithRequest<CreateProviderCommand>
+    .WithActionResult<CreateProviderResult>
 {
     private readonly IProviderService<Provider> _service;
     private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ public class CreateProvider : EndpointBaseAsync.
         Tags = new[] { "ProviderEndpoints" })
     ]
     public override async Task<ActionResult<CreateProviderResult>> HandleAsync
-        (CreateProviderCommand request, CancellationToken token = default)
+        ([FromBody]CreateProviderCommand request, CancellationToken token = default)
     {
         var provider = _mapper.Map<Provider>(request);
         var result = await _service.AddAsync(provider, token);

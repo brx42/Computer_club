@@ -6,7 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.RoleAction.Create;
 
-public class CreateRole : EndpointBaseAsync.WithRequest<string>.WithActionResult
+public class CreateRole : EndpointBaseAsync
+    .WithRequest<string>
+    .WithActionResult
 {
     private readonly IRoleService<IdentityRole<Guid>> _service;
 

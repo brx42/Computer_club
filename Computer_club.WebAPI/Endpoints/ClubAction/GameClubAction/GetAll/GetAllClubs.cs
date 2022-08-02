@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetAll;
 
-public class GetAllClubs : EndpointBaseAsync.
-        WithoutRequest.
-        WithActionResult
+public class GetAllClubs : EndpointBaseAsync
+    .WithoutRequest
+    .WithActionResult
 {
     private readonly IClubService<GameClub> _service;
     private readonly IMapper _mapper;

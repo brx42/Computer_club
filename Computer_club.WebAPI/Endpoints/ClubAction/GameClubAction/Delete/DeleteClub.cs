@@ -6,9 +6,9 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Delete;
 
-public class DeleteClub : EndpointBaseAsync.
-        WithRequest<int>.
-        WithActionResult
+public class DeleteClub : EndpointBaseAsync
+    .WithRequest<int>
+    .WithActionResult
 {
     private readonly IClubService<GameClub> _service;
     private readonly IMapper _mapper;
