@@ -6,6 +6,7 @@ using Computer_club.Services.Services.ClubServices.DeviceSetService;
 using Computer_club.Services.Services.ClubServices.EquipmentService;
 using Computer_club.Services.Services.ClubServices.HistoryEquipmentService;
 using Computer_club.Services.Services.ClubServices.PhotoService;
+using Computer_club.Services.Services.ClubServices.PlaceService;
 using Computer_club.Services.Services.ClubServices.ProviderService;
 using Computer_club.Services.Services.UserServices.AuthService;
 using Computer_club.Services.Services.UserServices.RoleService;
@@ -28,6 +29,7 @@ public static class ServiceExtensions
         service.AddScoped<IProviderService<Provider>, ProviderService>();
         service.AddScoped<IHistoryEquipService<HistoryEquip>, HistoryEquipService>();
         service.AddScoped<IPhotoService<Photo>, PhotoService>();
+        service.AddScoped<IPlaceService<Place>, PlaceService>();
         service.AddScoped<IDeviceSetService<DeviceSet>, DeviceSetService>();
         service.AddScoped<IEquipmentService<Equipment>, EquipmentService>();
 

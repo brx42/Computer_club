@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
 using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
 using Computer_club.WebAPI.Mapping;
@@ -98,7 +99,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper
     (typeof(UserMapping), typeof(ClubMapping), typeof(RoleMapping), typeof(AccountMapping),
     typeof(ProviderMapping), typeof(HistoryEquipmentMapping), typeof(PhotoMapping), typeof(DeviceSetMapping),
-    typeof(EquipmentMapping));
+    typeof(EquipmentMapping), typeof(PlaceMapping));
 
 
 var app = builder.Build();
