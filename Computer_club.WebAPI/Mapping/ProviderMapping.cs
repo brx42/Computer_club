@@ -27,7 +27,6 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
-
         
         
         // GetAll
@@ -41,7 +40,6 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
         
-        
         // GetById
         CreateMap<Provider, GetByIdProviderResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -51,7 +49,6 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
-
         
         
         // Update

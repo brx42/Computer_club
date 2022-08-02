@@ -97,7 +97,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAutoMapper
     (typeof(UserMapping), typeof(ClubMapping), typeof(RoleMapping), typeof(AccountMapping),
-    typeof(ProviderMapping), typeof(HistoryEquipmentMapping), typeof(PhotoMapping));
+    typeof(ProviderMapping), typeof(HistoryEquipmentMapping), typeof(PhotoMapping), typeof(DeviceSetMapping));
 
 
 var app = builder.Build();

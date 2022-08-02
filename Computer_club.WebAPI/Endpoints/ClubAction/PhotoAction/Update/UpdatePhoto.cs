@@ -27,7 +27,8 @@ public class UpdatePhoto : EndpointBaseAsync
         OperationId = "Photo.Update",
         Tags = new[] { "PhotoClubEndpoints" })
     ]
-    public override async Task<ActionResult<UpdatePhotoResult>> HandleAsync([FromBody]UpdatePhotoCommand request, CancellationToken token = default)
+    public override async Task<ActionResult<UpdatePhotoResult>> HandleAsync
+        ([FromBody]UpdatePhotoCommand request, CancellationToken token = default)
     {
         var find = await _service.GetByIdAsync(request.Id);
         if (find == null) return NotFound();

@@ -2,6 +2,7 @@
 using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Services.ClubServices.ClubService;
+using Computer_club.Services.Services.ClubServices.DeviceSetService;
 using Computer_club.Services.Services.ClubServices.HistoryEquipmentService;
 using Computer_club.Services.Services.ClubServices.PhotoService;
 using Computer_club.Services.Services.ClubServices.ProviderService;
@@ -27,6 +28,7 @@ public static class ServiceExtensions
         service.AddScoped<IProviderService<Provider>, ProviderService>();
         service.AddScoped<IHistoryEquipService<HistoryEquip>, HistoryEquipService>();
         service.AddScoped<IPhotoService<Photo>, PhotoService>();
+        service.AddScoped<IDeviceSetService<DeviceSet>, DeviceSetService>();
 
         return service;
     }

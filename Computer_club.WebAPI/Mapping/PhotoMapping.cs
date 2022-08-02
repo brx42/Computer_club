@@ -25,7 +25,6 @@ public class PhotoMapping : Profile
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
         
-        
         // GetAll
         CreateMap<Photo, GetAllPhotosResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -35,7 +34,6 @@ public class PhotoMapping : Profile
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
         
-        
         // GetById
         CreateMap<Photo, GetByIdPhotoResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -44,7 +42,6 @@ public class PhotoMapping : Profile
             .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
-        
         
         // Update
         CreateMap<UpdatePhotoCommand, Photo>()

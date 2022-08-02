@@ -27,7 +27,8 @@ public class CreatePhoto : EndpointBaseAsync
         OperationId = "Photo.Create",
         Tags = new[] { "PhotoClubEndpoints" })
     ]
-    public override async Task<ActionResult<CreatePhotoResult>> HandleAsync([FromBody]CreatePhotoCommand request, CancellationToken token = default)
+    public override async Task<ActionResult<CreatePhotoResult>> HandleAsync
+        ([FromBody]CreatePhotoCommand request, CancellationToken token = default)
     {
         var photo = _mapper.Map<Photo>(request);
         var result = await _service.AddAsync(photo, token);

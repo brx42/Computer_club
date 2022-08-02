@@ -29,7 +29,6 @@ public class HistoryEquipmentMapping : Profile
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
         
-        
         // GetAll
         CreateMap<HistoryEquip, GetAllHistoriesResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -41,7 +40,6 @@ public class HistoryEquipmentMapping : Profile
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
         
-        
         // GetById
         CreateMap<HistoryEquip, GetByIdHistoryResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -52,7 +50,6 @@ public class HistoryEquipmentMapping : Profile
             .ForMember(dest => dest.ReasonForWork, opt => opt.MapFrom(src => src.ReasonForWork))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
-        
         
         // Update
         CreateMap<UpdateHistoryCommand, HistoryEquip>()
