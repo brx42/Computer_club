@@ -64,4 +64,11 @@
       <ProjectReference Include="..\Computer_club.Services\Computer_club.Services.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Endpoints\ClubAction\PhotoAction\Delete" />
+      <Folder Include="Endpoints\ClubAction\PhotoAction\GetAll" />
+      <Folder Include="Endpoints\ClubAction\PhotoAction\GetById" />
+      <Folder Include="Endpoints\ClubAction\PhotoAction\Update" />
+    </ItemGroup>
+
 </Project>
