@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.PlaceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,9 @@ public class DeletePlace : EndpointBaseAsync
         _service = service;
     }
 
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
     [HttpDelete("api/clubs/places/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place delete ",
         Description = "Place delete",

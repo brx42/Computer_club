@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.EquipmentService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,9 @@ public class UpdateEquipment : EndpointBaseAsync
         _mapper = mapper;
     }
 
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
     [HttpPut("api/clubs/places/device_sets/equipments")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment update",
         Description = "Equipment update",

@@ -1,4 +1,5 @@
-﻿using Computer_club.Services.Services.UserServices.RoleService;
+﻿using Computer_club.Data.Models.User;
+using Computer_club.Services.Services.UserServices.RoleService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ public class CreateRole : EndpointBaseAsync
         _service = service;
     }
 
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
     [HttpPost("api/roles")]
     [SwaggerOperation(
         Summary = "Creates a new Role",

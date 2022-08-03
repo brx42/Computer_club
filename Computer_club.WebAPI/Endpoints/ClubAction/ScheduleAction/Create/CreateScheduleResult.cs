@@ -3,8 +3,8 @@
 public class CreateScheduleResult
 {
     public int Id { get; set; }
-    public TimeOnly StartOfWork { get; set; }
-    public TimeOnly EndOfWork { get; set; }
+    public string StartOfWork { get; set; } = new TimeOnly().ToString();
+    public string EndOfWork { get; set; } = new TimeOnly().ToString();
     
     public int GameClubId { get; set; }
 }

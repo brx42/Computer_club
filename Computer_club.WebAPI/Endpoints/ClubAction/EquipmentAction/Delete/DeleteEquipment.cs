@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.EquipmentService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,9 @@ public class DeleteEquipment : EndpointBaseAsync
         _service = service;
     }
 
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
     [HttpDelete("api/clubs/places/device_sets/equipments/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment delete ",
         Description = "Equipment delete",

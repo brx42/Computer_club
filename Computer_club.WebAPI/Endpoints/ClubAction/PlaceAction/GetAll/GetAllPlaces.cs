@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.PlaceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,6 @@ public class GetAllPlaces : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/places")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place get all",
         Description = "Place get all",

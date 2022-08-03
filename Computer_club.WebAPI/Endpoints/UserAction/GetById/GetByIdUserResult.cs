@@ -1,4 +1,4 @@
-﻿namespace Computer_club.WebAPI.Endpoints.UserAction.Get;
+﻿namespace Computer_club.WebAPI.Endpoints.UserAction.GetById;
 
 public class GetByIdUserResult
 {

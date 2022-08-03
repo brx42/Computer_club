@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,13 +20,15 @@ public class GetAllUsers : EndpointBaseAsync
         _mapper = mapper;
     }
     
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpGet("api/user")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.ClubAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpGet("api/users")]
     [SwaggerOperation(
         Summary = "Get a list of all Users",
         Description = "Get a list of all Users",
         OperationId = "User.GetAll",
-        Tags = new[] { "UserEndpoints" })
+        Tags = new[] { "UsersEndpoints" })
     ]
     public override async Task<ActionResult<GetAllUsersResult>> HandleAsync
         ([FromQuery] GetAllUsersCommand request,CancellationToken token = default)

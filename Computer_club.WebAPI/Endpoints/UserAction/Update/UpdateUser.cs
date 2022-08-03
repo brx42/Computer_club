@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,13 +20,15 @@ public class UpdateUser : EndpointBaseAsync
         _mapper = mapper;
     }
         
-    [HttpPut("api/user")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.ClubAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpPut("api/users")]
     [SwaggerOperation(
         Summary = "Updates a User",
         Description = "Updates a User",
         OperationId = "User.Update",
-        Tags = new[] { "UserEndpoints" })
+        Tags = new[] { "UsersEndpoints" })
     ]
     public override async Task<ActionResult<UpdateUserResult>> HandleAsync
     ([FromBody]UpdateUserCommand request,

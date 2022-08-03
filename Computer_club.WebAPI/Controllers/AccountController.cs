@@ -19,7 +19,7 @@ public class AccountController : ControllerBase
         _auth = auth;
     }
 
-    [HttpPost("registration")]
+    [HttpPost("registrations")]
     public async Task<IActionResult> Registration(RegistrationDTO registration)
     {
         try
@@ -43,7 +43,7 @@ public class AccountController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost("refresh_token")]
+    [HttpPost("refresh_tokens")]
     public async Task<IActionResult> RefreshToken([Required] string token)
     {
         var result = await _auth.RefreshToken(token);

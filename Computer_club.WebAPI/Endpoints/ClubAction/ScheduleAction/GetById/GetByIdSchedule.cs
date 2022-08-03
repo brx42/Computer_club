@@ -20,7 +20,6 @@ public class GetByIdSchedule : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/schedules/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Schedule get",
         Description = "Schedule get",

@@ -1,4 +1,5 @@
-﻿using Computer_club.Services.Services.UserServices.RoleService;
+﻿using Computer_club.Data.Models.User;
+using Computer_club.Services.Services.UserServices.RoleService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,8 @@ public class DeleteRole : EndpointBaseAsync
         _service = service;
     }
 
+    [Authorize(Policy = Role.SuperAdmin)]
     [HttpDelete("api/roles")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Deletes a Role",
         Description = "Deletes a Role",

@@ -1,4 +1,5 @@
-﻿using Computer_club.Services.Services.UserServices.RoleService;
+﻿using Computer_club.Data.Models.User;
+using Computer_club.Services.Services.UserServices.RoleService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ public class GetByIdRole : EndpointBaseAsync
         _mapper = mapper;
     }
     
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
     [HttpGet("api/roles/{id:guid}")]
     [SwaggerOperation(
         Summary = "Gets a single User role",

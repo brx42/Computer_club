@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,13 +21,15 @@ public class CreateUser : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpPost("api/user")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.ClubAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpPost("api/users")]
     [SwaggerOperation(
         Summary = "Creates a new User",
         Description = "Creates a new User",
         OperationId = "User.Create",
-        Tags = new[] { "UserEndpoints" })
+        Tags = new[] { "UsersEndpoints" })
     ]
     public override async Task<ActionResult>
         HandleAsync([FromBody]CreateUserCommand request,

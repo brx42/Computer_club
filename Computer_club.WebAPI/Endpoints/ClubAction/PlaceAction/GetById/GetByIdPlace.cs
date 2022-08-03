@@ -20,7 +20,6 @@ public class GetByIdPlace : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/places/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place get",
         Description = "Place get",

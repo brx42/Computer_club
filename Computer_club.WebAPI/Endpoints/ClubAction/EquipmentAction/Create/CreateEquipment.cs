@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.EquipmentService;
 using Computer_club.WebAPI.Endpoints.ClubAction.DeviceSetAction.Create;
 using Microsoft.AspNetCore.Authorization;
@@ -20,8 +21,9 @@ public class CreateEquipment : EndpointBaseAsync
         _mapper = mapper;
     }
 
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
     [HttpPost("api/clubs/places/device_sets/equipments")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment create",
         Description = "Equipment create",

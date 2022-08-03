@@ -20,7 +20,6 @@ public class GetByIdEquipment : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/places/device_sets/equipments/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment get",
         Description = "Equipment get",

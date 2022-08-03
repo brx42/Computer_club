@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Computer_club.Data.Entities.ClubEntities;
+using Computer_club.Data.Models.User;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Create;
 
@@ -19,8 +20,9 @@ public class CreateClub : EndpointBaseAsync
         _mapper = mapper;
     }
 
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
     [HttpPost("api/clubs")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Club create",
         Description = "Club create",

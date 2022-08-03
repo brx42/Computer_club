@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.ProviderService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,9 @@ public class GetAllProviders : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/providers")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpGet("api/clubs/providers")]
     [SwaggerOperation(
         Summary = "Provider get all",
         Description = "Provider get all",

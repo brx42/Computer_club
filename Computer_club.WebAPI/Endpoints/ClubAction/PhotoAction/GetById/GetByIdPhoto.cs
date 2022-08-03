@@ -20,7 +20,6 @@ public class GetByIdPhoto : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/photos/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Photo get",
         Description = "Photo get",

@@ -19,7 +19,6 @@ public class GetAllPhotos : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/photos")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Photo get all",
         Description = "Photo get all",

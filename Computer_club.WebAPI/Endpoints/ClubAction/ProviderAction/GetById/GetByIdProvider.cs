@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.ProviderService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,9 @@ public class GetByIdProvider : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/providers/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpGet("api/clubs/providers/{id}")]
     [SwaggerOperation(
         Summary = "Provider get",
         Description = "Provider get",

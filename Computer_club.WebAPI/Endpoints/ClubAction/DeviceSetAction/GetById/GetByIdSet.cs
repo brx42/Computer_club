@@ -20,7 +20,6 @@ public class GetByIdSet : EndpointBaseAsync
     }
 
     [HttpGet("api/clubs/places/device_sets/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Device set get",
         Description = "Device set get",

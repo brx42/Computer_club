@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -42,7 +43,15 @@ public class TokenGenerator : ITokenGenerator
         {
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Role, Role.SuperAdmin),
+            new Claim(ClaimTypes.Role, Role.Manager),
+            new Claim(ClaimTypes.Role, Role.Support),
+            new Claim(ClaimTypes.Role, Role.Client),
+            new Claim(ClaimTypes.Role, Role.ClubAdmin),
+            new Claim(ClaimTypes.Role, Role.SiteAdmin),
+            new Claim(ClaimTypes.Role, Role.Analyst),
+            new Claim(ClaimTypes.Role, Role.Auditor),
         };
 
         ClaimsIdentity claimsIdentity =

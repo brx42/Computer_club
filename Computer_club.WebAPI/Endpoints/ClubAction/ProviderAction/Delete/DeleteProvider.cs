@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.ProviderService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,8 +18,9 @@ public class DeleteProvider : EndpointBaseAsync
         _service = service;
     }
 
-    [HttpDelete("api/providers/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpDelete("api/clubs/providers/{id}")]
     [SwaggerOperation(
         Summary = "Provider delete ",
         Description = "Provider delete",

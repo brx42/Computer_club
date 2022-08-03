@@ -4,8 +4,8 @@ namespace Computer_club.Data.Models.ClubModels;
 
 public class Schedule : BaseClub
 {
-    public string StartOfWork { get; set; } 
-    public string EndOfWork { get; set; }
+    public string StartOfWork { get; set; } = new TimeOnly().ToString();
+    public string EndOfWork { get; set; } = new TimeOnly().ToString();
     
     public int GameClubId { get; set; }
     public GameClub GameClub { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,15 @@ public class DeleteUser : EndpointBaseAsync
         _repository = repository;
     }
 
-    [HttpDelete("api/user/{id}")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(Policy = Role.SuperAdmin)]
+    [Authorize(Policy = Role.ClubAdmin)]
+    [Authorize(Policy = Role.Manager)]
+    [HttpDelete("api/users/{id}")]
     [SwaggerOperation(
         Summary = "Deletes a User",
         Description = "Deletes a User",
         OperationId = "User.Delete",
-        Tags = new[] { "UserEndpoints" })
+        Tags = new[] { "UsersEndpoints" })
     ]
     public override async Task<ActionResult>
         HandleAsync(Guid id, CancellationToken token = default)
