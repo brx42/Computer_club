@@ -19,13 +19,13 @@ public class GetByIdSet : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/club/place/device_set/{id}")]
+    [HttpGet("api/clubs/places/device_sets/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Device set get",
         Description = "Device set get",
         OperationId = "DeviceSet.GetById",
-        Tags = new[] { "DeviceSetEndpoints" })
+        Tags = new[] { "DeviceSetsEndpoints" })
     ]
     public override async Task<ActionResult<GetByIdSetResult>> HandleAsync(int id, CancellationToken token = default)
     {

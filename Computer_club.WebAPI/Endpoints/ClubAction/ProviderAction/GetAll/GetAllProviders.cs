@@ -19,13 +19,13 @@ public class GetAllProviders : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/provider")]
+    [HttpGet("api/providers")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Provider get all",
         Description = "Provider get all",
         OperationId = "Provider.GetAll",
-        Tags = new[] { "ProviderEndpoints" })
+        Tags = new[] { "ProvidersEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
     {

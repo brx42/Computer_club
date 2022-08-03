@@ -1,4 +1,4 @@
-﻿namespace Computer_club.WebAPI.Endpoints.RoleAction.Get;
+﻿namespace Computer_club.WebAPI.Endpoints.RoleAction.GetById;
 
 public class GetByIdRoleResult
 {

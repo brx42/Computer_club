@@ -17,13 +17,13 @@ public class DeletePhoto : EndpointBaseAsync
         _service = service;
     }
 
-    [HttpDelete("api/club/photo/{id}")]
+    [HttpDelete("api/clubs/photos/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Photo delete ",
         Description = "Photo delete",
         OperationId = "Photo.delete",
-        Tags = new[] { "PhotoClubEndpoints" })
+        Tags = new[] { "PhotosEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {

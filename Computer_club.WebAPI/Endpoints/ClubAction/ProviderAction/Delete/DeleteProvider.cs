@@ -17,13 +17,13 @@ public class DeleteProvider : EndpointBaseAsync
         _service = service;
     }
 
-    [HttpDelete("api/provider/{id}")]
+    [HttpDelete("api/providers/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Provider delete ",
         Description = "Provider delete",
         OperationId = "Provider.delete",
-        Tags = new[] { "ProviderEndpoints" })
+        Tags = new[] { "ProvidersEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {

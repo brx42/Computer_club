@@ -19,13 +19,13 @@ public class GetByIdPlace : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/club/place/{id}")]
+    [HttpGet("api/clubs/places/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place get",
         Description = "Place get",
         OperationId = "Place.GetById",
-        Tags = new[] { "PlaceEndpoints" })
+        Tags = new[] { "PlacesEndpoints" })
     ]
     public override async Task<ActionResult<GetByIdPlaceResult>> HandleAsync(int id, CancellationToken token = default)
     {

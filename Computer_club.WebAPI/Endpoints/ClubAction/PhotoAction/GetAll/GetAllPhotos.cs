@@ -18,13 +18,13 @@ public class GetAllPhotos : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/club/photo")]
+    [HttpGet("api/clubs/photos")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Photo get all",
         Description = "Photo get all",
         OperationId = "Photo.GetAll",
-        Tags = new[] { "PhotoClubEndpoints" })
+        Tags = new[] { "PhotosEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
     {

@@ -19,13 +19,13 @@ public class GetAllEquipments : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/club/place/device_set/equipment")]
+    [HttpGet("api/clubs/places/device_sets/equipments")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment get all",
         Description = "Equipment get all",
         OperationId = "Equipment.GetAll",
-        Tags = new[] { "EquipmentEndpoints" })
+        Tags = new[] { "EquipmentsEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
     {

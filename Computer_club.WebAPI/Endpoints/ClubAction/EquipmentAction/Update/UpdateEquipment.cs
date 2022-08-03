@@ -19,13 +19,13 @@ public class UpdateEquipment : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPut("api/club/place/device_set/equipment")]
+    [HttpPut("api/clubs/places/device_sets/equipments")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment update",
         Description = "Equipment update",
         OperationId = "Equipment.Update",
-        Tags = new[] { "EquipmentEndpoints" })
+        Tags = new[] { "EquipmentsEndpoints" })
     ]
     public override async Task<ActionResult<UpdateEquipmentResult>> HandleAsync
         ([FromBody]UpdateEquipmentCommand request, CancellationToken token = default)

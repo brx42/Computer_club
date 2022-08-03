@@ -19,13 +19,13 @@ public class CreateClub : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPost("api/club")]
+    [HttpPost("api/clubs")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Club create",
         Description = "Club create",
         OperationId = "Club.Create",
-        Tags = new[] { "ClubEndpoints" })
+        Tags = new[] { "ClubsEndpoints" })
     ]
     public override async Task<ActionResult<CreateClubResult>> HandleAsync
         ([FromBody]CreateClubCommand club, CancellationToken token = default)

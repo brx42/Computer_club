@@ -19,13 +19,13 @@ public class DeleteClub : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpDelete("api/club/{id}")]
+    [HttpDelete("api/clubs/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Club delete ",
         Description = "Club delete",
         OperationId = "Club.delete",
-        Tags = new[] { "ClubEndpoints" })
+        Tags = new[] { "ClubsEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {

@@ -1,4 +1,4 @@
-﻿using Computer_club.WebAPI.Endpoints.RoleAction.Get;
+﻿using Computer_club.WebAPI.Endpoints.RoleAction.GetById;
 using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.WebAPI.Mapping;

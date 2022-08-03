@@ -19,13 +19,13 @@ public class GetByIdProvider : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/provider/{id}")]
+    [HttpGet("api/providers/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Provider get",
         Description = "Provider get",
         OperationId = "Provider.GetById",
-        Tags = new[] { "ProviderEndpoints" })
+        Tags = new[] { "ProvidersEndpoints" })
     ]
     public override async Task<ActionResult<GetByIdProviderResult>> HandleAsync(int id, CancellationToken token = default)
     {

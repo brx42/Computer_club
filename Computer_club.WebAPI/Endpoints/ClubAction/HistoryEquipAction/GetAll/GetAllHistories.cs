@@ -19,13 +19,13 @@ public class GetAllHistories : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpGet("api/club/history_equipment")]
+    [HttpGet("api/clubs/history_equipments")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "History equip get all",
         Description = "History equip get all",
         OperationId = "HistoryEquip.GetAll",
-        Tags = new[] { "HistoryEquipmentEndpoints" })
+        Tags = new[] { "HistoryEquipsEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
     {

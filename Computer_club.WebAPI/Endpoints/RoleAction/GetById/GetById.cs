@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace Computer_club.WebAPI.Endpoints.RoleAction.Get;
+namespace Computer_club.WebAPI.Endpoints.RoleAction.GetById;
 
 public class GetByIdRole : EndpointBaseAsync
     .WithRequest<Guid>
@@ -20,12 +20,12 @@ public class GetByIdRole : EndpointBaseAsync
     }
     
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpGet("api/role/{id:guid}")]
+    [HttpGet("api/roles/{id:guid}")]
     [SwaggerOperation(
         Summary = "Gets a single User role",
         Description = "Gets a single Role by Id",
         OperationId = "Role.GetById",
-        Tags = new[] { "RoleEndpoints" })
+        Tags = new[] { "RolesEndpoints" })
     ]
     public override async Task<ActionResult<GetByIdRoleResult>> HandleAsync
         (Guid id, CancellationToken token = default)

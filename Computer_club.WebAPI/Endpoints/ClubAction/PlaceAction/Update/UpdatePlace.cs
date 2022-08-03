@@ -19,13 +19,13 @@ public class UpdatePlace : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPut("api/club/place")]
+    [HttpPut("api/clubs/places")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place update",
         Description = "Place update",
         OperationId = "Place.Update",
-        Tags = new[] { "PlaceEndpoints" })
+        Tags = new[] { "PlacesEndpoints" })
     ]
     public override async Task<ActionResult<UpdatePlaceResult>> HandleAsync
         ([FromBody]UpdatePlaceCommand request, CancellationToken token = default)

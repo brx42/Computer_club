@@ -17,13 +17,13 @@ public class DeleteHistory : EndpointBaseAsync
         _service = service;
     }
 
-    [HttpDelete("api/club/history_equipment/{id}")]
+    [HttpDelete("api/clubs/history_equipments/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "History equip delete ",
         Description = "History equip delete",
         OperationId = "HistoryEquip.delete",
-        Tags = new[] { "HistoryEquipmentEndpoints" })
+        Tags = new[] { "HistoryEquipsEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {

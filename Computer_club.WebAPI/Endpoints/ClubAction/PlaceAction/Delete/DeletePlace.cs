@@ -17,13 +17,13 @@ public class DeletePlace : EndpointBaseAsync
         _service = service;
     }
 
-    [HttpDelete("api/club/place/{id}")]
+    [HttpDelete("api/clubs/places/{id}")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place delete ",
         Description = "Place delete",
         OperationId = "Place.delete",
-        Tags = new[] { "PlaceEndpoints" })
+        Tags = new[] { "PlacesEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(int id, CancellationToken token = default)
     {

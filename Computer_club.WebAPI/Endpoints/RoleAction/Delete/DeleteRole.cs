@@ -17,13 +17,13 @@ public class DeleteRole : EndpointBaseAsync
         _service = service;
     }
 
-    [HttpDelete("api/role")]
+    [HttpDelete("api/roles")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Deletes a Role",
         Description = "Deletes a Role",
         OperationId = "Role.Delete",
-        Tags = new[] { "RoleEndpoints" })
+        Tags = new[] { "RolesEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync([FromBody]IdentityRole<Guid> role, CancellationToken cancellationToken = new CancellationToken())
     {

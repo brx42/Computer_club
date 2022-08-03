@@ -15,7 +15,7 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Speed, opt => opt.MapFrom(src => src.Speed))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
+            .ForMember(dest => dest.IsStaticIP, opt => opt.MapFrom(src => src.IsStaticIP))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
@@ -24,7 +24,7 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Speed, opt => opt.MapFrom(src => src.Speed))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
+            .ForMember(dest => dest.IsStaticIP, opt => opt.MapFrom(src => src.IsStaticIP))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
         
@@ -35,7 +35,7 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Speed, opt => opt.MapFrom(src => src.Speed))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
+            .ForMember(dest => dest.IsStaticIP, opt => opt.MapFrom(src => src.IsStaticIP))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
@@ -46,7 +46,7 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Speed, opt => opt.MapFrom(src => src.Speed))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
+            .ForMember(dest => dest.IsStaticIP, opt => opt.MapFrom(src => src.IsStaticIP))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
         
@@ -57,7 +57,7 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Speed, opt => opt.MapFrom(src => src.Speed))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
+            .ForMember(dest => dest.IsStaticIP, opt => opt.MapFrom(src => src.IsStaticIP))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
@@ -65,7 +65,7 @@ public class ProviderMapping : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Speed, opt => opt.MapFrom(src => src.Speed))
             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
-            .ForMember(dest => dest.IsStatic, opt => opt.MapFrom(src => src.IsStatic))
+            .ForMember(dest => dest.IsStaticIP, opt => opt.MapFrom(src => src.IsStaticIP))
             .ForMember(dest => dest.ContractNumber, opt => opt.MapFrom(src => src.ContractNumber))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
     }

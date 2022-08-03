@@ -19,13 +19,13 @@ public class CreatePhoto : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPost("api/club/photo")]
+    [HttpPost("api/clubs/photos")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Photo create",
         Description = "Photo create",
         OperationId = "Photo.Create",
-        Tags = new[] { "PhotoClubEndpoints" })
+        Tags = new[] { "PhotosEndpoints" })
     ]
     public override async Task<ActionResult<CreatePhotoResult>> HandleAsync
         ([FromBody]CreatePhotoCommand request, CancellationToken token = default)

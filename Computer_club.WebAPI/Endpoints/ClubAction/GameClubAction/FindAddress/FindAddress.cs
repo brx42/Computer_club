@@ -17,12 +17,12 @@ public class FindAddress : EndpointBaseAsync
         _address = address;
     }
 
-    [HttpPost("api/club/find_address")]
+    [HttpPost("api/clubs/find_addresses")]
     [SwaggerOperation(
         Summary = "Club address search ",
         Description = "Address search",
         OperationId = "Address.Find",
-        Tags = new[] { "ClubEndpoints" })
+        Tags = new[] { "ClubsEndpoints" })
     ]
     public override async Task<ActionResult<IEnumerable<string>>> HandleAsync(FindAddressCommand request, CancellationToken cancellationToken = new CancellationToken())
     {

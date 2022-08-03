@@ -19,13 +19,13 @@ public class UpdateProvider : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPut("api/provider")]
+    [HttpPut("api/providers")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Provider update",
         Description = "Provider update",
         OperationId = "Provider.Update",
-        Tags = new[] { "ProviderEndpoints" })
+        Tags = new[] { "ProvidersEndpoints" })
     ]
     public override async Task<ActionResult<UpdateProviderResult>> HandleAsync
         ([FromBody]UpdateProviderCommand provider, CancellationToken token = default)

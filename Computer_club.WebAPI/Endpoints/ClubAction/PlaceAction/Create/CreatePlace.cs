@@ -19,13 +19,13 @@ public class CreatePlace : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPost("api/club/place")]
+    [HttpPost("api/clubs/places")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Place create",
         Description = "Place create",
         OperationId = "Place.Create",
-        Tags = new[] { "PlaceEndpoints" })
+        Tags = new[] { "PlacesEndpoints" })
     ]
     public override async Task<ActionResult<CreatePlaceResult>> HandleAsync
         ([FromBody]CreatePlaceCommand request, CancellationToken token = default)

@@ -19,13 +19,13 @@ public class CreateProvider : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPost("api/provider")]
+    [HttpPost("api/providers")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Provider create",
         Description = "Provider create",
         OperationId = "Provider.Create",
-        Tags = new[] { "ProviderEndpoints" })
+        Tags = new[] { "ProvidersEndpoints" })
     ]
     public override async Task<ActionResult<CreateProviderResult>> HandleAsync
         ([FromBody]CreateProviderCommand request, CancellationToken token = default)

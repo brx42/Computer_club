@@ -19,13 +19,13 @@ public class CreateSet : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPost("api/club/place/device_set")]
+    [HttpPost("api/clubs/places/device_sets")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Device set create",
         Description = "Device set create",
         OperationId = "DeviceSet.Create",
-        Tags = new[] { "DeviceSetEndpoints" })
+        Tags = new[] { "DeviceSetsEndpoints" })
     ]
     public override async Task<ActionResult<CreateSetResult>> HandleAsync
         ([FromBody]CreateSetCommand request, CancellationToken token = default)

@@ -19,13 +19,13 @@ public class CreateHistory : EndpointBaseAsync
         _mapper = mapper;
     }
     
-    [HttpPost("api/club/history_equipment")]
+    [HttpPost("api/clubs/history_equipments")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "History equip create",
         Description = "History equip create",
         OperationId = "HistoryEquip.Create",
-        Tags = new[] { "HistoryEquipmentEndpoints" })
+        Tags = new[] { "HistoryEquipsEndpoints" })
     ]
     public override async Task<ActionResult<CreateHistoryResult>> HandleAsync
         ([FromBody]CreateHistoryCommand request, CancellationToken token = default)

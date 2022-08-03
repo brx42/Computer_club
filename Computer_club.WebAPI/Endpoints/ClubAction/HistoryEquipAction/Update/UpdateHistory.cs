@@ -19,13 +19,13 @@ public class UpdateHistory : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPut("api/club/history_equipment")]
+    [HttpPut("api/clubs/history_equipments")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "History equip update",
         Description = "History equip update",
         OperationId = "HistoryEquip.Update",
-        Tags = new[] { "HistoryEquipmentEndpoints" })
+        Tags = new[] { "HistoryEquipsEndpoints" })
     ]
     public override async Task<ActionResult<UpdateHistoryResult>> HandleAsync
         ([FromBody]UpdateHistoryCommand request, CancellationToken token = default)

@@ -20,13 +20,13 @@ public class CreateEquipment : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPost("api/club/place/device_set/equipment")]
+    [HttpPost("api/clubs/places/device_sets/equipments")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Equipment create",
         Description = "Equipment create",
         OperationId = "Equipment.Create",
-        Tags = new[] { "EquipmentEndpoints" })
+        Tags = new[] { "EquipmentsEndpoints" })
     ]
     public override async Task<ActionResult<CreateEquipmentResult>> HandleAsync
         ([FromBody]CreateEquipmentCommand request, CancellationToken token = default)

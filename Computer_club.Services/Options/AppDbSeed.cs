@@ -1,8 +1,12 @@
-﻿using Computer_club.Data.Entities.UserEntities;
+﻿using Computer_club.Data.Entities.ClubEntities;
+using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.ClubModels;
 using Computer_club.Data.Models.User;
+using Computer_club.Services.Services.ClubServices.ClubService;
+using Computer_club.Services.Services.ClubServices.ScheduleService;
 using Microsoft.AspNetCore.Identity;
 
-namespace Computer_club.Data.Database;
+namespace Computer_club.Services.Options;
 
 public class AppDbSeed 
 {
@@ -17,7 +21,9 @@ public class AppDbSeed
     public const string SuperAdminPhoneNumber = "SuperAdminPhoneNumber";
     public const string SuperAdminRoles = Role.SuperAdmin;
 
-    public static async Task SeedAsync(UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+    public static async Task SeedAsync
+        (UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager,
+            IClubService<GameClub> clubService, IScheduleService<Schedule> scheduleService)
     {
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.SuperAdmin));
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.Manager));
@@ -42,10 +48,38 @@ public class AppDbSeed
             PhoneNumberConfirmed = true
         };
 
+        var gameClub = new GameClub
+        {
+            Id = 1,
+            Address = "Ставрополь",
+            Description = "Игровой компьютерный клуб",
+            IsOwned = true,
+            ContractNumber = "12345",
+            DigitizedDocument = "54321"
+        };
+        
+        var aroundTheClock = new Schedule
+        {
+            Id = 1,
+            StartOfWork = new TimeOnly(00, 00, 00).ToString(),
+            EndOfWork = new TimeOnly(23, 59, 59).ToString(),
+            GameClubId = 1
+        };
+        var twelveToFour = new Schedule
+        {
+            Id = 2,
+            StartOfWork = new TimeOnly(12, 00, 00).ToString(),
+            EndOfWork = new TimeOnly(4, 00, 00).ToString(),
+            GameClubId = 1
+        };
+        
         if (userManager.Users.All(x => x.Id != defaultUser.Id))
         {
             await userManager.CreateAsync(defaultUser, SuperAdminPassword);
             await userManager.AddToRoleAsync(defaultUser, SuperAdminRoles);
+            await clubService.AddAsync(gameClub);
+            await scheduleService.AddAsync(aroundTheClock);
+            await scheduleService.AddAsync(twelveToFour);
         }
     }
 }

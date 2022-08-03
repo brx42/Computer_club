@@ -18,12 +18,12 @@ public class GetAllRoles : EndpointBaseAsync
     }
 
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpGet("api/role")]
+    [HttpGet("api/roles")]
     [SwaggerOperation(
         Summary = "Get a list of all Roles",
         Description = "Get a list of all Roles",
         OperationId = "Role.GetAll",
-        Tags = new[] { "RoleEndpoints" })
+        Tags = new[] { "RolesEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
     {

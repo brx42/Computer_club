@@ -19,13 +19,13 @@ public class UpdatePhoto : EndpointBaseAsync
         _mapper = mapper;
     }
 
-    [HttpPut("api/club/photo")]
+    [HttpPut("api/clubs/photos")]
     [Authorize(AuthenticationSchemes = "Bearer")]
     [SwaggerOperation(
         Summary = "Photo update",
         Description = "Photo update",
         OperationId = "Photo.Update",
-        Tags = new[] { "PhotoClubEndpoints" })
+        Tags = new[] { "PhotosEndpoints" })
     ]
     public override async Task<ActionResult<UpdatePhotoResult>> HandleAsync
         ([FromBody]UpdatePhotoCommand request, CancellationToken token = default)

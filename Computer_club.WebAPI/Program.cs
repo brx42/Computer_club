@@ -5,10 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
+using Computer_club.Data.Entities.ClubEntities;
 using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
+using Computer_club.Services.Services.ClubServices.ClubService;
+using Computer_club.Services.Services.ClubServices.ScheduleService;
 using Computer_club.WebAPI.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -97,9 +100,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddAutoMapper
-    (typeof(UserMapping), typeof(ClubMapping), typeof(RoleMapping), typeof(AccountMapping),
-    typeof(ProviderMapping), typeof(HistoryEquipmentMapping), typeof(PhotoMapping), typeof(DeviceSetMapping),
-    typeof(EquipmentMapping), typeof(PlaceMapping));
+    (typeof(UserMapping), typeof(ClubMapping),
+    typeof(RoleMapping), typeof(AccountMapping),
+    typeof(ProviderMapping), typeof(HistoryEquipmentMapping),
+    typeof(PhotoMapping), typeof(DeviceSetMapping), 
+    typeof(EquipmentMapping), typeof(PlaceMapping), 
+    typeof(ScheduleMapping));
 
 
 var app = builder.Build();
@@ -129,7 +135,9 @@ using (var scope = app.Services.CreateScope())
     {
         var userManager = services.GetRequiredService<UserManager<User>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-        await AppDbSeed.SeedAsync(userManager, roleManager);
+        var clubService = services.GetRequiredService<IClubService<GameClub>>();
+        var scheduleService = services.GetRequiredService<IScheduleService<Schedule>>();
+        await AppDbSeed.SeedAsync(userManager, roleManager, clubService, scheduleService);
     }
     catch (Exception ex)
     {

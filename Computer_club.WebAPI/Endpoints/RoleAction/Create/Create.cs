@@ -18,12 +18,12 @@ public class CreateRole : EndpointBaseAsync
     }
 
     [Authorize(AuthenticationSchemes = "Bearer")]
-    [HttpPost("api/role")]
+    [HttpPost("api/roles")]
     [SwaggerOperation(
         Summary = "Creates a new Role",
         Description = "Creates a new Role",
         OperationId = "Role.Create",
-        Tags = new[] { "RoleEndpoints" })
+        Tags = new[] { "RolesEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync([FromBody]string request, CancellationToken cancellationToken = new CancellationToken())
     {
