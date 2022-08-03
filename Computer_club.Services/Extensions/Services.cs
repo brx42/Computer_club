@@ -18,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Computer_club.Services.Extensions;
 
-public static class ServiceExtensions
+public static class Services
 {
     public static IServiceCollection AddServices(this IServiceCollection service)
     {
