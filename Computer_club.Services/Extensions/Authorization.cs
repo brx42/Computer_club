@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Computer_club.Data.Models.User;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Computer_club.Services.Extensions;

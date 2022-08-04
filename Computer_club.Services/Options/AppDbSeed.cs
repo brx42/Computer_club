@@ -1,9 +1,8 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
+﻿using Computer_club.Data.Database;
+using Computer_club.Data.Entities.ClubEntities;
 using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.ClubModels;
 using Computer_club.Data.Models.User;
-using Computer_club.Services.Services.ClubServices.ClubService;
-using Computer_club.Services.Services.ClubServices.ScheduleService;
 using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Services.Options;
@@ -22,8 +21,7 @@ public class AppDbSeed
     public const string SuperAdminRoles = Role.SuperAdmin;
 
     public static async Task SeedAsync
-        (UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager,
-            IClubService<GameClub> clubService, IScheduleService<Schedule> scheduleService)
+        (UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager, AppDbContext context)
     {
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.SuperAdmin));
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.Manager));
@@ -77,9 +75,9 @@ public class AppDbSeed
         {
             await userManager.CreateAsync(defaultUser, SuperAdminPassword);
             await userManager.AddToRoleAsync(defaultUser, SuperAdminRoles);
-            await clubService.AddAsync(gameClub);
-            await scheduleService.AddAsync(aroundTheClock);
-            await scheduleService.AddAsync(twelveToFour);
+            await context.GameClubs.AddAsync(gameClub);
+            await context.Schedules.AddAsync(aroundTheClock);
+            await context.Schedules.AddAsync(twelveToFour);
         }
     }
 }

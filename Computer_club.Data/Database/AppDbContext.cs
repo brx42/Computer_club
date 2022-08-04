@@ -15,6 +15,12 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         // Database.EnsureDeleted();
         // Database.EnsureCreated();
     }
+
+    public AppDbContext()
+    {
+        
+    }
+    
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     
     public DbSet<GameClub> GameClubs { get; set; }
@@ -36,32 +42,32 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        
+
         builder.Entity<Provider>()
             .HasOne(p => p.GameClub)
             .WithOne(p => p.Provider)
             .HasForeignKey<Provider>(p => p.GameClubId);
-
+        
         builder.Entity<HistoryEquip>()
             .HasOne(i => i.GameClub)
             .WithMany(i => i.HistoryEquips)
             .HasForeignKey(i => i.GameClubId);
-
+        
         builder.Entity<Schedule>()
             .HasOne(d => d.GameClub)
             .WithMany(d => d.Schedules)
             .HasForeignKey(d => d.GameClubId);
-
+        
         builder.Entity<Photo>()
             .HasOne(o => o.GameClub)
             .WithMany(o => o.Photos)
             .HasForeignKey(o => o.GameClubId);
-
+        
         builder.Entity<Place>()
             .HasOne(r => r.GameClub)
             .WithMany(r => r.Places)
             .HasForeignKey(r => r.GameClubId);
-
+        
         builder.Entity<Equipment>()
             .HasOne(a => a.DeviceSet)
             .WithMany(a => a.Equipments)

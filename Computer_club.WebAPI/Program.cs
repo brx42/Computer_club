@@ -5,18 +5,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
-using Computer_club.Data.Entities.ClubEntities;
 using Computer_club.Data.Entities.UserEntities;
-using Computer_club.Data.Models.ClubModels;
 using Computer_club.Services.Extensions;
 using Computer_club.Services.Options;
-using Computer_club.Services.Services.ClubServices.ClubService;
-using Computer_club.Services.Services.ClubServices.ScheduleService;
 using Computer_club.WebAPI.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
 
 var optSection = builder.Configuration.GetSection("JwtOptions");
 var keySection = builder.Configuration.GetSection("JwtOptions:Keys");
@@ -53,9 +52,6 @@ builder.Services.AddAuthentication(options =>
         };
     });
 builder.Services.AddRoleAndPolicy();
-
-builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 {
@@ -135,9 +131,8 @@ using (var scope = app.Services.CreateScope())
     {
         var userManager = services.GetRequiredService<UserManager<User>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-        var clubService = services.GetRequiredService<IClubService<GameClub>>();
-        var scheduleService = services.GetRequiredService<IScheduleService<Schedule>>();
-        await AppDbSeed.SeedAsync(userManager, roleManager, clubService, scheduleService);
+        var context = services.GetRequiredService<AppDbContext>();
+        await AppDbSeed.SeedAsync(userManager, roleManager, context);
     }
     catch (Exception ex)
     {
