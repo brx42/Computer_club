@@ -16,9 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Computer_club.Services", "Computer_club.Services\Computer_club.Services.csproj", "{754B9797-63CD-43C0-A7E9-7EE318401C36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Computer_club.Data", "Computer_club.Data\Computer_club.Data.csproj", "{F79EF48C-60B4-4C36-B70E-F6E5030842F5}"
-	ProjectSection(ProjectDependencies) = postProject
-		{754B9797-63CD-43C0-A7E9-7EE318401C36} = {754B9797-63CD-43C0-A7E9-7EE318401C36}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

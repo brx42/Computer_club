@@ -9,7 +9,7 @@ namespace Computer_club.WebAPI.Endpoints.UserAction.GetById;
 
 public class GetByIdUser : EndpointBaseAsync
     .WithRequest<Guid>
-    .WithActionResult<GetByIdUserResult>
+    .WithActionResult
 {
     private readonly IUserService<User> _repository;
     private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ public class GetByIdUser : EndpointBaseAsync
         OperationId = "User.GetById",
         Tags = new[] { "UsersEndpoints" })
     ]
-    public override async Task<ActionResult<GetByIdUserResult>> HandleAsync
+    public override async Task<ActionResult> HandleAsync
         (Guid id, CancellationToken token = default)
     {
         var user = await _repository.GetByIdAsync(id);

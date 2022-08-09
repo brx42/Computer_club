@@ -9,14 +9,14 @@ namespace Computer_club.WebAPI.Endpoints.UserAction.Update;
 
 public class UpdateUser : EndpointBaseAsync
     .WithRequest<UpdateUserCommand>
-    .WithActionResult<UpdateUserResult>
+    .WithActionResult
 {
-    private readonly IUserService<User> _repository;
+    private readonly IUserService<User> _service;
     private readonly IMapper _mapper;
 
-    public UpdateUser(IUserService<User> repository, IMapper mapper)
+    public UpdateUser(IUserService<User> service, IMapper mapper)
     {
-        _repository = repository;
+        _service = service;
         _mapper = mapper;
     }
         
@@ -30,14 +30,14 @@ public class UpdateUser : EndpointBaseAsync
         OperationId = "User.Update",
         Tags = new[] { "UsersEndpoints" })
     ]
-    public override async Task<ActionResult<UpdateUserResult>> HandleAsync
+    public override async Task<ActionResult> HandleAsync
     ([FromBody]UpdateUserCommand request,
         CancellationToken token = default)
     {
-        var user = await _repository.GetByIdAsync(request.Id);
+        var user = await _service.GetByIdAsync(request.Id);
         if (user == null) return NotFound();
         _mapper.Map(request, user);
-        await _repository.UpdateAsync(user, token);
+        await _service.UpdateAsync(user, token);
         var result = _mapper.Map<UpdateUserResult>(user);
         return Ok(result);
     }

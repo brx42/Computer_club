@@ -9,14 +9,14 @@ namespace Computer_club.WebAPI.Endpoints.UserAction.GetAll;
 
 public class GetAllUsers : EndpointBaseAsync
     .WithRequest<GetAllUsersCommand>
-    .WithActionResult<GetAllUsersResult>
+    .WithActionResult
 {
-    private readonly IUserService<User> _repository;
+    private readonly IUserService<User> _service;
     private readonly IMapper _mapper;
 
-    public GetAllUsers(IUserService<User> repository, IMapper mapper)
+    public GetAllUsers(IUserService<User> service, IMapper mapper)
     {
-        _repository = repository;
+        _service = service;
         _mapper = mapper;
     }
     
@@ -30,17 +30,17 @@ public class GetAllUsers : EndpointBaseAsync
         OperationId = "User.GetAll",
         Tags = new[] { "UsersEndpoints" })
     ]
-    public override async Task<ActionResult<GetAllUsersResult>> HandleAsync
+    public override async Task<ActionResult> HandleAsync
         ([FromQuery] GetAllUsersCommand request,CancellationToken token = default)
     {
-        if (request.PerPage == 0)
-            request.PerPage = 10;
+        if (request.Limit == 0)
+            request.Limit = 10;
         if (request.Page == 0)
             request.Page = 1;
 
         var result =
-            (await _repository.GetAllAsync(request.PerPage, request.Page, token)).Select
-            (x => _mapper.Map<GetAllUsersResult>(x));
+            (await _service.GetAllAsync(request.Page, request.Limit, token)).Select
+            (x => _mapper.Map<User>(x));
         return Ok(result);
     }
 }

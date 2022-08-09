@@ -39,7 +39,7 @@ public class TokenGenerator : ITokenGenerator
 
     private ClaimsIdentity GetIdentity(User user)
     {
-        var claims = new List<Claim>
+        var claims = new List<Claim>(11)
         {
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Email, user.Email),

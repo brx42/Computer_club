@@ -2,9 +2,9 @@
 
 public interface IUserService<T>
 {
-    Task<List<T>> GetAllAsync(int perPage, int page, CancellationToken token);
+    Task<List<T>> GetAllAsync(int page, int limit, CancellationToken token);
     Task<T?> GetByIdAsync(Guid id);
     Task<T> AddAsync(T entity, CancellationToken token);
-    Task UpdateAsync(T entity, CancellationToken token);
-    Task DeleteAsync(T entity);
+    Task<T> UpdateAsync(T entity, CancellationToken token);
+    Task<T> DeleteAsync(T entity);
 }

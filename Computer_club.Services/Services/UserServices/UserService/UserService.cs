@@ -13,9 +13,9 @@ public class UserService : IUserService<User>
         _context = context;
     }
 
-    public async Task<List<User>> GetAllAsync(int perPage, int page, CancellationToken token)
+    public async Task<List<User>> GetAllAsync(int page, int limit, CancellationToken token)
     {
-        return await _context.Users.Skip(perPage * (page - 1)).Take(perPage).ToListAsync(token);
+        return await _context.Users.Skip(page * (limit - 1)).Take(page).ToListAsync(token);
     }
 
     public async Task<User?> GetByIdAsync(Guid id)
@@ -30,15 +30,17 @@ public class UserService : IUserService<User>
         return user;
     }
 
-    public async Task UpdateAsync(User user, CancellationToken token)
+    public async Task<User> UpdateAsync(User user, CancellationToken token)
     {
         _context.Users.Update(user);
         await _context.SaveChangesAsync(token);
+        return user;
     }
 
-    public async Task DeleteAsync(User user)
+    public async Task<User> DeleteAsync(User user)
     {
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
+        return user;
     }
 }

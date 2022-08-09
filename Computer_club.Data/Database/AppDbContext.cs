@@ -16,11 +16,6 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         // Database.EnsureCreated();
     }
 
-    public AppDbContext()
-    {
-        
-    }
-    
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     
     public DbSet<GameClub> GameClubs { get; set; }
