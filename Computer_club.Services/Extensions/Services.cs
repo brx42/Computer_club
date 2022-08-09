@@ -13,7 +13,6 @@ using Computer_club.Services.Services.UserServices.AuthService;
 using Computer_club.Services.Services.UserServices.RoleService;
 using Computer_club.Services.Services.UserServices.TokenService;
 using Computer_club.Services.Services.UserServices.UserService;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Computer_club.Services.Extensions;
@@ -25,7 +24,7 @@ public static class Services
         service.AddScoped<ITokenGenerator, TokenGenerator>();
         service.AddScoped<IAuthService, AuthService>();
         service.AddScoped<IUserService<User>, UserService>();
-        service.AddScoped<IRoleService<IdentityRole<Guid>>, RoleService>();
+        service.AddScoped<IRoleService, RoleService>();
         service.AddScoped<IClubService<GameClub>, ClubService>();
         service.AddScoped<IProviderService<Provider>, ProviderService>();
         service.AddScoped<IHistoryEquipService<HistoryEquip>, HistoryEquipService>();

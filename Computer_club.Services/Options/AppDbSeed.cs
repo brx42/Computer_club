@@ -2,7 +2,7 @@
 using Computer_club.Data.Entities.ClubEntities;
 using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.ClubModels;
-using Computer_club.Data.Models.User;
+using Computer_club.Data.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Services.Options;

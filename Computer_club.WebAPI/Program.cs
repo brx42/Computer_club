@@ -96,11 +96,16 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddAutoMapper
-    (typeof(UserMapping), typeof(ClubMapping),
-    typeof(RoleMapping), typeof(AccountMapping),
-    typeof(ProviderMapping), typeof(HistoryEquipmentMapping),
-    typeof(PhotoMapping), typeof(DeviceSetMapping), 
-    typeof(EquipmentMapping), typeof(PlaceMapping), 
+    (typeof(UserMapping),
+    typeof(RoleMapping),
+    typeof(ClubMapping),
+    typeof(AccountMapping),
+    typeof(ProviderMapping), 
+    typeof(HistoryEquipmentMapping),
+    typeof(PhotoMapping), 
+    typeof(DeviceSetMapping), 
+    typeof(EquipmentMapping), 
+    typeof(PlaceMapping), 
     typeof(ScheduleMapping));
 
 

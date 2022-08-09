@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Computer_club.Data.Entities.ClubEntities;
-using Computer_club.Data.Models.User;
+using Computer_club.Data.Models.UserModels;
 
 namespace Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Create;
 

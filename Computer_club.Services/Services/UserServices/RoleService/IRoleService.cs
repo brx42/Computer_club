@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Models.UserModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Services.Services.UserServices.RoleService;
 
-public interface IRoleService<T>
+public interface IRoleService
 {
-    Task<List<T>?> GetAllAsync(CancellationToken token);
-    Task<T?> GetRoleByIdAsync(Guid id);
-    Task<IdentityResult> CreateRoleAsync(string role);
-    Task<IdentityResult> DeleteRoleAsync(T id);
+    Task<List<IdentityRole<Guid>>> GetAllAsync(CancellationToken token);
+    Task ChangeUserRoleAsync(Guid id, string role);
 }

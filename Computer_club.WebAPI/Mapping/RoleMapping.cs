@@ -1,5 +1,4 @@
-﻿using Computer_club.WebAPI.Endpoints.RoleAction.GetById;
-using Microsoft.AspNetCore.Identity;
+﻿using Computer_club.WebAPI.Endpoints.RoleAction.AddRole;
 
 namespace Computer_club.WebAPI.Mapping;
 
@@ -7,11 +6,8 @@ public class RoleMapping : Profile
 {
     public RoleMapping()
     {
-        // GetById
-        CreateMap<IdentityRole<Guid>, GetByIdRoleResult>().
-            ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).
-            ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name)).
-            ForMember(dest => dest.ConcurrencyStamp, opt => opt.MapFrom(src => src.ConcurrencyStamp)).
-            ForMember(dest => dest.NormalizedName, opt => opt.MapFrom(src => src.NormalizedName));
+        CreateMap<AddRoleCommand, AddRoleResult>()
+            .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
     }
 }

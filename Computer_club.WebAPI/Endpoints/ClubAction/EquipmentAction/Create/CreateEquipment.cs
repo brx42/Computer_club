@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
-using Computer_club.Data.Models.User;
+using Computer_club.Data.Models.UserModels;
 using Computer_club.Services.Services.ClubServices.EquipmentService;
 using Computer_club.WebAPI.Endpoints.ClubAction.DeviceSetAction.Create;
 using Microsoft.AspNetCore.Authorization;

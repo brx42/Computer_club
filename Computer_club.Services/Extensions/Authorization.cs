@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Computer_club.Data.Models.User;
+using Computer_club.Data.Models.UserModels;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Computer_club.Services.Extensions;

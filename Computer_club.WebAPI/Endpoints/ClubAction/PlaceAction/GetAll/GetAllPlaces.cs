@@ -1,5 +1,4 @@
 ﻿using Computer_club.Data.Models.ClubModels;
-using Computer_club.Data.Models.User;
 using Computer_club.Services.Services.ClubServices.PlaceService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Computer_club.Data.Models.UserModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Computer_club.Data.Entities.UserEntities;
 

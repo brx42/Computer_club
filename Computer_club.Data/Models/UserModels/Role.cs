@@ -1,6 +1,6 @@
-﻿namespace Computer_club.Data.Models.User;
+﻿namespace Computer_club.Data.Models.UserModels;
 
-public class Role 
+public class Role
 {
     public const string SuperAdmin = "SuperAdmin";
     public const string Manager = "Manager";
