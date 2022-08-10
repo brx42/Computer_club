@@ -64,5 +64,9 @@
     <ItemGroup>
       <ProjectReference Include="..\Computer_club.Services\Computer_club.Services.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Endpoints\BackendAction" />
+    </ItemGroup>
     
 </Project>

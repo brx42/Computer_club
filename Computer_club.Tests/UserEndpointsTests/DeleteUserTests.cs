@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Services.Services.UserServices.UserService;
-using Computer_club.WebAPI.Endpoints.UserAction.Delete;
+using Computer_club.WebAPI.Endpoints.BackendAction.UserAction.Delete;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
