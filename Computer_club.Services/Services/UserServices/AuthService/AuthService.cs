@@ -48,7 +48,7 @@ public class AuthService : IAuthService
         };
         await _context.RefreshTokens.AddAsync(refreshToken);
         await _context.SaveChangesAsync();
-        var userRole =(await _userManager.GetRolesAsync(user)).FirstOrDefault();
+        var userRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
 
         response.Data = new Token
         {
@@ -56,7 +56,7 @@ public class AuthService : IAuthService
             JwtToken = token,
             UserId = user.Id,
             Username = user.UserName,
-            Role = userRole
+            Role = userRole!
         };
         return response;
     }

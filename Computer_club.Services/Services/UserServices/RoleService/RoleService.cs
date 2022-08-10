@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using Computer_club.Data.Database;
+﻿using Computer_club.Data.Database;
 using Computer_club.Data.Entities.UserEntities;
-using Computer_club.Data.Models.UserModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,13 +9,11 @@ public class RoleService : IRoleService
 {
     private readonly AppDbContext _context;
     private readonly UserManager<User> _userManager;
-    private readonly IMapper _mapper;
 
-    public RoleService(AppDbContext context, UserManager<User> userManager, IMapper mapper)
+    public RoleService(AppDbContext context, UserManager<User> userManager)
     {
         _context = context;
         _userManager = userManager;
-        _mapper = mapper;
     }
 
     public async Task<List<IdentityRole<Guid>>> GetAllAsync(CancellationToken token)
