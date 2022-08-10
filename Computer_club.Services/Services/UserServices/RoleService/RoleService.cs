@@ -21,7 +21,7 @@ public class RoleService : IRoleService
         return await _context.Roles.ToListAsync(token);
     }
 
-    public async Task ChangeUserRoleAsync(Guid id, string role)
+    public async Task AddUserRoleAsync(Guid id, string role)
     {
         var find = await _userManager.FindByIdAsync(id.ToString());
         await _userManager.AddToRoleAsync(find, role);

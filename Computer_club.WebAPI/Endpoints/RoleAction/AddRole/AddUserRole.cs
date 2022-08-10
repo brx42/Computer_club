@@ -29,7 +29,7 @@ public class AddUserRole : EndpointBaseAsync
     ]
     public override async Task<ActionResult> HandleAsync([FromBody]AddUserRoleCommand request, CancellationToken token = default)
     {
-        await _roleService.ChangeUserRoleAsync(request.UserId, request.Role);
+        await _roleService.AddUserRoleAsync(request.UserId, request.Role);
         var result = _mapper.Map<AddUserRoleResult>(request);
         return Ok(result);
     }
