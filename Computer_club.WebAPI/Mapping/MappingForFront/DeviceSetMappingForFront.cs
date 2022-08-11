@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Models.ClubModels;
 using Computer_club.WebAPI.Endpoints.FrontendAction.DeviceSetAction.Create;
+using Computer_club.WebAPI.Endpoints.FrontendAction.DeviceSetAction.GetAll;
 using Computer_club.WebAPI.Endpoints.FrontendAction.DeviceSetAction.Update;
 
 namespace Computer_club.WebAPI.Mapping.MappingForFront;
@@ -13,6 +14,12 @@ public class DeviceSetMappingForFront : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
 
         CreateMap<DeviceSet, CreateSetForFrontResult>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
+        
+        
+        // GetAll
+        CreateMap<DeviceSet, GetAllSetsForFrontResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         

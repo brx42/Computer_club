@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Database;
 using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Services.Options;
 using Microsoft.EntityFrameworkCore;
 
 namespace Computer_club.Services.Services.UserServices.UserService;
@@ -13,9 +14,12 @@ public class UserService : IUserService<User>
         _context = context;
     }
 
-    public async Task<List<User>> GetAllAsync(int page, int limit, CancellationToken token)
+    public async Task<List<User>> GetAllAsync(Pagination pagination, CancellationToken token)
     {
-        return await _context.Users.Skip(page * (limit - 1)).Take(page).ToListAsync(token);
+        return await _context.Users
+                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+                .Take(pagination.PageSize)
+                .ToListAsync(token);
     }
 
     public async Task<User?> GetByIdAsync(Guid id)

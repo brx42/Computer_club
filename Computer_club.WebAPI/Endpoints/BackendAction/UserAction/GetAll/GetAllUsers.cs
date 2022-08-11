@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.UserModels;
+using Computer_club.Services.Options;
 using Computer_club.Services.Services.UserServices.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Computer_club.WebAPI.Endpoints.BackendAction.UserAction.GetAll;
 
 public class GetAllUsers : EndpointBaseAsync
-    .WithRequest<GetAllUsersCommand>
+    .WithRequest<Pagination>
     .WithActionResult
 {
     private readonly IUserService<User> _service;
@@ -31,15 +32,10 @@ public class GetAllUsers : EndpointBaseAsync
         Tags = new[] { "UsersEndpoints" })
     ]
     public override async Task<ActionResult> HandleAsync
-        ([FromQuery] GetAllUsersCommand request,CancellationToken token = default)
+        ([FromQuery] Pagination request,CancellationToken token = default)
     {
-        if (request.Limit == 0)
-            request.Limit = 10;
-        if (request.Page == 0)
-            request.Page = 1;
-
         var result =
-            (await _service.GetAllAsync(request.Page, request.Limit, token)).Select
+            (await _service.GetAllAsync(request, token)).Select
             (x => _mapper.Map<User>(x));
         return Ok(result);
     }

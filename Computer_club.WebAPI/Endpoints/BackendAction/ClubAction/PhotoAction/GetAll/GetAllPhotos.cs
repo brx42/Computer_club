@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Services.Options;
 using Computer_club.Services.Services.ClubServices.PhotoService;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -6,7 +7,8 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Computer_club.WebAPI.Endpoints.BackendAction.ClubAction.PhotoAction.GetAll;
 
 public class GetAllPhotos : EndpointBaseAsync
-    .WithoutRequest.WithActionResult
+    .WithRequest<Pagination>
+    .WithActionResult
 {
     private readonly IPhotoService<Photo> _service;
     private readonly IMapper _mapper;
@@ -24,9 +26,9 @@ public class GetAllPhotos : EndpointBaseAsync
         OperationId = "Photo.GetAll",
         Tags = new[] { "PhotosEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync(Pagination pagination, CancellationToken token = default)
     {
-        var result = await _service.GetAllAsync(token);
+        var result = await _service.GetAllAsync(pagination, token);
         var map = _mapper.Map<List<GetAllPhotosResult>>(result);
         return Ok(map);
     }

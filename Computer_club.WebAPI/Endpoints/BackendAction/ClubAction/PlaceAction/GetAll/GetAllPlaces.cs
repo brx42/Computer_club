@@ -1,4 +1,5 @@
 ﻿using Computer_club.Data.Models.ClubModels;
+using Computer_club.Services.Options;
 using Computer_club.Services.Services.ClubServices.PlaceService;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -6,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Computer_club.WebAPI.Endpoints.BackendAction.ClubAction.PlaceAction.GetAll;
 
 public class GetAllPlaces : EndpointBaseAsync
-    .WithoutRequest
+    .WithRequest<Pagination>
     .WithActionResult
 {
     private readonly IPlaceService<Place> _service;
@@ -20,14 +21,14 @@ public class GetAllPlaces : EndpointBaseAsync
 
     [HttpGet("api/clubs/places")]
     [SwaggerOperation(
-        Summary = "Place get all",
-        Description = "Place get all",
+        Summary = "Places get all",
+        Description = "Places get all",
         OperationId = "Place.GetAll",
         Tags = new[] { "PlacesEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync(CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync([FromQuery]Pagination pagination, CancellationToken token = default)
     {
-        var result = await _service.GetAllAsync(token);
+        var result = await _service.GetAllAsync(pagination, token);
         var map = _mapper.Map<List<GetAllPlacesResult>>(result);
         return Ok(map);
     }

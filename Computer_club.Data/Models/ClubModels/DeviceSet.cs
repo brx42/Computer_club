@@ -7,5 +7,5 @@ public class DeviceSet : BaseClub
     public string Name { get; set; }
 
     public List<Equipment> Equipments { get; set; }
-    public Place Place { get; set; }
+    public List<Place> Place { get; set; }
 }

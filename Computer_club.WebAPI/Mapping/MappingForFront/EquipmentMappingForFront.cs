@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Models.ClubModels;
 using Computer_club.WebAPI.Endpoints.FrontendAction.EquipmentAction.Create;
+using Computer_club.WebAPI.Endpoints.FrontendAction.EquipmentAction.GetAll;
 using Computer_club.WebAPI.Endpoints.FrontendAction.EquipmentAction.Update;
 
 namespace Computer_club.WebAPI.Mapping.MappingForFront;
@@ -16,6 +17,15 @@ public class EquipmentMappingForFront : Profile
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId));
         
         CreateMap<Equipment, CreateEquipmentForFrontResult>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.DeviceType, opt => opt.MapFrom(src => src.DeviceType))
+            .ForMember(dest => dest.DeviceName, opt => opt.MapFrom(src => src.DeviceName))
+            .ForMember(dest => dest.DevicePicturePath, opt => opt.MapFrom(src => src.DevicePicturePath))
+            .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId));
+        
+        
+        // GetAll
+        CreateMap<Equipment, GetAllEquipmentsForFrontResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.DeviceType, opt => opt.MapFrom(src => src.DeviceType))
             .ForMember(dest => dest.DeviceName, opt => opt.MapFrom(src => src.DeviceName))

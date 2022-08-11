@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Database;
 using Computer_club.Data.Models.ClubModels;
+using Computer_club.Services.Options;
 using Microsoft.EntityFrameworkCore;
 
 namespace Computer_club.Services.Services.ClubServices.PhotoService;
@@ -13,9 +14,12 @@ public class PhotoService : IPhotoService<Photo>
         _context = context;
     }
 
-    public async Task<List<Photo>> GetAllAsync(CancellationToken token)
+    public async Task<List<Photo>> GetAllAsync(Pagination pagination,CancellationToken token)
     {
-        return await _context.Photos.ToListAsync(token);
+        return await _context.Photos
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .ToListAsync(token);
     }
 
     public async Task<Photo?> GetByIdAsync(int id)

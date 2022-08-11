@@ -1,5 +1,6 @@
 ﻿using Computer_club.Data.Database;
 using Computer_club.Data.Models.ClubModels;
+using Computer_club.Services.Options;
 using Microsoft.EntityFrameworkCore;
 
 namespace Computer_club.Services.Services.ClubServices.PlaceService;
@@ -14,9 +15,48 @@ public class PlaceService : IPlaceService<Place>
     }
     
 
-    public async Task<List<Place>> GetAllAsync(CancellationToken token)
+    public async Task<List<Place>> GetAllAsync(Pagination pagination,CancellationToken token)
     {
-        return await _context.Places.ToListAsync(token);
+        return await _context.Places
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .ToListAsync(token);
+    }
+
+    public async Task<List<Place>> GetAllFreeSeatsAsync(Pagination pagination, CancellationToken token)
+    {
+        return await _context.Places
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .Where(x => x.IsFree == true)
+            .ToListAsync(token);
+    }
+
+    public async Task<List<Place>> GetAllBusySeatsAsync(Pagination pagination, CancellationToken token)
+    {
+        return await _context.Places
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .Where(x => x.IsFree != true)
+            .ToListAsync(token);
+    }
+
+    public async Task<List<Place>> GetAllVipSeatsAsync(Pagination pagination, CancellationToken token)
+    {
+        return await _context.Places
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .Where(x => x.IsVip == true)
+            .ToListAsync(token);
+    }
+
+    public async Task<List<Place>> GetAllSimpleSeatsAsync(Pagination pagination, CancellationToken token)
+    {
+        return await _context.Places
+            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+            .Take(pagination.PageSize)
+            .Where(x => x.IsVip != true)
+            .ToListAsync(token);
     }
 
     public async Task<Place?> GetByIdAsync(int id)

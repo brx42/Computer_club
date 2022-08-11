@@ -13,14 +13,14 @@ public class PlaceMapping : Profile
         // Create
         CreateMap<CreatePlaceCommand, Place>()
             .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
         
         CreateMap<Place, CreatePlaceResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
@@ -29,7 +29,7 @@ public class PlaceMapping : Profile
         CreateMap<Place, GetAllPlacesResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
@@ -38,7 +38,7 @@ public class PlaceMapping : Profile
         CreateMap<Place, GetByIdPlaceResult>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
@@ -47,13 +47,13 @@ public class PlaceMapping : Profile
         CreateMap<UpdatePlaceCommand, Place>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
 
         CreateMap<Place, UpdatePlaceResult>()
             .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip))
-            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
     }

@@ -14,6 +14,8 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         // Database.EnsureDeleted();
         // Database.EnsureCreated();
+        
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
 
     public DbSet<RefreshToken> RefreshTokens { get; set; }
@@ -70,7 +72,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         
         builder.Entity<Place>()
             .HasOne(s => s.DeviceSet)
-            .WithOne(s => s.Place)
-            .HasForeignKey<Place>(s => s.DeviceSetId);
+            .WithMany(s => s.Place)
+            .HasForeignKey(s => s.DeviceSetId);
     }
 }
