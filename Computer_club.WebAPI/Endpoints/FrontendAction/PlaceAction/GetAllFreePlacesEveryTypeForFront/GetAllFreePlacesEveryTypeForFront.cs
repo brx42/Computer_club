@@ -32,12 +32,11 @@ public class GetAllFreePlacesEveryTypeForFront : EndpointBaseAsync
     ([FromQuery]GetAllFreePlacesEveryTypeForFrontCommand request, CancellationToken token = default)
     {
         GetAllFreePlacesEveryTypeForFrontResult places = new();
-        List<Place> free = await _place.GetAllFreeSeatsAsync(request.PageNumber, request.PageSize, token);
-        DeviceSet? setName = await _device.GetDeviceSetForFreePlaces(request.NameSet);
+        List<Place> free = await _place.GetAllFreePlacesForTypeAsync(request.PageNumber, request.PageSize, request.NameSet);
         List<PlaceNotReal> mapFree = _mapper.Map<List<PlaceNotReal>>(free);
-        
+
+        places.DeviceSet = request.NameSet;
         places.Places = mapFree;
-        places.DeviceSet = setName.Name;
         return Ok(places);
     }
 }

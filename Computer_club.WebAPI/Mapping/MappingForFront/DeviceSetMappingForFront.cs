@@ -2,6 +2,7 @@
 using Computer_club.WebAPI.Endpoints.FrontendAction.DeviceSetAction.Create;
 using Computer_club.WebAPI.Endpoints.FrontendAction.DeviceSetAction.GetAll;
 using Computer_club.WebAPI.Endpoints.FrontendAction.DeviceSetAction.Update;
+using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllFreePlacesEveryTypeForFront;
 
 namespace Computer_club.WebAPI.Mapping.MappingForFront;
 
@@ -24,7 +25,7 @@ public class DeviceSetMappingForFront : Profile
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         
         
-        //Update
+        // Update
         CreateMap<UpdateSetForFrontCommand, DeviceSet>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));

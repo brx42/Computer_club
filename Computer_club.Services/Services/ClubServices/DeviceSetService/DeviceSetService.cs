@@ -18,9 +18,11 @@ public class DeviceSetService : IDeviceSetService<DeviceSet>
         return await _context.DeviceSets.ToListAsync(token);
     }
 
-    public async Task<DeviceSet?> GetDeviceSetForFreePlaces(string setName)
+    public async Task<DeviceSet?> GetDeviceSetForFreePlaces(string name)
     {
-       return await _context.DeviceSets.Where(x => x.Name == setName).FirstOrDefaultAsync();
+        return await _context.DeviceSets
+            .Where(x => x.Name == name)
+            .FirstOrDefaultAsync();
     }
     
     public async Task<DeviceSet?> GetByIdAsync(int id)
