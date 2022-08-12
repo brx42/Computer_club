@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllFree;
 
 public class GetAllFreePlacesForFront : EndpointBaseAsync
-    .WithRequest<Pagination>
+    .WithRequest<IPagination>
     .WithActionResult
 {
     private readonly IPlaceService<Place> _service;
@@ -26,9 +26,9 @@ public class GetAllFreePlacesForFront : EndpointBaseAsync
         OperationId = "PlaceFree.GetAll",
         Tags = new[] { "FrontEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync([FromQuery]Pagination request, CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync([FromQuery]IPagination pagination, CancellationToken token = default)
     {
-        var result = await _service.GetAllFreeSeatsAsync(request, token);
+        var result = await _service.GetAllFreeSeatsAsync(pagination.PageNumber, pagination.PageSize, token);
         var map = _mapper.Map<List<GetAllFreePlacesForFrontResult>>(result);
         return Ok(map);
     }

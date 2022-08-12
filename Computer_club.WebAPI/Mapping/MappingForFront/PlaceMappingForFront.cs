@@ -3,6 +3,7 @@ using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.Create;
 using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAll;
 using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllBusy;
 using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllFree;
+using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllFreePlacesEveryTypeForFront;
 using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllSimple;
 using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllVip;
 using Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetById;
@@ -72,6 +73,16 @@ public class PlaceMappingForFront : Profile
             .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
             .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
             .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId));
+        
+        
+        // GetAllFreePlacesEveryType
+        CreateMap<Place, PlaceNotReal>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.DeviceSetId, opt => opt.MapFrom(src => src.DeviceSetId))
+            .ForMember(dest => dest.GameClubId, opt => opt.MapFrom(src => src.GameClubId))
+            .ForMember(dest => dest.IsFree, opt => opt.MapFrom(src => src.IsFree))
+            .ForMember(dest => dest.IsVip, opt => opt.MapFrom(src => src.IsVip));
+            
 
         
         // GetById

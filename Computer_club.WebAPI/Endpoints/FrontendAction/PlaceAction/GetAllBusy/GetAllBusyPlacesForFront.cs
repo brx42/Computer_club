@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllBusy;
 
 public class GetAllBusyPlacesForFront : EndpointBaseAsync
-    .WithRequest<Pagination>
+    .WithRequest<IPagination>
     .WithActionResult
 {
     private readonly IPlaceService<Place> _service;
@@ -26,9 +26,9 @@ public class GetAllBusyPlacesForFront : EndpointBaseAsync
         OperationId = "PlaceBusy.GetAll",
         Tags = new[] { "FrontEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync([FromQuery]Pagination request, CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync([FromQuery]IPagination pagination, CancellationToken token = default)
     {
-        var result = await _service.GetAllBusySeatsAsync(request, token);
+        var result = await _service.GetAllBusySeatsAsync(pagination.PageNumber, pagination.PageSize, token);
         var map = _mapper.Map<List<GetAllBusyPlacesForFrontResult>>(result);
         return Ok(map);
     }

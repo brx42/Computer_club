@@ -15,46 +15,46 @@ public class PlaceService : IPlaceService<Place>
     }
     
 
-    public async Task<List<Place>> GetAllAsync(Pagination pagination,CancellationToken token)
+    public async Task<List<Place>> GetAllAsync(int pageNumber, int pageSize, CancellationToken token)
     {
         return await _context.Places
-            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync(token);
     }
 
-    public async Task<List<Place>> GetAllFreeSeatsAsync(Pagination pagination, CancellationToken token)
+    public async Task<List<Place>> GetAllFreeSeatsAsync(int pageNumber, int pageSize, CancellationToken token)
     {
         return await _context.Places
-            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Where(x => x.IsFree == true)
             .ToListAsync(token);
     }
 
-    public async Task<List<Place>> GetAllBusySeatsAsync(Pagination pagination, CancellationToken token)
+    public async Task<List<Place>> GetAllBusySeatsAsync(int pageNumber, int pageSize, CancellationToken token)
     {
         return await _context.Places
-            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Where(x => x.IsFree != true)
             .ToListAsync(token);
     }
 
-    public async Task<List<Place>> GetAllVipSeatsAsync(Pagination pagination, CancellationToken token)
+    public async Task<List<Place>> GetAllVipSeatsAsync(int pageNumber, int pageSize, CancellationToken token)
     {
         return await _context.Places
-            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Where(x => x.IsVip == true)
             .ToListAsync(token);
     }
 
-    public async Task<List<Place>> GetAllSimpleSeatsAsync(Pagination pagination, CancellationToken token)
+    public async Task<List<Place>> GetAllSimpleSeatsAsync(int pageNumber, int pageSize, CancellationToken token)
     {
         return await _context.Places
-            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Where(x => x.IsVip != true)
             .ToListAsync(token);
     }

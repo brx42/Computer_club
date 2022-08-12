@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Computer_club.WebAPI.Endpoints.FrontendAction.PlaceAction.GetAllVip;
 
 public class GetAllVipPlacesForFront : EndpointBaseAsync
-    .WithRequest<Pagination>
+    .WithRequest<IPagination>
     .WithActionResult
 {
     private readonly IPlaceService<Place> _service;
@@ -26,9 +26,9 @@ public class GetAllVipPlacesForFront : EndpointBaseAsync
         OperationId = "PlaceVip.GetAll",
         Tags = new[] { "FrontEndpoints" })
     ]
-    public override async Task<ActionResult> HandleAsync([FromQuery]Pagination request, CancellationToken token = default)
+    public override async Task<ActionResult> HandleAsync([FromQuery]IPagination pagination, CancellationToken token = default)
     {
-        var result = await _service.GetAllVipSeatsAsync(request, token);
+        var result = await _service.GetAllVipSeatsAsync(pagination.PageNumber, pagination.PageSize, token);
         var map = _mapper.Map<List<GetAllVipPlacesForFrontResult>>(result);
         return Ok(map);
     }

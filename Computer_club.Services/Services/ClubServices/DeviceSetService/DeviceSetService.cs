@@ -12,13 +12,17 @@ public class DeviceSetService : IDeviceSetService<DeviceSet>
     {
         _context = context;
     }
-
     
     public async Task<List<DeviceSet>> GetAllAsync(CancellationToken token)
     {
         return await _context.DeviceSets.ToListAsync(token);
     }
 
+    public async Task<DeviceSet?> GetDeviceSetForFreePlaces(string setName)
+    {
+       return await _context.DeviceSets.Where(x => x.Name == setName).FirstOrDefaultAsync();
+    }
+    
     public async Task<DeviceSet?> GetByIdAsync(int id)
     {
         return await _context.DeviceSets.FindAsync(id);
