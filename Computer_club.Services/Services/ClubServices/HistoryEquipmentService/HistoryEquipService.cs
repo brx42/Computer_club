@@ -19,17 +19,24 @@ public class HistoryEquipService : IHistoryEquipService<HistoryEquip>
         return await _context.HistoryEquips.ToListAsync(token);
     }
 
-    public async Task<List<HistoryEquip>?> GetAllForThePeriodAsync(Pagination pagination, DateTime start,
+    public async Task<List<HistoryEquip>?> GetAllForThePeriodAsync(int pageNumber, int pageSize, DateTime start,
         DateTime end)
     {
         return await _context.HistoryEquips
-            .Skip((pagination.PageNumber - 1) * pagination.PageSize)
-            .Take(pagination.PageSize)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Where(hi => hi.DateOfWork.Date >= start.Date && hi.DateOfWork.Date <= end.Date)
             .ToListAsync();
     }
 
-    public async Task<HistoryEquip?> GetByIdAsync(int id)
+    public async Task<int?> GetSumExpensesAsync(DateTime start, DateTime end)
+    {
+        return await _context.HistoryEquips
+            .Where(hi => hi.DateOfWork.Date >= start.Date && hi.DateOfWork.Date <= end.Date)
+            .SumAsync(s => s.PriceOfWork);
+    }
+
+public async Task<HistoryEquip?> GetByIdAsync(int id)
     {
         return await _context.HistoryEquips.FindAsync(id);
     }

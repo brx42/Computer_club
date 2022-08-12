@@ -1,15 +1,19 @@
 ﻿namespace Computer_club.Services.Options;
 
-public class Pagination
+public class Pagination : IPagination
 {
-    const int maxPageSize = 50;
-    public int PageNumber { get; set; } = 1;
-
-    private int _pageSize = 10;
-
-    public int PageSize
+    public Pagination() { }
+    public Pagination(int pageNumber, int pageSize)
     {
-        get => _pageSize;
-        set => _pageSize = (value > maxPageSize) ? maxPageSize : value;
+        PageSize = pageSize;
+        PageNumber = pageNumber;
     }
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 20;
+}
+
+public interface IPagination
+{
+    public int PageNumber { get; set; }
+    public int PageSize { get; set; }
 }
