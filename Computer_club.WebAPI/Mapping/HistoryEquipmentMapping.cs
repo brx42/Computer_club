@@ -4,7 +4,7 @@ using Computer_club.WebAPI.Endpoints.ClubAction.HistoryEquipAction.GetAll;
 using Computer_club.WebAPI.Endpoints.ClubAction.HistoryEquipAction.GetById;
 using Computer_club.WebAPI.Endpoints.ClubAction.HistoryEquipAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class HistoryEquipmentMapping : Profile
 {

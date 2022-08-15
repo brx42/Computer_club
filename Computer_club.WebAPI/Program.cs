@@ -8,6 +8,7 @@ using Computer_club.Data.Database;
 using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Domain.Extensions;
 using Computer_club.Domain.Options;
+using Computer_club.WebAPI.Mapping;
 using Computer_club.WebAPI.Mapping.MappingForBack;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;

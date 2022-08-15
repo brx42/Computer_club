@@ -4,7 +4,7 @@ using Computer_club.WebAPI.Endpoints.UserAction.GetAll;
 using Computer_club.WebAPI.Endpoints.UserAction.GetById;
 using Computer_club.WebAPI.Endpoints.UserAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class UserMapping : Profile
 {

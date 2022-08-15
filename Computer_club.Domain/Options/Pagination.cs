@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Computer_club.Domain.Options;
 

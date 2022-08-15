@@ -4,7 +4,7 @@ using Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetAll;
 using Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetById;
 using Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class ClubMapping : Profile
 {

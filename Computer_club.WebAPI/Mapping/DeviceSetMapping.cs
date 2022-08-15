@@ -4,7 +4,7 @@ using Computer_club.WebAPI.Endpoints.ClubAction.DeviceSetAction.GetAll;
 using Computer_club.WebAPI.Endpoints.ClubAction.DeviceSetAction.GetById;
 using Computer_club.WebAPI.Endpoints.ClubAction.DeviceSetAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class DeviceSetMapping : Profile
 {

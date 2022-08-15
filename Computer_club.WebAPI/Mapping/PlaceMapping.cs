@@ -9,7 +9,7 @@ using Computer_club.WebAPI.Endpoints.ClubAction.PlaceAction.GetAllVip;
 using Computer_club.WebAPI.Endpoints.ClubAction.PlaceAction.GetById;
 using Computer_club.WebAPI.Endpoints.ClubAction.PlaceAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class PlaceMapping : Profile
 {

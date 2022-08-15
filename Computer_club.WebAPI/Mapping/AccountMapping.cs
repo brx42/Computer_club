@@ -1,7 +1,7 @@
 ﻿using Computer_club.Data.Entities.UserEntities;
 using Computer_club.Data.Models.UserModels;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class AccountMapping : Profile
 {

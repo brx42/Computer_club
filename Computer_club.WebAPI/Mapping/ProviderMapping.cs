@@ -4,7 +4,7 @@ using Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.GetAll;
 using Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.GetById;
 using Computer_club.WebAPI.Endpoints.ClubAction.ProviderAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class ProviderMapping : Profile
 {

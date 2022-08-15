@@ -23,6 +23,31 @@ public class AppDbSeed
     public static async Task SeedAsync
         (UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager, AppDbContext context)
     {
+        GameClub club = new GameClub
+        {
+            Id = 1,
+            Address = "Ставрополь",
+            Description = "Компьютерный игровой клуб",
+            IsOwned = true,
+            ContractNumber = "12345",
+            DigitizedDocument = "54321"
+        };
+
+        List<Schedule> schedule = new List<Schedule>
+        {
+            new Schedule { Id = 1, Day = "Monday", Type = "12:00 - 04:00", GameClubId = 1},
+            new Schedule { Id = 2, Day = "Tuesday", Type = "12:00 - 04:00", GameClubId = 1},
+            new Schedule { Id = 3, Day = "Wednesday", Type = "12:00 - 04:00", GameClubId = 1},
+            new Schedule { Id = 4, Day = "Thursday", Type = "12:00 - 04:00", GameClubId = 1},
+            new Schedule { Id = 5, Day = "Friday", Type = "Around the clock", GameClubId = 1},
+            new Schedule { Id = 6, Day = "Saturday", Type = "Around the clock", GameClubId = 1},
+            new Schedule { Id = 7, Day = "Sunday", Type = "Around the clock", GameClubId = 1},
+        };
+         await context.GameClubs.AddAsync(club);
+         await context.Schedules.AddRangeAsync(schedule);
+         await context.SaveChangesAsync();
+         
+
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.SuperAdmin));
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.Manager));
         await roleManager.CreateAsync(new IdentityRole<Guid>(Role.Support));
@@ -45,39 +70,8 @@ public class AppDbSeed
             EmailConfirmed = true,
             PhoneNumberConfirmed = true
         };
-
-        var gameClub = new GameClub
-        {
-            Id = 1,
-            Address = "Ставрополь",
-            Description = "Игровой компьютерный клуб",
-            IsOwned = true,
-            ContractNumber = "12345",
-            DigitizedDocument = "54321"
-        };
         
-        var aroundTheClock = new Schedule
-        {
-            Id = 1,
-            StartOfWork = new TimeOnly(00, 00, 00).ToString(),
-            EndOfWork = new TimeOnly(23, 59, 59).ToString(),
-            GameClubId = 1
-        };
-        var twelveToFour = new Schedule
-        {
-            Id = 2,
-            StartOfWork = new TimeOnly(12, 00, 00).ToString(),
-            EndOfWork = new TimeOnly(4, 00, 00).ToString(),
-            GameClubId = 1
-        };
-        
-        if (userManager.Users.All(x => x.Id != defaultUser.Id))
-        {
-            await userManager.CreateAsync(defaultUser, SuperAdminPassword);
-            await userManager.AddToRoleAsync(defaultUser, SuperAdminRoles);
-            await context.GameClubs.AddAsync(gameClub);
-            await context.Schedules.AddAsync(aroundTheClock);
-            await context.Schedules.AddAsync(twelveToFour);
-        }
+        await userManager.CreateAsync(defaultUser, SuperAdminPassword);
+        await userManager.AddToRoleAsync(defaultUser, SuperAdminRoles);
     }
 }

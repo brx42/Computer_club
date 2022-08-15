@@ -8,6 +8,7 @@ using Computer_club.Domain.Services.ClubServices.ClubService;
 using Computer_club.Domain.Services.ClubServices.DeviceSetService;
 using Computer_club.Domain.Services.ClubServices.HistoryEquipmentService;
 using Computer_club.Domain.Services.ClubServices.PlaceService;
+using Computer_club.Domain.Services.ClubServices.ScheduleService;
 using Computer_club.Domain.Services.UserServices.AuthService;
 using Computer_club.Domain.Services.UserServices.RoleService;
 using Computer_club.Domain.Services.UserServices.TokenService;
@@ -35,6 +36,7 @@ public static class Services
         service.AddScoped<IHistoryEquipService<HistoryEquip>, HistoryEquipService>();
         service.AddScoped<IPlaceService<Place>, PlaceService>();
         service.AddScoped<IDeviceSetService, DeviceSetService>();
+        service.AddScoped<IScheduleService<Schedule>, ScheduleService>();
 
         return service;
     }

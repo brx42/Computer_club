@@ -4,7 +4,7 @@ using Computer_club.WebAPI.Endpoints.ClubAction.EquipmentAction.GetAll;
 using Computer_club.WebAPI.Endpoints.ClubAction.EquipmentAction.GetById;
 using Computer_club.WebAPI.Endpoints.ClubAction.EquipmentAction.Update;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class EquipmentMapping : Profile
 {

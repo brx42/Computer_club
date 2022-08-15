@@ -1,6 +1,6 @@
 ﻿using Computer_club.WebAPI.Endpoints.RoleAction.AddRole;
 
-namespace Computer_club.WebAPI.Mapping.MappingForBack;
+namespace Computer_club.WebAPI.Mapping;
 
 public class RoleMapping : Profile
 {

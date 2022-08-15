@@ -2,8 +2,8 @@
 
 public class UpdateScheduleResult
 {
-    public TimeOnly StartOfWork { get; set; }
-    public TimeOnly EndOfWork { get; set; }
+    public string Day { get; set; }
+    public string Type { get; set; }
     
     public int GameClubId { get; set; }
 }

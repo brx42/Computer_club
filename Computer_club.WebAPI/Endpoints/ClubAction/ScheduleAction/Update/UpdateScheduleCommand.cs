@@ -3,8 +3,8 @@
 public class UpdateScheduleCommand
 {
     public int Id { get; set; }
-    public string StartOfWork { get; set; } = new TimeOnly().ToString();
-    public string EndOfWork { get; set; } = new TimeOnly().ToString();
+    public string Day { get; set; }
+    public string Type { get; set; }
     
     public int GameClubId { get; set; }
 }
