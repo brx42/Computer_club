@@ -6,10 +6,9 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
 using Computer_club.Data.Entities.UserEntities;
-using Computer_club.Services.Extensions;
-using Computer_club.Services.Options;
+using Computer_club.Domain.Extensions;
+using Computer_club.Domain.Options;
 using Computer_club.WebAPI.Mapping.MappingForBack;
-using Computer_club.WebAPI.Mapping.MappingForFront;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -108,15 +107,6 @@ builder.Services.AddAutoMapper
     typeof(EquipmentMapping), 
     typeof(PlaceMapping), 
     typeof(ScheduleMapping));
-
-builder.Services.AddAutoMapper
-    (typeof(ClubMappingForFront),
-    typeof(DeviceSetMappingForFront),
-    typeof(EquipmentMappingForFront),
-    typeof(HistoryEquipmentMappingForFront),
-    typeof(PhotoMappingForFront),
-    typeof(PlaceMappingForFront),
-    typeof(ScheduleMappingForFront));
 
 
 var app = builder.Build();

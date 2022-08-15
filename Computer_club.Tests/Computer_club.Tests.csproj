@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Computer_club.Services\Computer_club.Services.csproj" />
+      <ProjectReference Include="..\Computer_club.Domain\Computer_club.Domain.csproj" />
       <ProjectReference Include="..\Computer_club.WebAPI\Computer_club.WebAPI.csproj" />
     </ItemGroup>
 

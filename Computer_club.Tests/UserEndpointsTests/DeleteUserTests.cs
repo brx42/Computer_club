@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using Computer_club.Data.Entities.UserEntities;
-using Computer_club.Services.Services.UserServices.UserService;
-using Computer_club.WebAPI.Endpoints.BackendAction.UserAction.Delete;
+using Computer_club.Domain.Repositories.UserRepository;
+using Computer_club.WebAPI.Endpoints.UserAction.Delete;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -11,12 +11,12 @@ namespace Computer_club.Tests.UserEndpointsTests;
 
 public class DeleteUserTests
 {
-    private readonly Mock<IUserService<User>> _userMock;
+    private readonly Mock<IUserRepository<User>> _userMock;
     private readonly DeleteUser _delete;
 
     public DeleteUserTests()
     {
-        _userMock = new Mock<IUserService<User>>();
+        _userMock = new Mock<IUserRepository<User>>();
         _delete = new DeleteUser(_userMock.Object);
     }
     

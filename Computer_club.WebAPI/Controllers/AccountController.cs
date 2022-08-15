@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Computer_club.Data.Models.UserModels;
-using Computer_club.Services.Services.UserServices.AuthService;
+using Computer_club.Domain.Services.UserServices.AuthService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

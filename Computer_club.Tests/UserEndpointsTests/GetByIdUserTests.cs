@@ -1,8 +1,8 @@
 ﻿using AutoFixture;
 using AutoMapper;
 using Computer_club.Data.Entities.UserEntities;
-using Computer_club.Services.Services.UserServices.UserService;
-using Computer_club.WebAPI.Endpoints.BackendAction.UserAction.GetById;
+using Computer_club.Domain.Repositories.UserRepository;
+using Computer_club.WebAPI.Endpoints.UserAction.GetById;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -13,12 +13,12 @@ namespace Computer_club.Tests.UserEndpointsTests;
 public class GetByIdUserTests
 {
     private readonly GetByIdUser _byId;
-    private readonly Mock<IUserService<User>> _userMock;
+    private readonly Mock<IUserRepository<User>> _userMock;
     private readonly Mock<IMapper> _mapMock;
 
     public GetByIdUserTests()
     {
-        _userMock = new Mock<IUserService<User>>();
+        _userMock = new Mock<IUserRepository<User>>();
         _mapMock = new Mock<IMapper>();
         _byId = new GetByIdUser(_userMock.Object, _mapMock.Object);
     }

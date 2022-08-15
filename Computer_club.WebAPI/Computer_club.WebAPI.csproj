@@ -62,11 +62,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Computer_club.Services\Computer_club.Services.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Endpoints\BackendAction" />
+      <ProjectReference Include="..\Computer_club.Domain\Computer_club.Domain.csproj" />
     </ItemGroup>
     
 </Project>
