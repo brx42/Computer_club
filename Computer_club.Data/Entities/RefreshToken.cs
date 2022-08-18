@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Computer_club.Data.Entities.UserEntities;
+namespace Computer_club.Data.Entities;
 
 public class RefreshToken
 {

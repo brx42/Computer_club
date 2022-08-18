@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Domain.Repositories.UserRepository;
 using Computer_club.WebAPI.Endpoints.UserAction.Delete;
 using FluentAssertions;

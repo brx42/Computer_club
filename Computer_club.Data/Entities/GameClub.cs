@@ -1,6 +1,6 @@
 ﻿using Computer_club.Data.Models.ClubModels;
 
-namespace Computer_club.Data.Entities.ClubEntities;
+namespace Computer_club.Data.Entities;
 
 public class GameClub : BaseClub
 {
@@ -16,4 +16,7 @@ public class GameClub : BaseClub
     public List<Schedule> Schedules { get; set; }
     public List<Photo> Photos { get; set; }
     public List<Place> Places { get; set; }
+    public List<Equipment> Equipments { get; set; }
+    public List<DeviceSet> DeviceSets { get; set; }
+    public List<User> Users { get; set; }
 }

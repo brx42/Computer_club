@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.UserEntities;
+﻿using Computer_club.Data.Entities;
 using Computer_club.WebAPI.Endpoints.UserAction.Create;
 using Computer_club.WebAPI.Endpoints.UserAction.GetAll;
 using Computer_club.WebAPI.Endpoints.UserAction.GetById;

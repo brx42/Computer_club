@@ -1,5 +1,4 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
-using Computer_club.Data.Entities.UserEntities;
+﻿using Computer_club.Data.Entities;
 using Computer_club.Data.Models.ClubModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,7 +8,7 @@ namespace Computer_club.Data.Database;
 
 public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
-    public AppDbContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 
     {
         // Database.EnsureDeleted();
@@ -17,9 +16,9 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
         
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
     }
-
-    public DbSet<RefreshToken> RefreshTokens { get; set; }
     
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public DbSet<GameClub> GameClubs { get; set; }
 
     public DbSet<Equipment> Equipments { get; set; }
@@ -40,39 +39,54 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         base.OnModelCreating(builder);
 
+        builder.Entity<GameClub>()
+            .HasMany(x => x.Users)
+            .WithMany(x => x.GameClubs)
+            .UsingEntity(x => x.ToTable("ClubUsers"));
+
+        builder.Entity<Equipment>()
+            .HasOne(x => x.GameClub)
+            .WithMany(x => x.Equipments)
+            .HasForeignKey(x => x.GameClubId);
+
+        builder.Entity<DeviceSet>()
+            .HasOne(x => x.GameClub)
+            .WithMany(x => x.DeviceSets)
+            .HasForeignKey(x => x.GameClubId);
+        
         builder.Entity<Provider>()
-            .HasOne(p => p.GameClub)
-            .WithOne(p => p.Provider)
-            .HasForeignKey<Provider>(p => p.GameClubId);
+            .HasOne(x => x.GameClub)
+            .WithOne(x => x.Provider)
+            .HasForeignKey<Provider>(x => x.GameClubId);
         
         builder.Entity<HistoryEquip>()
-            .HasOne(i => i.GameClub)
-            .WithMany(i => i.HistoryEquips)
-            .HasForeignKey(i => i.GameClubId);
+            .HasOne(x => x.GameClub)
+            .WithMany(x => x.HistoryEquips)
+            .HasForeignKey(x => x.GameClubId);
         
         builder.Entity<Schedule>()
-            .HasOne(d => d.GameClub)
-            .WithMany(d => d.Schedules)
-            .HasForeignKey(d => d.GameClubId);
+            .HasOne(x => x.GameClub)
+            .WithMany(x => x.Schedules)
+            .HasForeignKey(x => x.GameClubId);
         
         builder.Entity<Photo>()
-            .HasOne(o => o.GameClub)
-            .WithMany(o => o.Photos)
-            .HasForeignKey(o => o.GameClubId);
+            .HasOne(x => x.GameClub)
+            .WithMany(x => x.Photos)
+            .HasForeignKey(x => x.GameClubId);
         
         builder.Entity<Place>()
-            .HasOne(r => r.GameClub)
-            .WithMany(r => r.Places)
-            .HasForeignKey(r => r.GameClubId);
+            .HasOne(x => x.GameClub)
+            .WithMany(x => x.Places)
+            .HasForeignKey(x => x.GameClubId);
         
         builder.Entity<Equipment>()
-            .HasOne(a => a.DeviceSet)
-            .WithMany(a => a.Equipments)
-            .HasForeignKey(a => a.DeviceSetId);
+            .HasOne(x => x.DeviceSet)
+            .WithMany(x => x.Equipments)
+            .HasForeignKey(x => x.DeviceSetId);
         
         builder.Entity<Place>()
-            .HasOne(s => s.DeviceSet)
-            .WithMany(s => s.Place)
-            .HasForeignKey(s => s.DeviceSetId);
+            .HasOne(x => x.DeviceSet)
+            .WithMany(x => x.Place)
+            .HasForeignKey(x => x.DeviceSetId);
     }
 }

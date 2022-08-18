@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
+﻿using Computer_club.Data.Entities;
 using Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.Create;
 using Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetAll;
 using Computer_club.WebAPI.Endpoints.ClubAction.GameClubAction.GetById;

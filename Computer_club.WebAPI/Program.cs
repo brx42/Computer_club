@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Computer_club.Data.Database;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Domain.Extensions;
 using Computer_club.Domain.Options;
 using Computer_club.WebAPI.Mapping;
@@ -15,8 +15,10 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => 
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection")));
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ClubConnection"));
+});
 
 var optSection = builder.Configuration.GetSection("JwtOptions");
 var keySection = builder.Configuration.GetSection("JwtOptions:Keys");
@@ -31,6 +33,7 @@ builder.Services.AddControllers(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddServices();
+
 
 var pubKey = await key.GetPublicKey();
 builder.Services.AddAuthentication(options =>
@@ -135,10 +138,8 @@ using (var scope = app.Services.CreateScope())
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
     try
     {
-        var userManager = services.GetRequiredService<UserManager<User>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
-        var context = services.GetRequiredService<AppDbContext>();
-        await AppDbSeed.SeedAsync(userManager, roleManager, context);
+        var projectSeed = services.GetRequiredService<ProjectSeed>();
+        await projectSeed.SeedAsync();
     }
     catch (Exception ex)
     {

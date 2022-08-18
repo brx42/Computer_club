@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
+﻿using Computer_club.Data.Entities;
 using Dadata;
 using Microsoft.Extensions.Configuration;
 

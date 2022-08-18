@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
+﻿using Computer_club.Data.Entities;
 
 namespace Computer_club.Data.Models.ClubModels;
 
@@ -10,4 +10,7 @@ public class Equipment : BaseClub
 
     public int DeviceSetId { get; set; }
     public DeviceSet DeviceSet { get; set; }
+    
+    public int GameClubId { get; set; }
+    public GameClub GameClub { get; set; }
 }

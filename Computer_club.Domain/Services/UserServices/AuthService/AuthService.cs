@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Computer_club.Data.Database;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Data.Models.UserModels;
 using Computer_club.Domain.Services.UserServices.TokenService;
 using Microsoft.AspNetCore.Identity;
@@ -71,7 +71,6 @@ public class AuthService : IAuthService
         {
             throw new Exception(result.Errors.FirstOrDefault()?.Description);
         }
-
         
         await _userManager.AddToRoleAsync(user, Role.Client);
     }

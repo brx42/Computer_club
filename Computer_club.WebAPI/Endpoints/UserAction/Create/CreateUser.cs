@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.UserEntities;
+﻿using Computer_club.Data.Entities;
 using Computer_club.Data.Models.UserModels;
 using Computer_club.Domain.Repositories.UserRepository;
 using Microsoft.AspNetCore.Authorization;

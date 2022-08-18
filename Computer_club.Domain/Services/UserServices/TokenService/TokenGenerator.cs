@@ -1,6 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Data.Models.UserModels;
 using Computer_club.Domain.Options;
 using Microsoft.Extensions.Options;

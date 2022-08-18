@@ -1,5 +1,5 @@
 ﻿using Computer_club.Data.Database;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Domain.Options;
 using Microsoft.EntityFrameworkCore;
 

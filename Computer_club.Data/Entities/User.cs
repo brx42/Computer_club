@@ -1,7 +1,6 @@
-﻿using Computer_club.Data.Models.UserModels;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace Computer_club.Data.Entities.UserEntities;
+namespace Computer_club.Data.Entities;
 
 public sealed class User : IdentityUser<Guid>
 {
@@ -10,4 +9,6 @@ public sealed class User : IdentityUser<Guid>
     public string? LastName { get; set; }
     public string? ContactDetails { get; set; }
     public DateTime? DateOfBirth { get; set; }
+
+    public List<GameClub> GameClubs { get; set; }
 }

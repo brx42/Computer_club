@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
+﻿using Computer_club.Data.Entities;
 using Computer_club.Data.Models.UserModels;
 using Computer_club.Domain.Options;
 using Computer_club.Domain.Repositories.BaseClubRepository;

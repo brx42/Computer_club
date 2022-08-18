@@ -1,4 +1,4 @@
-﻿using Computer_club.Data.Entities.ClubEntities;
+﻿using Computer_club.Data.Entities;
 using Computer_club.Domain.Services.ClubServices.ClubService;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;

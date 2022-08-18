@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using AutoMapper;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Domain.Repositories.UserRepository;
 using Computer_club.WebAPI.Endpoints.UserAction.GetById;
 using FluentAssertions;

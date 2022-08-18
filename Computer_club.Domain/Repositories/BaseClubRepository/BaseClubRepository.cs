@@ -27,7 +27,7 @@ public class BaseClubRepository<TEntity, TContext> : IBaseClubRepository<TEntity
         return await _dbSet.FindAsync(id);
     }
 
-    public async Task<TEntity> AddAsync(TEntity entity, CancellationToken token)
+    public async Task<TEntity> AddAsync(TEntity entity, CancellationToken token = new())
     {
         await _dbSet.AddAsync(entity, token);
         await _context.SaveChangesAsync(token);

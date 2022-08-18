@@ -1,7 +1,7 @@
 ﻿using Computer_club.Data.Database;
-using Computer_club.Data.Entities.ClubEntities;
-using Computer_club.Data.Entities.UserEntities;
+using Computer_club.Data.Entities;
 using Computer_club.Data.Models.ClubModels;
+using Computer_club.Domain.Options;
 using Computer_club.Domain.Repositories.BaseClubRepository;
 using Computer_club.Domain.Repositories.UserRepository;
 using Computer_club.Domain.Services.ClubServices.ClubService;
@@ -37,6 +37,8 @@ public static class Services
         service.AddScoped<IPlaceService<Place>, PlaceService>();
         service.AddScoped<IDeviceSetService, DeviceSetService>();
         service.AddScoped<IScheduleService<Schedule>, ScheduleService>();
+        service.AddTransient<ProjectSeed>();
+
 
         return service;
     }
